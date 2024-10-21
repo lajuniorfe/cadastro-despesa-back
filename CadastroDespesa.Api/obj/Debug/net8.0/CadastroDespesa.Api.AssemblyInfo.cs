@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("ec55bee9-7bf0-49a2-84e3-986d4891a7fc")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CadastroDespesa.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6e8627b924475223c4a92d919888ab0e4d45a4f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9847a813c8ebfb91fa9b35bfbc2cbe31f3eefeb7")]
 [assembly: System.Reflection.AssemblyProductAttribute("CadastroDespesa.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CadastroDespesa.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
