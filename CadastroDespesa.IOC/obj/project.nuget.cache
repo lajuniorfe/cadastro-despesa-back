@@ -1,12 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Gaeu8iFjQJQ=",
+  "dgSpecHash": "VIbsi3ii66c=",
   "success": true,
-  "projectFilePath": "/home/casa/Documentos/projetos/cadastro-despesa-back/CadastroDespesa.Application/CadastroDespesa.Application.csproj",
+  "projectFilePath": "/home/casa/Documentos/projetos/cadastro-despesa-back/CadastroDespesa.IOC/CadastroDespesa.IOC.csproj",
   "expectedPackageFiles": [
     "/home/casa/.nuget/packages/antlr3.runtime/3.5.1/antlr3.runtime.3.5.1.nupkg.sha512",
-    "/home/casa/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
-    "/home/casa/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/home/casa/.nuget/packages/fluentnhibernate/3.4.0/fluentnhibernate.3.4.0.nupkg.sha512",
     "/home/casa/.nuget/packages/iesi.collections/4.0.4/iesi.collections.4.0.4.nupkg.sha512",
     "/home/casa/.nuget/packages/microsoft.entityframeworkcore/8.0.10/microsoft.entityframeworkcore.8.0.10.nupkg.sha512",
@@ -111,16 +109,5 @@
     "/home/casa/.nuget/packages/system.xml.readerwriter/4.3.0/system.xml.readerwriter.4.3.0.nupkg.sha512",
     "/home/casa/.nuget/packages/system.xml.xdocument/4.3.0/system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1608",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 13.0.1 was resolved.",
-      "libraryId": "AutoMapper",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

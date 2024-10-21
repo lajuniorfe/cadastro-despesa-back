@@ -1,10 +1,11 @@
 using System;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
+using CadastroDespesa.Dominio.Despesas.Servicos.Interfaces;
 
 namespace CadastroDespesa.Dominio.Despesas.Servicos;
 
-public class DespesaServico
+public class DespesaServico : IDespesaServico
 {
     private readonly IDespesasRepositorio despesasRepositorio;
 
@@ -13,7 +14,7 @@ public class DespesaServico
         this.despesasRepositorio = despesasRepositorio;
     }
 
-    public Despesa ValidarDespesa(int idDespesa){
-        return despesasRepositorio.Recuperar(idDespesa);
+    public async Task<Despesa> ValidarDespesaAsync(int idDespesa){
+        return await despesasRepositorio.ObterPorId(idDespesa);
     }
 }

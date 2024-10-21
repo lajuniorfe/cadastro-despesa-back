@@ -23,4 +23,7 @@
     <ProjectReference Include="..\CadastroDespesa.Application\CadastroDespesa.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CadastroDespesa.IOC\CadastroDespesa.IOC.csproj" />
+  </ItemGroup>
 </Project>

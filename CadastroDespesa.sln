@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Infra", "Ca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.DTO", "CadastroDespesa.DTO\CadastroDespesa.DTO.csproj", "{65E895A6-8D54-46AD-8814-0F24A0705002}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.IOC", "CadastroDespesa.IOC\CadastroDespesa.IOC.csproj", "{261461A4-1D7C-4ABC-8317-303E86367F2B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{65E895A6-8D54-46AD-8814-0F24A0705002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65E895A6-8D54-46AD-8814-0F24A0705002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65E895A6-8D54-46AD-8814-0F24A0705002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
