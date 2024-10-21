@@ -1,12 +1,11 @@
 using CadastroDespesa.Application.Despesas.Interfaces;
 using CadastroDespesa.DTO.Despesas.Requests;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroDespesa.Api.Controller.Despesas
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class DespesaController : ControllerBase
     {
         private readonly IDespesaApp despesaApp;

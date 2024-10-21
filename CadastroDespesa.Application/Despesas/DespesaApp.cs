@@ -21,6 +21,6 @@ public class DespesaApp : IDespesaApp
     public void CadastrarDespesa(DespesaRequest despesaRequest)
     {
         Despesa despesa = _mapper.Map<Despesa>(despesaRequest);
-        despesasRepositorio.CadastroDespesa(despesa);
+        despesasRepositorio.Criar(despesa);
     }
 }
