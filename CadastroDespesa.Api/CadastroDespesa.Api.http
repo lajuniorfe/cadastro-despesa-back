@@ -1,6 +1,0 @@
-@CadastroDespesa.Api_HostAddress = http://localhost:5083
-
-GET {{CadastroDespesa.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
