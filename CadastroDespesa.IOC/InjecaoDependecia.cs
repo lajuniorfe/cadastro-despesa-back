@@ -1,31 +1,36 @@
-﻿using System.Configuration;
+﻿using CadastroDespesa.Application.Despesas;
+using CadastroDespesa.Application.Despesas.Interfaces;
+using CadastroDespesa.Dominio.Base.Repositorios;
+using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Infra.Contexto;
+using CadastroDespesa.Infra.Contexto.Repositorios;
 using CadastroDespesa.Infra.Despesas.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace CadastroDespesa.IOC;
 
 public static class InjecaoDependecia
 {
-    public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration){
-        
-        var connectionUrl = configuration.GetConnectionString("DatabaseUrl");
-      
-        services.AddDbContext<EntityContexto>(options =>
-                options.UseNpgsql(connectionUrl));
+    public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    {
 
-        services.AddScoped<DespesaRepositorio, DespesaRepositorio>();
+        var connectionUrl = Environment.GetEnvironmentVariable("DATA_URL");
+
+        if (string.IsNullOrEmpty(connectionUrl))
+        {
+            connectionUrl = configuration.GetConnectionString("DatabaseUrl");
+        }
+
+        services.AddDbContext<EntityContexto>(options =>
+                options.UseNpgsql(connectionUrl), ServiceLifetime.Scoped);
+
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+        services.AddScoped<IDespesasRepositorio, DespesaRepositorio>();
+        services.AddScoped<IDespesaApp, DespesaApp>();
+        services.AddScoped(typeof(IBaseRepositorio<>), typeof(BaseRepositorio<>));
+
     }
-
-     public static void AddInfrastructureServicesProducao(this IServiceCollection services, IConfiguration configuration){
-        var connectionUrl = Environment.GetEnvironmentVariable("DATA_URL"); 
-
-        services.AddDbContext<EntityContexto>(options =>
-                options.UseNpgsql(connectionUrl));
-
-        services.AddScoped<DespesaRepositorio, DespesaRepositorio>();
-     }
 }

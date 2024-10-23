@@ -109,3 +109,8 @@
 /CadastroDespesa.Api/obj/project.assets.json
 /CadastroDespesa.Api/obj/project.nuget.cache
 /CadastroDespesa.Api/CadastroDespesa.Api.csproj.user
+*.v2
+/.vs/CadastroDespesa/v17/DocumentLayout.backup.json
+/.vs/ProjectEvaluation/cadastrodespesa.metadata.v9.bin
+/.vs/ProjectEvaluation/cadastrodespesa.projects.v9.bin
+/.vs/ProjectEvaluation/cadastrodespesa.strings.v9.bin

@@ -7,7 +7,11 @@
   </PropertyGroup>
 
  <ItemGroup>
+    <ProjectReference Include="..\CadastroDespesa.Application\CadastroDespesa.Application.csproj" />
     <ProjectReference Include="..\CadastroDespesa.Infra\CadastroDespesa.Infra.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
+	</ItemGroup>
 </Project>
