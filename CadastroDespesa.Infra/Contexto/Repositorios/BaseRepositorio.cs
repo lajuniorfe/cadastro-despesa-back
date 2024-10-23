@@ -49,9 +49,9 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : class
         return await contexto.Set<T>().FindAsync(id);
     }
 
-    public async Task<IEnumerable<T>> ObterTodos()
+    public IEnumerable<T> ObterTodos()
     {
-        return await contexto.Set<T>().ToListAsync();
+        return  contexto.Set<T>().ToList();
     }
 
 }

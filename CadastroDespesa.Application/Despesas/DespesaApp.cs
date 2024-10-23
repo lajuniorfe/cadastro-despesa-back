@@ -4,6 +4,7 @@ using CadastroDespesa.Application.Despesas.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.DTO.Despesas.Requests;
+using CadastroDespesa.DTO.Despesas.Responses;
 
 namespace CadastroDespesa.Application.Despesas;
 
@@ -16,6 +17,13 @@ public class DespesaApp : IDespesaApp
     {
         _mapper = mapper;
         this.despesasRepositorio = despesasRepositorio;
+    }
+
+    public IList<DespesaResponse> BuscarDespesas()
+    {
+        var rr =  despesasRepositorio.ObterTodos();
+
+        return _mapper.Map<List<DespesaResponse>>(rr);
     }
 
     public void CadastrarDespesa(DespesaRequest despesaRequest)

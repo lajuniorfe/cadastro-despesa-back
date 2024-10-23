@@ -20,6 +20,7 @@ public static class InjecaoDependecia
 
         if (string.IsNullOrEmpty(connectionUrl))
         {
+            Console.WriteLine("entrei aqui");
             connectionUrl = configuration.GetConnectionString("DatabaseUrl");
         }
 

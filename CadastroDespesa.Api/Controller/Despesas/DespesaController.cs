@@ -21,11 +21,19 @@ namespace CadastroDespesa.Api.Controller.Despesas
         /// <param name="despesa"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarDespesa([FromBody] DespesaRequest despesa) {
-            
+        public IActionResult CadastrarDespesa([FromBody] DespesaRequest despesa)
+        {
+
             despesaApp.CadastrarDespesa(despesa);
 
             return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult BuscarDespesas()
+        {
+            return Ok(despesaApp.BuscarDespesas());
+
         }
     }
 }
