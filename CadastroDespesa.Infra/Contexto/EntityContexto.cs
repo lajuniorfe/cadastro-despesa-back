@@ -1,4 +1,6 @@
+using CadastroDespesa.Dominio.Cartoes.Entidades;
 using CadastroDespesa.Dominio.Despesas.Entidades;
+using CadastroDespesa.Infra.Cartoes.Mapeamentos;
 using CadastroDespesa.Infra.Despesas.Mapeamentos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -9,6 +11,7 @@ public class EntityContexto : DbContext
 {
     public IDbContextTransaction Transaction { get; private set; }
     public DbSet<Despesa> Despesas { get; set; }
+    public DbSet<Cartao> Cartoes { get; set; }
     public EntityContexto(DbContextOptions<EntityContexto> options) : base(options)
     {
         if (Database.GetPendingMigrations().Count() > 0)
@@ -64,5 +67,6 @@ public class EntityContexto : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new DespesaMap());
+        modelBuilder.ApplyConfiguration(new CartaoMap());
     }
 }
