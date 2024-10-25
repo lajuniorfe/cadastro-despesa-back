@@ -1,14 +1,15 @@
+using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Base.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace CadastroDespesa.Infra.Contexto.Repositorios;
 
-public class BaseRepositorio<T> : IBaseRepositorio<T> where T : class
+public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
 {
     protected readonly EntityContexto contexto;
 
-    public BaseRepositorio(EntityContexto contexto) : base()
+    public BaseRepositorio(EntityContexto contexto)
     {
         this.contexto = contexto;
     }
@@ -16,21 +17,21 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : class
     public async Task Alterar(T entity)
     {
         contexto.InitTransacao();
-        contexto.Set<T>().Attach(entity);
+        contexto.GetDbSet<T>().Attach(entity);
         contexto.Entry(entity).State = EntityState.Modified;
         contexto.SendChanges();
     }
 
     public async Task<IEnumerable<T>> Buscar(Expression<Func<T, bool>> predicate)
     {
-        return await contexto.Set<T>().ToListAsync();
+        return await contexto.GetDbSet<T>().Where(predicate).ToListAsync();
     }
 
     public async Task<int> Criar(T entity)
     {
 
         contexto.InitTransacao();
-        var id = contexto.Set<T>().Add(entity).Entity;
+        var id = contexto.GetDbSet<T>().Add(entity).Entity;
         contexto.SendChanges();
         return 0;
 
@@ -39,19 +40,19 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : class
     public async Task Deletar(T entity)
     {
         contexto.InitTransacao();
-        contexto.Set<T>().Remove(entity);
+        contexto.GetDbSet<T>().Remove(entity);
         contexto.SendChanges();
 
     }
 
     public async Task<T> ObterPorId(int id)
     {
-        return await contexto.Set<T>().FindAsync(id);
+        return await contexto.GetDbSet<T>().FindAsync(id);
     }
 
     public IEnumerable<T> ObterTodos()
     {
-        return  contexto.Set<T>().ToList();
+        return  contexto.GetDbSet<T>().ToList();
     }
 
 }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CadastroDespesa.Dominio.Base.Entidades;
 
 namespace CadastroDespesa.Dominio.Cartoes.Entidades
 {
-    public class Cartao
+    public class Cartao : BaseEntidade
     {
-        public virtual int Id { get; protected set; }
         public virtual string? Nome { get; protected set; }
         public virtual decimal Limite { get; protected set; }
         public virtual int Vencimento { get; protected set; }

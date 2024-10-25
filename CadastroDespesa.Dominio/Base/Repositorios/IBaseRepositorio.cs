@@ -1,9 +1,10 @@
+using CadastroDespesa.Dominio.Base.Entidades;
 using System;
 using System.Linq.Expressions;
 
 namespace CadastroDespesa.Dominio.Base.Repositorios;
 
-public interface IBaseRepositorio<T> where T : class
+public interface IBaseRepositorio<T> where T : BaseEntidade
 {
     IEnumerable<T> ObterTodos();
     Task<T> ObterPorId(int id);
