@@ -86,10 +86,5 @@ public static class InjecaoDependecia
                 services.AddScoped(interfaceType, servico);
             }
         }
-
-        //services.AddScoped<IDespesaServico, DespesaServico>();
-        //services.AddScoped<ICartaoServico, CartaoServico>();
-        //services.AddScoped<ICategoriaServico, CategoriaServico>();
-        //services.AddScoped<ITipoDespesaServico, TipoDespesaServico>();
     }
 }
