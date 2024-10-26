@@ -21,9 +21,7 @@ public class DespesaApp : IDespesaApp
 
     public IList<DespesaResponse> BuscarDespesas()
     {
-        var rr =  despesasRepositorio.ObterTodos();
-
-        return _mapper.Map<List<DespesaResponse>>(rr);
+        return _mapper.Map<List<DespesaResponse>>(despesasRepositorio.ObterTodos());
     }
 
     public void CadastrarDespesa(DespesaRequest despesaRequest)
