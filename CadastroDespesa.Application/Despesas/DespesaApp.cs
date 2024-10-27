@@ -27,7 +27,8 @@ public class DespesaApp : IDespesaApp
 
     public IList<DespesaResponse> BuscarDespesas()
     {
-        return _mapper.Map<List<DespesaResponse>>(despesasRepositorio.ObterTodos());
+        IEnumerable<Despesa> despesas = despesasRepositorio.ObterTodos();
+        return _mapper.Map<List<DespesaResponse>>(despesas); 
     }
 
     public async Task CadastrarDespesa(CadastrarDespesaRequest despesaRequest)

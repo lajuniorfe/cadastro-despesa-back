@@ -6,7 +6,7 @@ namespace CadastroDespesa.Dominio.TiposPagamento.Entidades
     {
         public virtual string? Nome { get; protected set; }
 
-        public TipoPagamento(string nome)
+        public TipoPagamento(string? nome)
         {
             SetNome(nome);
         }

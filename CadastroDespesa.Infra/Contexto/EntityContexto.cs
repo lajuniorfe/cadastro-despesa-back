@@ -1,6 +1,5 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 namespace CadastroDespesa.Infra.Contexto;

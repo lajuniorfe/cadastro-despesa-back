@@ -8,6 +8,6 @@ namespace CadastroDespesa.Infra.Faturas.Repositorios
 {
     public class FaturaRepositorio : BaseRepositorio<Fatura>, IFaturaRepositorio
     {
-        FaturaRepositorio(EntityContexto context, IUnitOfWork unitOfWork): base(context, unitOfWork) { }
+        public FaturaRepositorio(EntityContexto context, IUnitOfWork unitOfWork): base(context, unitOfWork) { }
     }
 }

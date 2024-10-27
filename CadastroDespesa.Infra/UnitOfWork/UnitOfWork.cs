@@ -10,10 +10,9 @@ public class UnitOfWork : IUnitOfWork
     private readonly EntityContexto contexto;
     private IDbContextTransaction _transaction;
 
-    public UnitOfWork(EntityContexto contexto, IDbContextTransaction _transaction)
+    public UnitOfWork(EntityContexto contexto)
     {
         this.contexto = contexto;
-        this._transaction = _transaction;
     }
 
     public async Task CommitAsync()

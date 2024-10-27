@@ -13,8 +13,9 @@ namespace CadastroDespesa.Dominio.Faturas.Entidades
         public virtual decimal Valor { get; protected set; }
         public virtual DateTime DataVencimento { get; protected set; }
         public virtual DateTime MesCorrespondente { get; protected set; }
-        public virtual  Cartao Cartao { get; protected set; }
+        public virtual Cartao Cartao { get; protected set; }
 
+        private Fatura() { }
         public Fatura(decimal valor, DateTime dataVencimento, DateTime mesCorrespondente, Cartao cartao)
         {
             SetValor(valor);

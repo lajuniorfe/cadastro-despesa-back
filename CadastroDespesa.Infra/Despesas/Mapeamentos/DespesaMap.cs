@@ -26,8 +26,25 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
             .IsRequired()
             .HasColumnType("numeric");
 
+        builder.Property(d => d.StatusPagamento)
+          .HasColumnName("status_pagamento")
+          .IsRequired()
+          .HasColumnType("boolean");
+
         builder.Property(d => d.Data).HasColumnName("data_despesa")
              .HasColumnType("timestamp without time zone")
             .IsRequired();
+
+        builder.HasOne(p => p.Categoria)
+                     .WithMany()
+                     .HasForeignKey("id_categoria");
+
+        builder.HasOne(p => p.TipoDespesa)
+                     .WithMany()
+                     .HasForeignKey("id_tipodespesa");
+
+        builder.HasOne(p => p.TipoPagamento)
+                     .WithMany()
+                     .HasForeignKey("id_tipopagamento");
     }
 }

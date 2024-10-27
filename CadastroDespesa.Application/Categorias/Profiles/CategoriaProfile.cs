@@ -5,7 +5,7 @@ using CadastroDespesa.DTO.Categorias.Responses;
 
 namespace CadastroDespesa.Application.Categorias.Profiles
 {
-    internal class CategoriaProfile: Profile
+    public class CategoriaProfile: Profile
     {
         public CategoriaProfile()
         {
