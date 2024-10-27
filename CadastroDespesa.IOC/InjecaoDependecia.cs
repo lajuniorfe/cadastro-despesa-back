@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using CadastroDespesa.Application.TiposPagamento.Profiles;
+using CadastroDespesa.Dominio.Fatories.Pagamentos;
 using CadastroDespesa.Infra.Contexto;
 using CadastroDespesa.Infra.UnitOfWork;
 using CadastroDespesa.Infra.UnitOfWork.Interfaces;
@@ -22,85 +23,35 @@ public static class InjecaoDependecia
         }
 
         services.AddDbContext<EntityContexto>(options =>
-                options.UseNpgsql(connectionUrl), ServiceLifetime.Scoped);
-
+                options.UseLazyLoadingProxies().UseNpgsql(connectionUrl), ServiceLifetime.Scoped);
+       
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        var infraAssembly = Assembly.Load("CadastroDespesa.Infra");
-        var repositorios = infraAssembly.GetTypes()
-        .Where(type => type.Name.EndsWith("Repositorio") && !type.IsAbstract && !type.IsInterface);
+        services.AddAutoMapper(typeof(TipoPagamentoProfile).Assembly);
 
-        foreach (var repositorio in repositorios)
-        {
-            var interfaceType = repositorio.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("Repositorio"));
-            if (interfaceType != null)
-            {
-                services.AddScoped(interfaceType, repositorio);
-            }
-        }
-
-        var applicationAssembly = Assembly.Load("CadastroDespesa.Application");
-        var aplicacoes = applicationAssembly.GetTypes()
-        .Where(type => type.Name.EndsWith("App") && !type.IsAbstract && !type.IsInterface);
-
-        foreach (var aplicacao in aplicacoes)
-        {
-            var interfaceType = aplicacao.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("App"));
-            if (interfaceType != null)
-            {
-                services.AddScoped(interfaceType, aplicacao);
-            }
-        }
-
-
-        var profileAssembly = Assembly.Load("CadastroDespesa.Application");
-        var profiles = profileAssembly.GetTypes()
-            .Where(type => typeof(Profile).IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface);
-
-        foreach (var profile in profiles)
-        {
-            services.AddAutoMapper(profile); 
-        }
-
-        var ServicosAssembly = Assembly.Load("CadastroDespesa.Dominio");
-        var servicos = ServicosAssembly.GetTypes()
-        .Where(type => type.Name.EndsWith("Servico") && !type.IsAbstract && !type.IsInterface);
-
-        foreach (var servico in servicos)
-        {
-            var interfaceType = servico.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("Servico"));
-            if (interfaceType != null)
-            {
-                services.AddScoped(interfaceType, servico);
-            }
-        }
-
-        var FactoryAssembly = Assembly.Load("CadastroDespesa.Dominio");
-        var factorys = FactoryAssembly.GetTypes()
-        .Where(type => type.Name.EndsWith("Factory") && !type.IsAbstract && !type.IsInterface);
-
-        foreach (var factory in factorys)
-        {
-            var interfaceType = factory.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("Factory"));
-            if (interfaceType != null)
-            {
-                services.AddScoped(interfaceType, factory);
-            }
-        }
-
-        var ProcessarAssembly = Assembly.Load("CadastroDespesa.Dominio");
-        var processamentos = ProcessarAssembly.GetTypes()
-        .Where(type => type.Name.EndsWith("Processar") && !type.IsAbstract && !type.IsInterface);
-
-        foreach (var processamento in processamentos)
-        {
-            var interfaceType = processamento.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("Processar"));
-            if (interfaceType != null)
-            {
-                services.AddScoped(interfaceType, processamento);
-            }
-        }
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Infra", "Repositorio");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Application", "App");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Servico");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Processar");
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ProcessamentoPagamentoFactory>();
+
+    }
+
+    private static void RegisterTypesFromAssembly(IServiceCollection services, string assemblyName, string suffix)
+    {
+        var assembly = Assembly.Load(assemblyName);
+        var types = assembly.GetTypes()
+            .Where(type => type.Name.EndsWith(suffix) && !type.IsAbstract && !type.IsInterface);
+
+        foreach (var type in types)
+        {
+            var interfaceType = type.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith(suffix));
+            if (interfaceType != null)
+            {
+                services.AddScoped(interfaceType, type);
+            }
+        }
     }
 }
