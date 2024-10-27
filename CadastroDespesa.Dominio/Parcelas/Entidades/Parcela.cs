@@ -17,6 +17,18 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
         public virtual DateTime Data { get; protected set; }
         public virtual Fatura Fatura {get; protected set; }
 
+        public Parcela(Despesa despesa, decimal valor, int numeroParcela, DateTime data, Fatura fatura)
+        {
+            SetDespesa(despesa);
+            SetValor(valor);
+            SetNumeroParcela(numeroParcela);
+            SetData(data);
+            SetFatura(fatura);
+        }
+        public Parcela()
+        {
+
+        }
         public virtual void SetDespesa(Despesa despesa)
         {
             Despesa = despesa;
@@ -42,7 +54,7 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
             Fatura = fatura;
         }
 
-        public IList<Parcela> CalcularDataParcela(int totalParcelas, DateTime dataDespesa, Despesa despesa)
+        public IList<Parcela> CalcularDataParcela(int totalParcelas, Despesa despesa)
         {
             IList<Parcela> parcelas = new List<Parcela>();
             for (var i = 0; i < totalParcelas; i++)
@@ -53,7 +65,8 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
                     Despesa = despesa,
                     Valor = despesa.Valor / totalParcelas,
                     NumeroParcela = i,
-                    Data = i == 0 ? dataDespesa : dataDespesa.AddMonths(1)
+                    Data = i == 0 ? despesa.Data : despesa.Data.AddMonths(1),
+                    Fatura = null
                 };
 
                 parcelas.Add(parcela);

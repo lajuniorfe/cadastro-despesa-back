@@ -29,7 +29,7 @@ namespace CadastroDespesa.Application.Cartoes
             this.cartaoServico = cartaoServico;
         }
 
-        public CartaoResponse AlterarCartao(CartaoRequest request)
+        public CartaoResponse AlterarCartao(CadastrarCartaoRequest request)
         {
             Cartao cartao = _mapper.Map<Cartao>(request);
             cartaoRepositorio.Alterar(cartao);
@@ -48,7 +48,7 @@ namespace CadastroDespesa.Application.Cartoes
             return response;
         }
 
-        public void CadastrarCartao(CartaoRequest request)
+        public void CadastrarCartao(CadastrarCartaoRequest request)
         {
             Cartao cartao = _mapper.Map<Cartao>(request);
             cartaoRepositorio.Criar(cartao);

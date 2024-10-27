@@ -23,7 +23,7 @@ namespace CadastroDespesa.Api.Controller.Cartoes
         /// <param name="cartao"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarDespesa([FromBody] CartaoRequest request)
+        public IActionResult CadastrarDespesa([FromBody] CadastrarCartaoRequest request)
         {
 
             cartaoApp.CadastrarCartao(request);

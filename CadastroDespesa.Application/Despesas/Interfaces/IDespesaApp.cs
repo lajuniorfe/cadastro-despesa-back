@@ -7,5 +7,5 @@ namespace CadastroDespesa.Application.Despesas.Interfaces;
 public interface IDespesaApp
 {
     IList<DespesaResponse> BuscarDespesas();
-    public void CadastrarDespesa(DespesaRequest despesaRequest);
+    Task CadastrarDespesa(CadastrarDespesaRequest despesaRequest);
 }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CadastroDespesa.DTO.Cartoes.Requests
+namespace CadastroDespesa.DTO.Cartao.Requests
 {
-    public class CartaoRequest
+    public class CadastrarCartaoRequest
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public decimal Limite { get; set; }
         public int Vencimento { get; set; }

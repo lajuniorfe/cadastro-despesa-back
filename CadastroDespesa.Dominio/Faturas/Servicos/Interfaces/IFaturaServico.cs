@@ -1,9 +1,13 @@
-﻿using CadastroDespesa.Dominio.Faturas.Entidades;
+﻿using CadastroDespesa.Dominio.Cartoes.Entidades;
+using CadastroDespesa.Dominio.Faturas.Entidades;
 
 namespace CadastroDespesa.Dominio.Faturas.Servicos.Interfaces
 {
     public interface IFaturaServico
     {
         Task<Fatura> ValidarFaturaAsync(int id);
+
+        Task<Fatura> VerificarFaturaCartaoAsync(Cartao cartao, decimal valorDespesa, DateTime dataFatura);
+
     }
 }

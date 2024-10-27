@@ -7,7 +7,8 @@ namespace CadastroDespesa.Infra.Despesas.Mapeamentos;
 
 public class DespesaMap : IEntityTypeConfiguration<Despesa>
 {
-   public void Configure(EntityTypeBuilder<Despesa> builder){
+    public void Configure(EntityTypeBuilder<Despesa> builder)
+    {
         builder.ToTable("despesa");
 
         builder.HasKey(d => d.Id);
@@ -28,5 +29,5 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
         builder.Property(d => d.Data).HasColumnName("data_despesa")
              .HasColumnType("timestamp without time zone")
             .IsRequired();
-    }       
+    }
 }

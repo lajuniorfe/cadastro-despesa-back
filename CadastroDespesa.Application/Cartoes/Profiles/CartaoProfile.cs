@@ -10,7 +10,7 @@ namespace CadastroDespesa.Application.Cartoes.Profiles
         public CartaoProfile()
         {
             CreateMap<Cartao, CartaoResponse>();
-            CreateMap<CartaoRequest, Cartao>();
+            CreateMap<CadastrarCartaoRequest, Cartao>();
         }
     }
 }

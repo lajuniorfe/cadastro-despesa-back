@@ -21,7 +21,7 @@ namespace CadastroDespesa.Api.Controller.Despesas
         /// <param name="despesa"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarDespesa([FromBody] DespesaRequest despesa)
+        public IActionResult CadastrarDespesa([FromBody] CadastrarDespesaRequest despesa)
         {
 
             despesaApp.CadastrarDespesa(despesa);
