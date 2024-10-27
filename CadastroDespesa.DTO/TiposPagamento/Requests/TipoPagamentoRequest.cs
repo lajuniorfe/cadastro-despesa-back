@@ -9,6 +9,7 @@ namespace CadastroDespesa.DTO.TiposPagamento.Requests
 {
     public class TipoPagamentoRequest
     {
+        public int Id { get; set; }
         public string? Nome { get; set; }
     }
 }

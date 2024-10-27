@@ -33,7 +33,7 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos
 
             Fatura novaFatura = new(valorDespesa, dataVencimento, dataFatura, cartao);
            
-            await faturaRepositorio.Criar(novaFatura);
+            faturaRepositorio.Criar(novaFatura);
 
             return novaFatura;
         }

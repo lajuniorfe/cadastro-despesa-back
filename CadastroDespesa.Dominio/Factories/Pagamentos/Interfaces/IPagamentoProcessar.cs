@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CadastroDespesa.Dominio.Pagamentos.Servicos.Interfaces
+namespace CadastroDespesa.Dominio.Factories.Pagamentos.Interfaces
 {
-    public interface IProcessarPagamento
+    public interface IPagamentoProcessar
     {
-        Task ProcessarPagamento(Despesa despesa, int idCartao, int totalParcelas);
+        Task Processar(Despesa despesa, Cartao cartao, int totalParcelas); 
     }
 }

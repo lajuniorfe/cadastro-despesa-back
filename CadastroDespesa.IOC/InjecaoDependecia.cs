@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using CadastroDespesa.Infra.Contexto;
+using CadastroDespesa.Infra.UnitOfWork;
+using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -73,6 +75,32 @@ public static class InjecaoDependecia
             }
         }
 
+        var FactoryAssembly = Assembly.Load("CadastroDespesa.Dominio");
+        var factorys = FactoryAssembly.GetTypes()
+        .Where(type => type.Name.EndsWith("Factory") && !type.IsAbstract && !type.IsInterface);
 
+        foreach (var factory in factorys)
+        {
+            var interfaceType = factory.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("Factory"));
+            if (interfaceType != null)
+            {
+                services.AddScoped(interfaceType, factory);
+            }
+        }
+
+        var ProcessarAssembly = Assembly.Load("CadastroDespesa.Dominio");
+        var processamentos = ProcessarAssembly.GetTypes()
+        .Where(type => type.Name.EndsWith("Processar") && !type.IsAbstract && !type.IsInterface);
+
+        foreach (var processamento in processamentos)
+        {
+            var interfaceType = processamento.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith("Processar"));
+            if (interfaceType != null)
+            {
+                services.AddScoped(interfaceType, processamento);
+            }
+        }
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

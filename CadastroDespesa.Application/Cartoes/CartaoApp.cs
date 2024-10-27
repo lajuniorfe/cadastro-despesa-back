@@ -57,7 +57,7 @@ namespace CadastroDespesa.Application.Cartoes
         public async void ExcluirCartao(int id)
         {
             Cartao retorno = await cartaoServico.ValidarCartaoAsync(id);
-            await cartaoRepositorio.Deletar(retorno);
+            cartaoRepositorio.Deletar(retorno);
         }
     }
 }

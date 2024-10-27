@@ -20,8 +20,12 @@ public class Despesa : BaseEntidade
         SetDescricao(descricao);
         SetData();
         SetValor(valor);
+        SetStatusPagamento(false);
     }
 
+    public virtual void SetStatusPagamento(bool status){
+        StatusPagamento = status;
+    }
     public virtual void SetDescricao(string? descricao)
     {
         Descricao = descricao;

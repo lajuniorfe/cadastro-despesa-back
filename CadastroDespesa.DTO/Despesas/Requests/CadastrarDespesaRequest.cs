@@ -13,7 +13,7 @@ namespace CadastroDespesa.DTO.Despesas.Requests
         public decimal Valor { get; set; }
         public required CategoriaRequest Categoria { get; set; }
         public required TipoDespesaRequest TipoDespesa { get; set; }
-        public required TipoPagamentoRequest TipoPagamentoRequest { get; set; }
+        public required TipoPagamentoRequest TipoPagamento { get; set; }
         public CartaoRequest? Cartao { get; set; }
         public int? Parcela { get; set; }
 
