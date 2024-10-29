@@ -21,10 +21,10 @@ namespace CadastroDespesa.Api.Controller.Despesas
         /// <param name="despesa"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarDespesa([FromBody] CadastrarDespesaRequest despesa)
+        public async Task<IActionResult> CadastrarDespesa([FromBody] CadastrarDespesaRequest despesa)
         {
 
-            despesaApp.CadastrarDespesa(despesa);
+            await despesaApp.CadastrarDespesa(despesa);
 
             return Ok();
         }

@@ -1,5 +1,8 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Npgsql;
+using System.Net.Sockets;
 using System.Reflection;
 
 namespace CadastroDespesa.Infra.Contexto;
@@ -11,6 +14,7 @@ public class EntityContexto : DbContext
         if (Database.GetPendingMigrations().Count() > 0)
             Database.Migrate();
     }
+
     public DbSet<T> GetDbSet<T>() where T : BaseEntidade
     {
         return Set<T>();
@@ -21,4 +25,6 @@ public class EntityContexto : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
     }
+
+    
 }

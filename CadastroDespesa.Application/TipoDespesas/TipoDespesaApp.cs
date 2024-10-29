@@ -18,17 +18,17 @@ namespace CadastroDespesa.Application.TipoDespesas
             _mapper = mapper;
         }
 
-        public IList<TipoDespesaResponse> BuscarTipoDespesas()
+        public async Task<IList<TipoDespesaResponse>> BuscarTipoDespesas()
         {
-            IEnumerable<TipoDespesa> tipoDespesas = tipoDespesaRepositorio.ObterTodos();
-            return _mapper.Map<IList<TipoDespesaResponse>>(tipoDespesas);
+            IEnumerable<TipoDespesa> response = await tipoDespesaRepositorio.ObterTodos();
+            return _mapper.Map<IList<TipoDespesaResponse>>(response);
         }
 
-        public void CadastrarTipoDespesa(TipoDespesaRequest request)
+        public async Task CadastrarTipoDespesa(TipoDespesaRequest request)
         {
             TipoDespesa tipoDespesa = _mapper.Map<TipoDespesa>(request);
 
-            tipoDespesaRepositorio.Criar(tipoDespesa);
+            await tipoDespesaRepositorio.Criar(tipoDespesa);
         }
     }
 }

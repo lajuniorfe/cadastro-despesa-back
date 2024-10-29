@@ -7,9 +7,9 @@ namespace CadastroDespesa.Dominio.Despesas.Servicos;
 
 public class DespesaServico : IDespesaServico
 {
-    private readonly IDespesasRepositorio despesasRepositorio;
+    private readonly IDespesaRepositorio despesasRepositorio;
 
-    public DespesaServico(IDespesasRepositorio despesasRepositorio)
+    public DespesaServico(IDespesaRepositorio despesasRepositorio)
     {
         this.despesasRepositorio = despesasRepositorio;
     }
@@ -17,4 +17,5 @@ public class DespesaServico : IDespesaServico
     public async Task<Despesa> ValidarDespesaAsync(int idDespesa){
         return await despesasRepositorio.ObterPorId(idDespesa);
     }
+
 }

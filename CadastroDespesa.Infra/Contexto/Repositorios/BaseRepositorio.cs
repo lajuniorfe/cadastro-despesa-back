@@ -1,26 +1,24 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Base.Repositorios;
-using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using System.Linq.Expressions;
+using System.Net.Sockets;
 
 namespace CadastroDespesa.Infra.Contexto.Repositorios;
 
 public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
 {
     protected readonly EntityContexto contexto;
-    private readonly IUnitOfWork unitOfWork;
-
-    public BaseRepositorio(EntityContexto contexto, IUnitOfWork unitOfWork)
+    public BaseRepositorio(EntityContexto contexto)
     {
         this.contexto = contexto;
-        this.unitOfWork = unitOfWork;
     }
-
-    public void Alterar(T entity)
+    public async Task Alterar(T entity)
     {
         contexto.GetDbSet<T>().Attach(entity);
         contexto.Entry(entity).State = EntityState.Modified;
+        await contexto.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<T>> Buscar(Expression<Func<T, bool>> predicate)
@@ -28,25 +26,33 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         return await contexto.GetDbSet<T>().Where(predicate).ToListAsync();
     }
 
-    public int Criar(T entity)
+    public async Task<int> Criar(T entity)
     {
-        var id = contexto.GetDbSet<T>().Add(entity).Entity;
+        await contexto.GetDbSet<T>().AddAsync(entity);
+        await contexto.SaveChangesAsync();
         return entity.Id;
     }
 
-    public void Deletar(T entity)
+    public async Task Deletar(T entity)
     {
         contexto.GetDbSet<T>().Remove(entity);
     }
 
     public async Task<T> ObterPorId(int id)
     {
-        return await contexto.GetDbSet<T>().FindAsync(id);
+        var entity = await contexto.GetDbSet<T>().FindAsync(id);
+        if (entity == null)
+        {
+            throw new KeyNotFoundException($"Entidade com Id {id} não encontrada.");
+        }
+
+        return entity;
+
     }
 
-    public IEnumerable<T> ObterTodos()
+    public async Task<IEnumerable<T>> ObterTodos()
     {
-        return  contexto.GetDbSet<T>().ToList();
+        return await contexto.GetDbSet<T>().ToListAsync();
     }
 
 }

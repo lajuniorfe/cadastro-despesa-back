@@ -17,15 +17,15 @@ namespace CadastroDespesa.Application.TiposPagamento
             _mapper = mapper;
         }
 
-        public void CriarTipoPagamento(TipoPagamentoRequest request)
+        public async Task CriarTipoPagamento(TipoPagamentoRequest request)
         {
             TipoPagamento tipoPagamento = _mapper.Map<TipoPagamento>(request);
-            tipoPagamentoRepositorio.Criar(tipoPagamento);
+            await tipoPagamentoRepositorio.Criar(tipoPagamento);
         }
 
-        public IList<TipoPagamentoResponse> RetornarTiposPagamento()
+        public async Task<IList<TipoPagamentoResponse>> RetornarTiposPagamento()
         {
-            IEnumerable<TipoPagamento> tiposPagamento = tipoPagamentoRepositorio.ObterTodos();
+            IEnumerable<TipoPagamento> tiposPagamento = await tipoPagamentoRepositorio.ObterTodos();
 
             IList<TipoPagamentoResponse> response = _mapper.Map<IList<TipoPagamentoResponse>>(tiposPagamento);
             return response;

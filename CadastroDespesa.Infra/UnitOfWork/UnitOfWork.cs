@@ -1,11 +1,11 @@
 using System;
+using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.Infra.Contexto;
-using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CadastroDespesa.Infra.UnitOfWork;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork : IUnitOfWork, IAsyncDisposable
 {
     private readonly EntityContexto contexto;
     private IDbContextTransaction _transaction;
@@ -17,23 +17,55 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task CommitAsync()
     {
-        await contexto.SaveChangesAsync();
-        _transaction.Commit();
+        try
+        {
+            if (_transaction == null)
+            {
+                _transaction = await contexto.Database.BeginTransactionAsync();
+            }
+
+            await contexto.SaveChangesAsync();
+            await _transaction.CommitAsync();
+        }
+        catch
+        {
+            await RollbackAsync();
+            throw;
+        }
+        finally
+        {
+            await DisposeAsync();
+        }
     }
 
-    public void Dispose()
+    public async Task RollbackAsync()
     {
-        _transaction?.Dispose();
-        contexto.Dispose();
+        if (_transaction == null)
+        {
+            throw new InvalidOperationException("Erro ao dar roolbaclk");
+        }
+
+        await _transaction.RollbackAsync();
+        await DisposeAsync();
     }
 
-    public void Rollback()
+    public async Task BeginTransaction()
     {
-        _transaction.Rollback();
+
+        if (_transaction != null)
+        {
+            throw new InvalidOperationException("Já existe uma transação aberta.");
+        }
+
+        _transaction = await contexto.Database.BeginTransactionAsync();
     }
 
-    public void BeginTransaction()
+    public async ValueTask DisposeAsync()
     {
-        _transaction = contexto.Database.BeginTransaction();
+        if (_transaction != null)
+        {
+            await _transaction.DisposeAsync();
+        }
+        await contexto.DisposeAsync();
     }
 }

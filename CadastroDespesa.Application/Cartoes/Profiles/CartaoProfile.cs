@@ -2,6 +2,7 @@
 using CadastroDespesa.Dominio.Cartoes.Entidades;
 using CadastroDespesa.DTO.Cartao.Requests;
 using CadastroDespesa.DTO.Cartao.Responses;
+using CadastroDespesa.DTO.Cartoes.Requests;
 
 namespace CadastroDespesa.Application.Cartoes.Profiles
 {
@@ -11,6 +12,7 @@ namespace CadastroDespesa.Application.Cartoes.Profiles
         {
             CreateMap<Cartao, CartaoResponse>();
             CreateMap<CadastrarCartaoRequest, Cartao>();
+            CreateMap<CartaoRequest, Cartao>();
         }
     }
 }

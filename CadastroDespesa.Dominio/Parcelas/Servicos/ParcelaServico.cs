@@ -19,7 +19,7 @@ namespace CadastroDespesa.Dominio.Parcelas.Servicos
             foreach (var i in parcelas)
             {
                 i.SetFatura(fatura);
-                parcelaRepositorio.Criar(i);
+                await parcelaRepositorio.Criar(i);
             }
         }
 

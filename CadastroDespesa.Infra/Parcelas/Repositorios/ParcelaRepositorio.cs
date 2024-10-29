@@ -2,7 +2,6 @@
 using CadastroDespesa.Dominio.Parcelas.Repositorios;
 using CadastroDespesa.Infra.Contexto;
 using CadastroDespesa.Infra.Contexto.Repositorios;
-using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,6 @@ namespace CadastroDespesa.Infra.Parcelas.Repositorios
 {
     public class ParcelaRepositorio : BaseRepositorio<Parcela>, IParcelaRepositorio
     {
-        public ParcelaRepositorio(EntityContexto context, IUnitOfWork unitOfWork) : base(context, unitOfWork) { }
+        public ParcelaRepositorio(EntityContexto context) : base(context) { }
     }
 }

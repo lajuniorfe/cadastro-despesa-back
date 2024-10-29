@@ -47,9 +47,9 @@ namespace CadastroDespesa.Api.Controller.Cartoes
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult BuscarCartaoPorId(int id)
+        public async Task<IActionResult> BuscarCartaoPorId(int id)
         {
-            CartaoResponse response = cartaoApp.BuscarCartao(id);
+            CartaoResponse response = await cartaoApp.BuscarCartao(id);
 
             if (response is null)
                 return BadRequest();

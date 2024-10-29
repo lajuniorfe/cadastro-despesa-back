@@ -12,9 +12,9 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
         private readonly ICartaoServico cartaoServico;
         private readonly IFaturaServico faturaServico;
         private readonly IParcelaServico parcelaServico;
-        private readonly IDespesasRepositorio despesasRepositorio;
+        private readonly IDespesaRepositorio despesasRepositorio;
 
-        public ProcessamentoPagamentoFactory(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, IDespesasRepositorio despesasRepositorio)
+        public ProcessamentoPagamentoFactory(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, IDespesaRepositorio despesasRepositorio)
         {
             this.cartaoServico = cartaoServico;
             this.faturaServico = faturaServico;
@@ -26,8 +26,8 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
         {
             return idTipoPagamento switch
             {
-                1 => new PagamentoDinheiroProcessar(despesasRepositorio),
-                2 => new PagamentoCartaoProcessar(cartaoServico, faturaServico, parcelaServico),
+                1 => new PagamentoCartaoProcessar(cartaoServico, faturaServico, parcelaServico),
+                2 => new PagamentoDinheiroProcessar(despesasRepositorio),
                 _ => throw new ArgumentException("Tipo Pagamento não suportado")
             };
         }

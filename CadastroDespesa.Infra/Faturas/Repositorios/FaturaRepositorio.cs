@@ -2,12 +2,11 @@
 using CadastroDespesa.Dominio.Faturas.Repositorios;
 using CadastroDespesa.Infra.Contexto;
 using CadastroDespesa.Infra.Contexto.Repositorios;
-using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 
 namespace CadastroDespesa.Infra.Faturas.Repositorios
 {
     public class FaturaRepositorio : BaseRepositorio<Fatura>, IFaturaRepositorio
     {
-        public FaturaRepositorio(EntityContexto context, IUnitOfWork unitOfWork): base(context, unitOfWork) { }
+        public FaturaRepositorio(EntityContexto context): base(context) { }
     }
 }

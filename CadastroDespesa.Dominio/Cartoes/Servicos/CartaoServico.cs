@@ -23,7 +23,7 @@ namespace CadastroDespesa.Dominio.Cartoes.Servicos
             Cartao retorno = await cartaoRepositorio.ObterPorId(idCartao);
 
             if (retorno is null)
-                return null; //criar metodo de exceção
+                return null; 
 
            return retorno;
         }

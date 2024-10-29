@@ -17,9 +17,9 @@ namespace CadastroDespesa.Dominio.TipoDespesas.Servicos
             this.tipoDespesaRepositorio = tipoDespesaRepositorio;
         }
 
-        public Task<TipoDespesa> ValidarTipoDespesaAsync(int id)
+        public async Task<TipoDespesa> ValidarTipoDespesaAsync(int id)
         {
-            return tipoDespesaRepositorio.ObterPorId(id);
+            return await tipoDespesaRepositorio.ObterPorId(id);
         }
     }
 }

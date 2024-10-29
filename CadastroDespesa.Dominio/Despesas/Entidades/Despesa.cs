@@ -15,14 +15,32 @@ public class Despesa : BaseEntidade
     public virtual TipoDespesa TipoDespesa {get; protected set;}
     public virtual TipoPagamento TipoPagamento { get; protected set; }
 
-    public Despesa(string? descricao, decimal valor)
+    public Despesa() { }
+    public Despesa(string? descricao, decimal valor, Categoria categoria, TipoDespesa tipoDespesa, TipoPagamento tipoPagamento)
     {
         SetDescricao(descricao);
         SetData();
         SetValor(valor);
         SetStatusPagamento(false);
+        SetCategoria(categoria);
+        SetTipoDespesa(tipoDespesa);
+        SetTipoPagamento(tipoPagamento);
     }
 
+    public virtual void SetCategoria(Categoria categoria)
+    {
+        Categoria = categoria;
+    }
+
+    public virtual void SetTipoDespesa(TipoDespesa tipoDespesa)
+    {
+        TipoDespesa = tipoDespesa;
+    }
+
+    public virtual void SetTipoPagamento(TipoPagamento tipoPagamento)
+    {
+        TipoPagamento = tipoPagamento;
+    }
     public virtual void SetStatusPagamento(bool status){
         StatusPagamento = status;
     }

@@ -22,9 +22,9 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
             this.parcelaServico = parcelaServico;
         }
 
-        public async Task Processar(Despesa despesa, Cartao? cartao, int totalParcelas)
+        public async Task Processar(Despesa despesa, int idCartao, int totalParcelas)
         {
-            await ProcessarPagamentoCartao(despesa, cartao.Id, totalParcelas);
+            await ProcessarPagamentoCartao(despesa, idCartao, totalParcelas);
         }
 
         public async Task ProcessarPagamentoCartao(Despesa despesa, int idCartao, int totalParcelas)

@@ -18,18 +18,18 @@ namespace CadastroDespesa.Application.Categorias
             _mapper = mapper;
         }
 
-        public IList<CategoriaResponse> BuscarCategorias()
+        public async Task<IList<CategoriaResponse>> BuscarCategorias()
         {
-            IEnumerable<Categoria> retorno = categoriaRepositorio.ObterTodos();
+            IEnumerable<Categoria> retorno = await categoriaRepositorio.ObterTodos();
 
             return _mapper.Map<IList<CategoriaResponse>>(retorno);
         }
 
-        public void CriarCategoria(CategoriaRequest request)
+        public async Task CriarCategoria(CategoriaRequest request)
         {
             Categoria categoria = _mapper.Map<Categoria>(request);
 
-            categoriaRepositorio.Criar(categoria);
+            await categoriaRepositorio.Criar(categoria);
 
         }
     }

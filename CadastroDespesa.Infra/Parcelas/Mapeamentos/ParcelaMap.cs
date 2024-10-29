@@ -21,7 +21,7 @@ namespace CadastroDespesa.Infra.Parcelas.Mapeamentos
             builder.Property(c => c.Id)
                   .IsRequired()
                   .HasColumnName("id")
-                  .HasColumnType("integer");
+                  .HasColumnType("interger");
 
             builder.Property(d => d.Valor)
                 .HasColumnName("valor")
@@ -41,7 +41,7 @@ namespace CadastroDespesa.Infra.Parcelas.Mapeamentos
 
             builder.HasOne(p => p.Despesa)
                        .WithMany()
-                       .HasForeignKey("id_depesa");
+                       .HasForeignKey("id_jurema");
 
 
             builder.HasOne(p => p.Fatura)

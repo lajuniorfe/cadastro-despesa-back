@@ -2,7 +2,6 @@
 using CadastroDespesa.Dominio.TiposPagamento.Repositorios;
 using CadastroDespesa.Infra.Contexto;
 using CadastroDespesa.Infra.Contexto.Repositorios;
-using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +12,6 @@ namespace CadastroDespesa.Infra.TiposPagamento.Repositorios
 {
     public class TipoPagamentoRepositorio : BaseRepositorio<TipoPagamento>, ITipoPagamentoRepositorio
     {
-        public TipoPagamentoRepositorio(EntityContexto context, IUnitOfWork unitOfWork) : base(context, unitOfWork) { }
+        public TipoPagamentoRepositorio(EntityContexto context) : base(context) { }
     }
 }

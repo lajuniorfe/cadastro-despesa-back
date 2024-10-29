@@ -1,58 +1,80 @@
 using AutoMapper;
 using CadastroDespesa.Application.Despesas.Interfaces;
 using CadastroDespesa.Dominio.Cartoes.Entidades;
+using CadastroDespesa.Dominio.Cartoes.Repositorios;
+using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
+using CadastroDespesa.Dominio.Categorias.Entidades;
+using CadastroDespesa.Dominio.Categorias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Interfaces;
 using CadastroDespesa.Dominio.Fatories.Pagamentos;
+using CadastroDespesa.Dominio.Faturas.Repositorios;
+using CadastroDespesa.Dominio.TipoDespesas.Entidades;
+using CadastroDespesa.Dominio.TipoDespesas.Repositorios;
+using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TiposPagamento.Entidades;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
+using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.DTO.Despesas.Requests;
 using CadastroDespesa.DTO.Despesas.Responses;
-using CadastroDespesa.Infra.UnitOfWork.Interfaces;
 
 namespace CadastroDespesa.Application.Despesas;
 
 public class DespesaApp : IDespesaApp
 {
     private readonly IMapper _mapper;
-    private readonly IDespesasRepositorio despesasRepositorio;
+    private readonly IDespesaRepositorio despesasRepositorio;
     private readonly ProcessamentoPagamentoFactory _pagamentoFactory;
     private readonly IUnitOfWork unitOfWork;
-    public DespesaApp(IMapper mapper, IDespesasRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork)
+    private readonly ICartaoServico cartaoServico;
+    private readonly ICategoriaServico categoriaServico;
+    private readonly ITipoPagamentoServico tipoPagamentoServico;
+    private readonly ITipoDespesaServico tipoDespesaServico;
+    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, ICartaoServico cartaoServico, ICategoriaServico categoriaServico = null, ITipoPagamentoServico tipoPagamentoServico = null, ITipoDespesaServico tipoDespesaServico = null)
     {
         _mapper = mapper;
         this._pagamentoFactory = _pagamentoFactory;
         this.despesasRepositorio = despesasRepositorio;
         this.unitOfWork = unitOfWork;
+        this.cartaoServico = cartaoServico;
+        this.categoriaServico = categoriaServico;
+        this.tipoPagamentoServico = tipoPagamentoServico;
+        this.tipoDespesaServico = tipoDespesaServico;
     }
 
-    public IList<DespesaResponse> BuscarDespesas()
+    public async Task<IList<DespesaResponse>> BuscarDespesas()
     {
-        IEnumerable<Despesa> despesas = despesasRepositorio.ObterTodos();
-        return _mapper.Map<List<DespesaResponse>>(despesas); 
+        IEnumerable<Despesa> despesas = await despesasRepositorio.ObterTodos();
+        return _mapper.Map<List<DespesaResponse>>(despesas); ;
     }
 
     public async Task CadastrarDespesa(CadastrarDespesaRequest despesaRequest)
     {
         try
         {
-            unitOfWork.BeginTransaction();
+            //usar fluent validator
+            await unitOfWork.BeginTransaction();
+            Categoria categoria = await categoriaServico.ValidarCategoriaAsync(despesaRequest.IdCategoria);
+            TipoDespesa tipoDespesa = await tipoDespesaServico.ValidarTipoDespesaAsync(despesaRequest.IdTipoDespesa);
+            TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(despesaRequest.IdTipoPagamento);
 
-            Despesa despesa = _mapper.Map<Despesa>(despesaRequest);
-            despesasRepositorio.Criar(despesa);
+            Despesa despesa = new(despesaRequest.Descricao, despesaRequest.Valor, categoria, tipoDespesa, tipoPagamento);
+            await despesasRepositorio.Criar(despesa);
 
-            Cartao cartao = _mapper.Map<Cartao>(despesaRequest.Cartao);
+            IPagamentoProcessar processadorPagamento = _pagamentoFactory.ProcessarPagamento(despesaRequest.IdTipoPagamento);
 
-            IPagamentoProcessar processadorPagamento = _pagamentoFactory.ProcessarPagamento(despesaRequest.TipoPagamento.Id);
+            await processadorPagamento.Processar(despesa, despesaRequest.IdCartao, despesaRequest.Parcela.Value);
 
-            await processadorPagamento.Processar(despesa, cartao, despesaRequest.Parcela.Value);
-            
             await unitOfWork.CommitAsync();
         }
-        catch{
-            unitOfWork.Rollback();
+        catch (Exception ex)
+        {
+            //criar log
+            Console.WriteLine($"Erro: {ex.Message}");
             throw;
         }
-        
+
 
     }
 }

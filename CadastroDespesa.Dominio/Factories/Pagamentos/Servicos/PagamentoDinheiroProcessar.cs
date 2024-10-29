@@ -8,14 +8,14 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos;
 
 public class PagamentoDinheiroProcessar : IPagamentoDinheiroProcessar
 {
-    private  readonly IDespesasRepositorio despesasRepositorio;
+    private  readonly IDespesaRepositorio despesasRepositorio;
 
-    public PagamentoDinheiroProcessar(IDespesasRepositorio despesasRepositorio)
+    public PagamentoDinheiroProcessar(IDespesaRepositorio despesasRepositorio)
     {
         this.despesasRepositorio = despesasRepositorio;
     }
 
-    public async Task Processar(Despesa despesa, Cartao cartao, int totalParcelas)
+    public async Task Processar(Despesa despesa, int idCartao, int totalParcelas)
     {
         ProcessarPagamentoDinheiro(despesa);
        

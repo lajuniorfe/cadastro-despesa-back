@@ -10,7 +10,7 @@ namespace CadastroDespesa.Application.TiposPagamento.Interfaces
 {
     public interface ITipoPagamentoApp
     {
-        public void CriarTipoPagamento(TipoPagamentoRequest request);
-        public IList<TipoPagamentoResponse> RetornarTiposPagamento();
+        public Task CriarTipoPagamento(TipoPagamentoRequest request);
+        public Task<IList<TipoPagamentoResponse>> RetornarTiposPagamento();
     }
 }

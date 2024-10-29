@@ -5,7 +5,7 @@ namespace CadastroDespesa.Application.Categorias.Interfaces
 {
     public interface ICategoriaApp
     {
-        IList<CategoriaResponse> BuscarCategorias();
-        void CriarCategoria(CategoriaRequest request);
+        Task<IList<CategoriaResponse>> BuscarCategorias();
+        Task CriarCategoria(CategoriaRequest request);
     }
 }

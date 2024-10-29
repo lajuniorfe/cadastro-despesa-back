@@ -22,35 +22,36 @@ namespace CadastroDespesa.Application.Cartoes
             this.cartaoServico = cartaoServico;
         }
 
-        public CartaoResponse AlterarCartao(CadastrarCartaoRequest request)
+        public async Task<CartaoResponse> AlterarCartao(CadastrarCartaoRequest request)
         {
             Cartao cartao = _mapper.Map<Cartao>(request);
-            cartaoRepositorio.Alterar(cartao);
+            await cartaoRepositorio.Alterar(cartao);
             return _mapper.Map<CartaoResponse>(cartao);
         }
 
-        public CartaoResponse BuscarCartao(int id)
+        public async Task<CartaoResponse> BuscarCartao(int id)
         {
-            return _mapper.Map<CartaoResponse>(cartaoRepositorio.ObterPorId(id));
+            Cartao response = await cartaoRepositorio.ObterPorId(id);
+            return _mapper.Map<CartaoResponse>(response);
         }
 
-        public IList<CartaoResponse> BuscarCartoes()
+        public async Task<IList<CartaoResponse>> BuscarCartoes()
         {
-            IEnumerable<Cartao> cartao = cartaoRepositorio.ObterTodos();
+            IEnumerable<Cartao> cartao = await cartaoRepositorio.ObterTodos();
             IList<CartaoResponse> response = _mapper.Map<IList<CartaoResponse>>(cartao);
             return response;
         }
 
-        public void CadastrarCartao(CadastrarCartaoRequest request)
+        public async Task CadastrarCartao(CadastrarCartaoRequest request)
         {
             Cartao cartao = _mapper.Map<Cartao>(request);
-            cartaoRepositorio.Criar(cartao);
+            await cartaoRepositorio.Criar(cartao);
         }
 
-        public async void ExcluirCartao(int id)
+        public async Task ExcluirCartao(int id)
         {
             Cartao retorno = await cartaoServico.ValidarCartaoAsync(id);
-            cartaoRepositorio.Deletar(retorno);
+            await cartaoRepositorio.Deletar(retorno);
         }
     }
 }

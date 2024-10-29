@@ -64,7 +64,7 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
                     Id = 0,
                     Despesa = despesa,
                     Valor = despesa.Valor / totalParcelas,
-                    NumeroParcela = i,
+                    NumeroParcela = i == 0 ? 1 : i++,
                     Data = i == 0 ? despesa.Data : despesa.Data.AddMonths(1),
                     Fatura = null
                 };

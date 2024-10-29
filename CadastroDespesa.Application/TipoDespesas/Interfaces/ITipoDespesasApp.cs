@@ -5,7 +5,7 @@ namespace CadastroDespesa.Application.TipoDespesas.Interfaces
 {
     public interface ITipoDespesasApp
     {
-        IList<TipoDespesaResponse> BuscarTipoDespesas();
-        void CadastrarTipoDespesa(TipoDespesaRequest request);
+        Task<IList<TipoDespesaResponse>> BuscarTipoDespesas();
+        Task CadastrarTipoDespesa(TipoDespesaRequest request);
     }
 }

@@ -26,14 +26,19 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos
             && (x.MesCorrespondente.Month == dataFatura.Month
             && x.MesCorrespondente.Year == x.MesCorrespondente.Year));
 
-            if(response.Any())
-                return response.First();
+            if (response.Any())
+            {
+                response.First().SetValor(response.First().Valor + valorDespesa);
+                await faturaRepositorio.Alterar(response.First());
+                return response.First();    
+            }
+                
 
-            DateTime dataVencimento = new DateTime(cartao.Vencimento,dataFatura.Month, dataFatura.Year);
+            DateTime dataVencimento = new DateTime(dataFatura.Year, dataFatura.Month, cartao.Vencimento);
 
             Fatura novaFatura = new(valorDespesa, dataVencimento, dataFatura, cartao);
            
-            faturaRepositorio.Criar(novaFatura);
+            await faturaRepositorio.Criar(novaFatura);
 
             return novaFatura;
         }

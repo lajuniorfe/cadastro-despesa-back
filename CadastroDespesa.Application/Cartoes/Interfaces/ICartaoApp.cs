@@ -10,10 +10,10 @@ namespace CadastroDespesa.Application.Cartoes.Interfaces
 {
     public interface ICartaoApp
     {
-        void CadastrarCartao(CadastrarCartaoRequest request);
-        CartaoResponse AlterarCartao(CadastrarCartaoRequest request);
-        CartaoResponse BuscarCartao(int id);
-        IList<CartaoResponse> BuscarCartoes();
-        void ExcluirCartao(int id);
+        Task CadastrarCartao(CadastrarCartaoRequest request);
+        Task<CartaoResponse> AlterarCartao(CadastrarCartaoRequest request);
+        Task<CartaoResponse> BuscarCartao(int id);
+        Task<IList<CartaoResponse>> BuscarCartoes();
+        Task ExcluirCartao(int id);
     }
 }
