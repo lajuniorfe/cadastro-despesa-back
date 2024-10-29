@@ -14,7 +14,7 @@ namespace CadastroDespesa.DTO.Despesas.Requests
         public int IdCategoria { get; set; }
         public int IdTipoDespesa { get; set; }
         public int IdTipoPagamento { get; set; }
-        public int IdCartao { get; set; }
+        public int? IdCartao { get; set; }
         public int? Parcela { get; set; }
 
     }

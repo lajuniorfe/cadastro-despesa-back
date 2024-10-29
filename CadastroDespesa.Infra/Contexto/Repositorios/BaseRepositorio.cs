@@ -1,9 +1,7 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Base.Repositorios;
 using Microsoft.EntityFrameworkCore;
-using Npgsql;
 using System.Linq.Expressions;
-using System.Net.Sockets;
 
 namespace CadastroDespesa.Infra.Contexto.Repositorios;
 
@@ -52,7 +50,8 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
 
     public async Task<IEnumerable<T>> ObterTodos()
     {
-        return await contexto.GetDbSet<T>().ToListAsync();
+        var tt = await contexto.GetDbSet<T>().ToListAsync();
+        return tt;
     }
 
 }

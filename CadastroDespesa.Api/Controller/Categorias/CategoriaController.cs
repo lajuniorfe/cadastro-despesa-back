@@ -32,9 +32,9 @@ namespace CadastroDespesa.Api.Controller.Categorias
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult BuscarCategorias()
+        public async Task<IActionResult> BuscarCategorias()
         {
-            return Ok(categoriaApp.BuscarCategorias());
+            return Ok(await categoriaApp.BuscarCategorias());
         }
     }
 }

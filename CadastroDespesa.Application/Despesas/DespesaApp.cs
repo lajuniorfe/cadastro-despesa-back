@@ -64,7 +64,14 @@ public class DespesaApp : IDespesaApp
 
             IPagamentoProcessar processadorPagamento = _pagamentoFactory.ProcessarPagamento(despesaRequest.IdTipoPagamento);
 
-            await processadorPagamento.Processar(despesa, despesaRequest.IdCartao, despesaRequest.Parcela.Value);
+            await processadorPagamento
+                .Processar(
+                    despesa,
+                    despesaRequest.IdCartao.HasValue ?
+                    despesaRequest.IdCartao.Value : 0,
+                    despesaRequest.Parcela.HasValue ?
+                    despesaRequest.Parcela.Value : 0
+                );
 
             await unitOfWork.CommitAsync();
         }

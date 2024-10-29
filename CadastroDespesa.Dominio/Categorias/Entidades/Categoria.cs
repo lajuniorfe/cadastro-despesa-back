@@ -4,6 +4,19 @@ namespace CadastroDespesa.Dominio.Categorias.Entidades
 {
     public class Categoria : BaseEntidade
     {
-        public string? Nome { get; set; }
+        public virtual string? Nome { get; protected set; }
+
+        public Categoria()
+        {
+
+        }
+        public Categoria(string nome)
+        {
+            SetNome(nome);
+        }
+        public virtual void SetNome(string nome)
+        {
+            Nome = nome;
+        }
     }
 }

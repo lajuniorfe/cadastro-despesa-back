@@ -27,7 +27,7 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
             return idTipoPagamento switch
             {
                 1 => new PagamentoCartaoProcessar(cartaoServico, faturaServico, parcelaServico),
-                2 => new PagamentoDinheiroProcessar(despesasRepositorio),
+                2 => new PagamentoPixDinheiroProcessar(despesasRepositorio),
                 _ => throw new ArgumentException("Tipo Pagamento não suportado")
             };
         }

@@ -23,10 +23,10 @@ namespace CadastroDespesa.Api.Controller.Cartoes
         /// <param name="cartao"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarDespesa([FromBody] CadastrarCartaoRequest request)
+        public async Task<IActionResult> CadastrarDespesa([FromBody] CadastrarCartaoRequest request)
         {
 
-            cartaoApp.CadastrarCartao(request);
+            await cartaoApp.CadastrarCartao(request);
 
             return Ok();
         }
@@ -36,9 +36,9 @@ namespace CadastroDespesa.Api.Controller.Cartoes
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult BuscarDespesas()
+        public async Task<IActionResult> BuscarDespesas()
         {
-            return Ok(cartaoApp.BuscarCartoes());
+            return Ok(await cartaoApp.BuscarCartoes());
         }
 
         /// <summary>

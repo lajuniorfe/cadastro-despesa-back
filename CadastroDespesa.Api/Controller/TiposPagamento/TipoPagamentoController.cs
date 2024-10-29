@@ -20,9 +20,9 @@ namespace CadastroDespesa.Api.Controller.TiposPagamento
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult BuscarTipoPagamento()
+        public async Task<IActionResult> BuscarTipoPagamento()
         {
-            return Ok(tipoPagamentoApp.RetornarTiposPagamento());
+            return Ok(await tipoPagamentoApp.RetornarTiposPagamento());
         }
 
         /// <summary>
@@ -31,9 +31,9 @@ namespace CadastroDespesa.Api.Controller.TiposPagamento
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarTipoPagamento([FromBody] TipoPagamentoRequest request)
+        public async Task<IActionResult> CadastrarTipoPagamento([FromBody] TipoPagamentoRequest request)
         {
-            tipoPagamentoApp.CriarTipoPagamento(request);
+            await tipoPagamentoApp.CriarTipoPagamento(request);
 
             return Ok();
         }

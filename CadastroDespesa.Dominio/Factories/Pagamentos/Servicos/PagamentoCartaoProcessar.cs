@@ -22,19 +22,19 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
             this.parcelaServico = parcelaServico;
         }
 
-        public async Task Processar(Despesa despesa, int idCartao, int totalParcelas)
+        public async Task Processar(Despesa despesa, int? idCartao, int? totalParcelas)
         {
             await ProcessarPagamentoCartao(despesa, idCartao, totalParcelas);
         }
 
-        public async Task ProcessarPagamentoCartao(Despesa despesa, int idCartao, int totalParcelas)
+        public async Task ProcessarPagamentoCartao(Despesa despesa, int? idCartao, int? totalParcelas)
         {
-            Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao);
+            Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao.Value);
             Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(cartaoRetornado, despesa.Valor, despesa.Data);
 
             Parcela parcela = parcelaServico.InstanciarParcela();
 
-            IList<Parcela> parcelas = parcela.CalcularDataParcela(totalParcelas, despesa);
+            IList<Parcela> parcelas = parcela.CalcularDataParcela(totalParcelas.Value, despesa);
             await parcelaServico.CriarParcelasDespesa(parcelas, faturaRetornada);
         }
     }

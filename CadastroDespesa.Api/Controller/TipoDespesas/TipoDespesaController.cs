@@ -20,9 +20,9 @@ namespace CadastroDespesa.Api.Controller.TipoDespesas
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult BuscarTipoDespesas()
+        public async Task<IActionResult> BuscarTipoDespesas()
         {
-           return Ok( tipoDespesaApp.BuscarTipoDespesas());
+            return Ok(await tipoDespesaApp.BuscarTipoDespesas());
         }
 
         /// <summary>
@@ -31,9 +31,9 @@ namespace CadastroDespesa.Api.Controller.TipoDespesas
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult CadastrarTipoDespesa([FromBody] TipoDespesaRequest request)
+        public async Task<IActionResult> CadastrarTipoDespesa([FromBody] TipoDespesaRequest request)
         {
-            tipoDespesaApp.CadastrarTipoDespesa(request);
+            await tipoDespesaApp.CadastrarTipoDespesa(request);
 
             return Ok();
         }

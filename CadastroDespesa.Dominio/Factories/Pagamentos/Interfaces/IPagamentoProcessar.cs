@@ -10,6 +10,6 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Interfaces
 {
     public interface IPagamentoProcessar
     {
-        Task Processar(Despesa despesa, int idCartao, int totalParcelas); 
+        Task Processar(Despesa despesa, int? idCartao, int? totalParcelas); 
     }
 }

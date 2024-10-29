@@ -30,9 +30,9 @@ namespace CadastroDespesa.Api.Controller.Despesas
         }
 
         [HttpGet]
-        public IActionResult BuscarDespesas()
+        public async Task<IActionResult> BuscarDespesas()
         {
-            return Ok(despesaApp.BuscarDespesas());
+            return Ok(await despesaApp.BuscarDespesas());
 
         }
     }
