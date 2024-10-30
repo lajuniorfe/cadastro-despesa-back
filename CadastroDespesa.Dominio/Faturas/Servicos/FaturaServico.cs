@@ -24,7 +24,7 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos
             IEnumerable<Fatura> response = await faturaRepositorio.Buscar(x =>
             x.Cartao.Id == cartao.Id
             && (x.MesCorrespondente.Month == dataFatura.Month
-            && x.MesCorrespondente.Year == x.MesCorrespondente.Year));
+            && x.MesCorrespondente.Year == dataFatura.Year));
 
             if (response.Any())
             {

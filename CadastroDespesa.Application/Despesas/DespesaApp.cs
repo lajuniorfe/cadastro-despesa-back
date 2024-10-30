@@ -27,17 +27,15 @@ public class DespesaApp : IDespesaApp
     private readonly IDespesaRepositorio despesasRepositorio;
     private readonly ProcessamentoPagamentoFactory _pagamentoFactory;
     private readonly IUnitOfWork unitOfWork;
-    private readonly ICartaoServico cartaoServico;
     private readonly ICategoriaServico categoriaServico;
     private readonly ITipoPagamentoServico tipoPagamentoServico;
     private readonly ITipoDespesaServico tipoDespesaServico;
-    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, ICartaoServico cartaoServico, ICategoriaServico categoriaServico = null, ITipoPagamentoServico tipoPagamentoServico = null, ITipoDespesaServico tipoDespesaServico = null)
+    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, ICategoriaServico categoriaServico, ITipoPagamentoServico tipoPagamentoServico, ITipoDespesaServico tipoDespesaServico)
     {
         _mapper = mapper;
         this._pagamentoFactory = _pagamentoFactory;
         this.despesasRepositorio = despesasRepositorio;
         this.unitOfWork = unitOfWork;
-        this.cartaoServico = cartaoServico;
         this.categoriaServico = categoriaServico;
         this.tipoPagamentoServico = tipoPagamentoServico;
         this.tipoDespesaServico = tipoDespesaServico;
@@ -46,7 +44,7 @@ public class DespesaApp : IDespesaApp
     public async Task<IList<DespesaResponse>> BuscarDespesas()
     {
         IEnumerable<Despesa> despesas = await despesasRepositorio.ObterTodos();
-        return _mapper.Map<List<DespesaResponse>>(despesas); ;
+        return _mapper.Map<List<DespesaResponse>>(despesas);
     }
 
     public async Task CadastrarDespesa(CadastrarDespesaRequest despesaRequest)
@@ -79,6 +77,7 @@ public class DespesaApp : IDespesaApp
         {
             //criar log
             Console.WriteLine($"Erro: {ex.Message}");
+            await unitOfWork.RollbackAsync();
             throw;
         }
 

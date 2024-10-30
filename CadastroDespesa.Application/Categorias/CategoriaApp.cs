@@ -5,6 +5,7 @@ using CadastroDespesa.Dominio.Categorias.Repositorios;
 using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.DTO.Categorias.Requests;
 using CadastroDespesa.DTO.Categorias.Responses;
+using CadastroDespesa.Infra.UnitOfWork;
 
 namespace CadastroDespesa.Application.Categorias
 {
@@ -27,7 +28,7 @@ namespace CadastroDespesa.Application.Categorias
                 IEnumerable<Categoria> retorno = await categoriaRepositorio.ObterTodos();
                 return _mapper.Map<IList<CategoriaResponse>>(retorno); ;
             }
-            catch (Exception ex)
+            catch 
             {
                 throw;
             }
@@ -35,10 +36,20 @@ namespace CadastroDespesa.Application.Categorias
 
         public async Task CriarCategoria(CategoriaRequest request)
         {
-            Categoria categoria = _mapper.Map<Categoria>(request);
+            try
+            {
+                await unitOfWork.BeginTransaction();
 
-            await categoriaRepositorio.Criar(categoria);
+                Categoria categoria = _mapper.Map<Categoria>(request);
 
+                await categoriaRepositorio.Criar(categoria);
+
+                await unitOfWork.CommitAsync();
+            }
+            catch
+            {
+                await unitOfWork.RollbackAsync();
+            }
         }
     }
 }

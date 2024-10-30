@@ -7,11 +7,11 @@ namespace CadastroDespesa.DTO.Despesas.Requests;
 
 public class DespesaRequest
 {
-    public string? Descricao {get; set;}
-    public decimal Valor {get;set;}
-    public CategoriaRequest Categoria {get; set;}
-    public TipoPagamentoRequest TipoPagamento { get; set;}
-    public TipoDespesaRequest TipoDespesa { get; set;}
-    public CartaoRequest? Cartao { get; set;}
-    public int Parcela {get; set;}
+    public string? Descricao { get; set; }
+    public decimal Valor { get; set; }
+    public required CategoriaRequest Categoria { get; set; }
+    public required TipoPagamentoRequest TipoPagamento { get; set; }
+    public required TipoDespesaRequest TipoDespesa { get; set; }
+    public CartaoRequest? Cartao { get; set; }
+    public int Parcela { get; set; }
 }

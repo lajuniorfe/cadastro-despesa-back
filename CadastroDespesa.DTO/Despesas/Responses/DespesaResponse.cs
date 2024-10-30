@@ -12,7 +12,7 @@ public class DespesaResponse
     public DateTime Data { get; set; }
     public decimal Valor { get; set; }
     public bool StatusPagamento { get; set; }
-    public CategoriaResponse Categoria { get; set; }
-    public TipoDespesaResponse TipoDespesa { get; set; }
-    public TipoPagamentoResponse TipoPagamento { get; set; }
+    public CategoriaResponse? Categoria { get; set; }
+    public TipoDespesaResponse? TipoDespesa { get; set; }
+    public TipoPagamentoResponse? TipoPagamento { get; set; }
 }
