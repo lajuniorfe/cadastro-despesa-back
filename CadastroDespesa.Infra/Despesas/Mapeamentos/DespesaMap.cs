@@ -33,7 +33,7 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
 
         builder.Property(d => d.Data).HasColumnName("data_despesa")
              .HasColumnType("timestamp without time zone")
-            .IsRequired();
+             .IsRequired();
 
         builder.HasOne(p => p.Categoria)
                      .WithMany()
