@@ -66,35 +66,35 @@ public static class InjecaoDependecia
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddAutoMapper(typeof(TipoPagamentoProfile).Assembly);
-        
-        services.AddScoped<ICartaoServico, CartaoServico>();
-        services.AddScoped<IDespesaServico, DespesaServico>();
-        services.AddScoped<ITipoDespesaServico, TipoDespesaServico>();
-        services.AddScoped<IFaturaServico, FaturaServico>();
-        services.AddScoped<ICategoriaServico, CategoriaServico>();
-        services.AddScoped<IParcelaServico, ParcelaServico>();
-        services.AddScoped<ITipoPagamentoServico, TipoPagamentoServico>();
-        
-        services.AddScoped<IDespesaRepositorio, DespesaRepositorio>();
-        services.AddScoped<ICartaoRepositorio, CartaoRepositorio>();
-        services.AddScoped<ITipoDespesaRepositorio, TipoDespesaRepositorio>();
-        services.AddScoped<IFaturaRepositorio, FaturaRepositorio>();
-        services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
-        services.AddScoped<IParcelaRepositorio, ParcelaRepositorio>();
-        services.AddScoped<ITipoPagamentoRepositorio, TipoPagamentoRepositorio>();
 
-        services.AddScoped<IDespesaApp, DespesaApp>();
-        services.AddScoped<ICartaoApp, CartaoApp>();
-        services.AddScoped<ITipoDespesasApp, TipoDespesaApp>();
-        services.AddScoped<ICategoriaApp, CategoriaApp>();
-        services.AddScoped<ITipoPagamentoApp, TipoPagamentoApp>();
+        //services.AddScoped<ICartaoServico, CartaoServico>();
+        //services.AddScoped<IDespesaServico, DespesaServico>();
+        //services.AddScoped<ITipoDespesaServico, TipoDespesaServico>();
+        //services.AddScoped<IFaturaServico, FaturaServico>();
+        //services.AddScoped<ICategoriaServico, CategoriaServico>();
+        //services.AddScoped<IParcelaServico, ParcelaServico>();
+        //services.AddScoped<ITipoPagamentoServico, TipoPagamentoServico>();
 
-        //RegisterTypesFromAssembly(services, "CadastroDespesa.Infra", "Repositorio");
-        //RegisterTypesFromAssembly(services, "CadastroDespesa.Application", "App");
-        //RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Servico");
-        //RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Processar");
+        //services.AddScoped<IDespesaRepositorio, DespesaRepositorio>();
+        //services.AddScoped<ICartaoRepositorio, CartaoRepositorio>();
+        //services.AddScoped<ITipoDespesaRepositorio, TipoDespesaRepositorio>();
+        //services.AddScoped<IFaturaRepositorio, FaturaRepositorio>();
+        //services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+        //services.AddScoped<IParcelaRepositorio, ParcelaRepositorio>();
+        //services.AddScoped<ITipoPagamentoRepositorio, TipoPagamentoRepositorio>();
 
-       
+        //services.AddScoped<IDespesaApp, DespesaApp>();
+        //services.AddScoped<ICartaoApp, CartaoApp>();
+        //services.AddScoped<ITipoDespesasApp, TipoDespesaApp>();
+        //services.AddScoped<ICategoriaApp, CategoriaApp>();
+        //services.AddScoped<ITipoPagamentoApp, TipoPagamentoApp>();
+
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Infra", "Repositorio");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Application", "App");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Servico");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Processar");
+
+
         services.AddScoped<ProcessamentoPagamentoFactory>();
 
     }
