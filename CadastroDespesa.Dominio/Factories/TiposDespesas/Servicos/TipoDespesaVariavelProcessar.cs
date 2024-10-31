@@ -3,39 +3,45 @@ using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.TipoDespesas.Entidades;
 using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
+using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 using System;
 
 namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
 {
     public class TipoDespesaVariavelProcessar : ITipoDespesaVariavelProcessar
     {
-        private readonly ITipoDespesaServico tipoDespesaServico;
-        private readonly IDespesaRepositorio despesaRepositorio;
+        private readonly ITransacaoDespesaRepositorio transacaoDespesaRepositorio;
 
-        public TipoDespesaVariavelProcessar(ITipoDespesaServico tipoDespesaServico, IDespesaRepositorio despesaRepositorio)
+        public TipoDespesaVariavelProcessar(ITransacaoDespesaRepositorio transacaoDespesaRepositorio)
         {
-            this.tipoDespesaServico = tipoDespesaServico;
-            this.despesaRepositorio = despesaRepositorio;
+            this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public async Task Processar(int idTipoDespesa, int idTipoPagamento, Despesa despesa)
+        public async Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
         {
-            await ProcessarTipoDespesaVariavel(idTipoDespesa, despesa);
+            await ProcessarTipoDespesaVariavel(despesa, quantidadeTransacao, statusPagamento, valorTransacao);
         }
 
-        public async Task<int> ProcessarTipoDespesaVariavel(int idTipoDespesa, Despesa despesa)
+        public async Task ProcessarTipoDespesaVariavel(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
         {
+            try
+            {
+                TransacaoDespesa transacaoDespesa = new();
+                var dataAtual = despesa.Data;
 
-            //Despesa variavel, será cadastrada normalmente. porém, será criada uma transação para o mês cadastrado
-            // Será necessário criar uma transação todos os meses para informar o valor e o pagamento
+                for (var i = 0; i < quantidadeTransacao; i++)
+                {
+                    transacaoDespesa = new(despesa, dataAtual, valorTransacao, despesa.TipoPagamento, statusPagamento);
+                    await transacaoDespesaRepositorio.Criar(transacaoDespesa);
 
-            TipoDespesa tipoDespesa = await tipoDespesaServico.ValidarTipoDespesaAsync(idTipoDespesa);
-
-            if (tipoDespesa == null)
-                throw new Exception("Tipo Despesa não encontrada");
-
-
-            return await despesaRepositorio.Criar(despesa);
+                    dataAtual.AddMonths(1);
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

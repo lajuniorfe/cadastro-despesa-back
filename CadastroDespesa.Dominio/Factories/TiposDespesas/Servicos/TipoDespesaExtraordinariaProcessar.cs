@@ -1,5 +1,7 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
+using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +13,37 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
 {
     public class TipoDespesaExtraordinariaProcessar : ITipoDespesaExtraordinariaProcessar
     {
-        public async Task Processar(int idTipoDespesa, int idTipoPagamento, Despesa despesa)
+        private readonly ITransacaoDespesaRepositorio transacaoDespesaRepositorio;
+
+        public TipoDespesaExtraordinariaProcessar(ITransacaoDespesaRepositorio transacaoDespesaRepositorio)
         {
-            await ProcessarTipoDespesaExtraordinaria();
+            this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public Task ProcessarTipoDespesaExtraordinaria()
+        public async Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
         {
-            //Despesa Extraordinária é fluxo comum com uma transaçao. Se tiver parcela(criar e transaçoes).
+            await ProcessarTipoDespesaExtraordinaria(despesa, quantidadeTransacao, statusPagamento, valorTransacao);
+        }
 
-            throw new NotImplementedException();
+        public async Task ProcessarTipoDespesaExtraordinaria(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
+        {
+            try
+            {
+                TransacaoDespesa transacaoDespesa = new();
+                var dataAtual = despesa.Data;
+
+                for (var i = 0; i < quantidadeTransacao; i++)
+                {
+                    transacaoDespesa = new(despesa, dataAtual, valorTransacao, despesa.TipoPagamento, statusPagamento);
+                    await transacaoDespesaRepositorio.Criar(transacaoDespesa);
+
+                    dataAtual.AddMonths(1);
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

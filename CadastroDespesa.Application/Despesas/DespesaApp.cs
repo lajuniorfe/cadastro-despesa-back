@@ -5,9 +5,9 @@ using CadastroDespesa.Dominio.Categorias.Entidades;
 using CadastroDespesa.Dominio.Categorias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
+using CadastroDespesa.Dominio.Despesas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Interfaces;
 using CadastroDespesa.Dominio.Factories.TiposDespesas;
-using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
 using CadastroDespesa.Dominio.Fatories.Pagamentos;
 using CadastroDespesa.Dominio.TipoDespesas.Entidades;
 using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
@@ -27,20 +27,16 @@ public class DespesaApp : IDespesaApp
     private readonly ProcessamentoTipoDespesaFactory _tipoDespesaFactory;
     private readonly IUnitOfWork unitOfWork;
     private readonly ICartaoServico cartaoServico;
-    private readonly ICategoriaServico categoriaServico;
-    private readonly ITipoPagamentoServico tipoPagamentoServico;
-    private readonly ITipoDespesaServico tipoDespesaServico;
-    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, ICartaoServico cartaoServico, ICategoriaServico categoriaServico, ITipoPagamentoServico tipoPagamentoServico, ITipoDespesaServico tipoDespesaServico, ProcessamentoTipoDespesaFactory tipoDespesaFactory)
+    private readonly IDespesaServico despesaServico;
+    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, ICartaoServico cartaoServico, ProcessamentoTipoDespesaFactory tipoDespesaFactory, IDespesaServico despesaServico)
     {
         _mapper = mapper;
         this._pagamentoFactory = _pagamentoFactory;
         this.despesasRepositorio = despesasRepositorio;
         this.unitOfWork = unitOfWork;
         this.cartaoServico = cartaoServico;
-        this.categoriaServico = categoriaServico;
-        this.tipoPagamentoServico = tipoPagamentoServico;
-        this.tipoDespesaServico = tipoDespesaServico;
         _tipoDespesaFactory = tipoDespesaFactory;
+        this.despesaServico = despesaServico;
     }
 
     public async Task<IList<DespesaResponse>> BuscarDespesas()
@@ -53,20 +49,12 @@ public class DespesaApp : IDespesaApp
     {
         try
         {
-            //ajustar tudo aqui
 
             //usar fluent validator
             await unitOfWork.BeginTransaction();
 
-            Categoria categoria = await categoriaServico.ValidarCategoriaAsync(despesaRequest.IdCategoria);
-
-            TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(despesaRequest.IdTipoPagamento);
-            Despesa despesa = new(despesaRequest.Descricao, despesaRequest.Valor, categoria, null, tipoPagamento);
-
-            ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory
-                                .ProcessarTipoDespesa(despesaRequest.IdTipoDespesa);
-
-            await processadorTipoDespesa.Processar(despesaRequest.IdTipoDespesa, tipoPagamento.Id, despesa);
+            Despesa despesa = await despesaServico
+                .InstanciaDespesaParaCadastro(despesaRequest.Descricao, despesaRequest.Valor, despesaRequest.IdCategoria, despesaRequest.IdTipoDespesa, despesaRequest.IdTipoPagamento);
 
             await despesasRepositorio.Criar(despesa);
 

@@ -9,6 +9,6 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces
 {
     public interface ITipoDepesaProcessar
     {
-        Task Processar(int idTipoDespesa, int idTipoPagamento, Despesa despesa);
+        Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao);
     }
 }

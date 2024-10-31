@@ -1,30 +1,43 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
+using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 
 namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
 {
     public class TipoDespesaRecorrenteProcessar : ITipoDespesaRecorrenteProcessar
     {
-        public async Task Processar(int idTipoDespesa, int idTipoPagamento, Despesa despesa)
+        private readonly ITransacaoDespesaRepositorio transacaoDespesaRepositorio;
+
+        public TipoDespesaRecorrenteProcessar(ITransacaoDespesaRepositorio transacaoDespesaRepositorio)
         {
-            await ProcessarTipoDespesaRecorrente();
+            this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public Task ProcessarTipoDespesaRecorrente()
+        public async Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
         {
+            await ProcessarTipoDespesaRecorrente(despesa, quantidadeTransacao, statusPagamento, valorTransacao);
+        }
 
-            //Despesa Recorrente, Será cadastrada normalmente e será criada uma transaçao
-            //para todos os meses do ano com valor.
+        public async Task ProcessarTipoDespesaRecorrente(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
+        {
+            try
+            {
+                TransacaoDespesa transacaoDespesa = new();
+                var dataAtual = despesa.Data;
 
-            throw new NotImplementedException();
+                for (var i = 0; i < quantidadeTransacao; i++)
+                {
+                    transacaoDespesa = new(despesa, dataAtual, valorTransacao, despesa.TipoPagamento, statusPagamento);
+                    await transacaoDespesaRepositorio.Criar(transacaoDespesa);
+
+                    dataAtual.AddMonths(1);
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

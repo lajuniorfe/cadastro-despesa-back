@@ -1,26 +1,44 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
-using System.Threading.Tasks;
+using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
+using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 
 namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
 {
     public class TipoDespesaConvenienciaProcessar : ITipoDespesaConvenienciaProcessar
     {
-        public async Task Processar(int idTipoDespesa, int idTipoPagamento, int idDespesa)
+        private readonly ITransacaoDespesaRepositorio transacaoDespesaRepositorio;
+
+        public TipoDespesaConvenienciaProcessar(ITransacaoDespesaRepositorio transacaoDespesaRepositorio)
         {
-            await ProcessarTipoDespesaConveniencia();
+            this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public Task ProcessarTipoDespesaConveniencia()
+        public async Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
         {
-            //Despesa Conveniencia é fluxo comum com uma transaçao. Se tiver parcela(criar)
+            await ProcessarTipoDespesaConveniencia(despesa, quantidadeTransacao, statusPagamento, valorTransacao);
+        }
 
-            throw new NotImplementedException();
+        public async Task ProcessarTipoDespesaConveniencia(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
+        {
+            try
+            {
+                TransacaoDespesa transacaoDespesa = new();
+                var dataAtual = despesa.Data;
+
+                for (var i = 0; i < quantidadeTransacao; i++)
+                {
+                    transacaoDespesa = new(despesa, dataAtual, valorTransacao, despesa.TipoPagamento, statusPagamento);
+                    await transacaoDespesaRepositorio.Criar(transacaoDespesa);
+
+                    dataAtual.AddMonths(1);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
         }
     }
 }

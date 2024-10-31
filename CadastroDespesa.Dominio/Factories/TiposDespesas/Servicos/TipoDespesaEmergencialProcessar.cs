@@ -1,5 +1,7 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
+using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +13,39 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
 {
     public class TipoDespesaEmergencialProcessar : ITipoDespesaEmergencialProcessar
     {
-        public async Task Processar(int idTipoDespesa, int idTipoPagamento, Despesa despesa)
+        private readonly ITransacaoDespesaRepositorio transacaoDespesaRepositorio;
+
+        public TipoDespesaEmergencialProcessar(ITransacaoDespesaRepositorio transacaoDespesaRepositorio)
         {
-            await ProcessarTipoDespesaEmergencial();
+            this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public Task ProcessarTipoDespesaEmergencial()
+        public async Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
         {
+            await ProcessarTipoDespesaEmergencial(despesa, quantidadeTransacao, statusPagamento, valorTransacao);
+        }
 
-            //Despesa emergencial é fluxo comum com uma transaçao. Se tiver parcela(criar)
+        public async Task ProcessarTipoDespesaEmergencial(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao)
+        {
+            try
+            {
+                TransacaoDespesa transacaoDespesa = new();
+                var dataAtual = despesa.Data;
 
-            throw new NotImplementedException();
+                for (var i = 0; i < quantidadeTransacao; i++)
+                {
+                    transacaoDespesa = new(despesa, dataAtual, valorTransacao, despesa.TipoPagamento, statusPagamento);
+                    await transacaoDespesaRepositorio.Criar(transacaoDespesa);
+
+                    dataAtual.AddMonths(1);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+           
         }
     }
 }
