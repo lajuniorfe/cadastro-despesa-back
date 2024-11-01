@@ -2,8 +2,10 @@
 using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Interfaces;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Servicos;
+using CadastroDespesa.Dominio.Factories.TiposDespesas;
 using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 
 namespace CadastroDespesa.Dominio.Fatories.Pagamentos
 {
@@ -13,21 +15,25 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
         private readonly IFaturaServico faturaServico;
         private readonly IParcelaServico parcelaServico;
         private readonly IDespesaRepositorio despesasRepositorio;
+        private readonly ProcessamentoTipoDespesaFactory processamentoTipoDespesaFactory;
+        private readonly ITipoPagamentoServico tipoPagamentoServico;
 
-        public ProcessamentoPagamentoFactory(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, IDespesaRepositorio despesasRepositorio)
+        public ProcessamentoPagamentoFactory(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, IDespesaRepositorio despesasRepositorio, ProcessamentoTipoDespesaFactory processamentoTipoDespesaFactory, ITipoPagamentoServico tipoPagamentoServico)
         {
             this.cartaoServico = cartaoServico;
             this.faturaServico = faturaServico;
             this.parcelaServico = parcelaServico;
             this.despesasRepositorio = despesasRepositorio;
+            this.processamentoTipoDespesaFactory = processamentoTipoDespesaFactory;
+            this.tipoPagamentoServico = tipoPagamentoServico;
         }
 
         public IPagamentoProcessar ProcessarPagamento(int idTipoPagamento)
         {
             return idTipoPagamento switch
             {
-                1 => new PagamentoCartaoProcessar(cartaoServico, faturaServico, parcelaServico),
-                2 => new PagamentoPixDinheiroProcessar(despesasRepositorio),
+                1 => new PagamentoCartaoProcessar(cartaoServico, faturaServico, parcelaServico, processamentoTipoDespesaFactory, tipoPagamentoServico),
+                2 => new PagamentoPixDinheiroProcessar(processamentoTipoDespesaFactory, tipoPagamentoServico),
                 _ => throw new ArgumentException("Tipo Pagamento não suportado")
             };
         }
