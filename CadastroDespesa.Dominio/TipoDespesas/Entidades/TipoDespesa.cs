@@ -7,6 +7,7 @@ namespace CadastroDespesa.Dominio.TipoDespesas.Entidades
         public virtual string? Nome { get; set; }
         public virtual string? Descricao { get; set; }
 
+        public TipoDespesa() { }
         public TipoDespesa(string nome, string descricao)
         {
             SetNome(nome);

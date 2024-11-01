@@ -115,3 +115,6 @@
 /.vs/ProjectEvaluation/cadastrodespesa.projects.v9.bin
 /.vs/ProjectEvaluation/cadastrodespesa.strings.v9.bin
 /CadastroDespesa.Api/obj/Container
+/CadastroDespesa.Test/bin/Debug/net8.0
+/.vs/CadastroDespesa/v17/TestStore/0/testlog.manifest
+/.vs/CadastroDespesa/v17/TestStore/0/000.testlog

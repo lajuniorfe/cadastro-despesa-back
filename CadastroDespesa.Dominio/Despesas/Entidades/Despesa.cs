@@ -1,7 +1,6 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Categorias.Entidades;
 using CadastroDespesa.Dominio.TipoDespesas.Entidades;
-using CadastroDespesa.Dominio.TiposPagamento.Entidades;
 
 namespace CadastroDespesa.Dominio.Despesas.Entidades;
 
@@ -14,10 +13,10 @@ public class Despesa : BaseEntidade
     public virtual TipoDespesa TipoDespesa {get; protected set;}
 
     public Despesa() { }
-    public Despesa(string? descricao, decimal valor, Categoria categoria, TipoDespesa tipoDespesa)
+    public Despesa(string? descricao, decimal valor, DateTime data, Categoria categoria, TipoDespesa tipoDespesa)
     {
         SetDescricao(descricao);
-        SetData();
+        SetData(data);
         SetValor(valor);
         SetCategoria(categoria);
         SetTipoDespesa(tipoDespesa);
@@ -43,8 +42,8 @@ public class Despesa : BaseEntidade
         Valor = valor;
     }
 
-    public virtual void SetData()
+    public virtual void SetData(DateTime data)
     {
-        Data = Data = DateTime.SpecifyKind(DateTime.Now.Date, DateTimeKind.Unspecified);
+        Data = Data = DateTime.SpecifyKind(data.Date, DateTimeKind.Unspecified);
     }
 }

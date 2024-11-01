@@ -3,25 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Api", "CadastroDespesa.Api\CadastroDespesa.Api.csproj", "{A265A2AE-F094-447F-A5AD-50F1FF2A6E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.Api", "CadastroDespesa.Api\CadastroDespesa.Api.csproj", "{A265A2AE-F094-447F-A5AD-50F1FF2A6E83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Application", "CadastroDespesa.Application\CadastroDespesa.Application.csproj", "{20B4ECC9-3F04-4564-9F08-F964418DBDE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.Application", "CadastroDespesa.Application\CadastroDespesa.Application.csproj", "{20B4ECC9-3F04-4564-9F08-F964418DBDE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Dominio", "CadastroDespesa.Dominio\CadastroDespesa.Dominio.csproj", "{D5093DA2-85B6-4C16-BAB4-EDD449A54A22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.Dominio", "CadastroDespesa.Dominio\CadastroDespesa.Dominio.csproj", "{D5093DA2-85B6-4C16-BAB4-EDD449A54A22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Infra", "CadastroDespesa.Infra\CadastroDespesa.Infra.csproj", "{2FAA8695-B5F9-45E5-BECF-53E22BDA6896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.Infra", "CadastroDespesa.Infra\CadastroDespesa.Infra.csproj", "{2FAA8695-B5F9-45E5-BECF-53E22BDA6896}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.DTO", "CadastroDespesa.DTO\CadastroDespesa.DTO.csproj", "{65E895A6-8D54-46AD-8814-0F24A0705002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.DTO", "CadastroDespesa.DTO\CadastroDespesa.DTO.csproj", "{65E895A6-8D54-46AD-8814-0F24A0705002}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.IOC", "CadastroDespesa.IOC\CadastroDespesa.IOC.csproj", "{261461A4-1D7C-4ABC-8317-303E86367F2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.IOC", "CadastroDespesa.IOC\CadastroDespesa.IOC.csproj", "{261461A4-1D7C-4ABC-8317-303E86367F2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Teste", "CadastroDespesa.Test\CadastroDespesa.Teste.csproj", "{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A265A2AE-F094-447F-A5AD-50F1FF2A6E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -48,5 +47,15 @@ Global
 		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{261461A4-1D7C-4ABC-8317-303E86367F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6EDDA085-9A2E-42FF-9B4B-01C977B4CB77}
 	EndGlobalSection
 EndGlobal
