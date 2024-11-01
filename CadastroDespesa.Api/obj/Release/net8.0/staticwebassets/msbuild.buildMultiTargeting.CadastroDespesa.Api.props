@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CadastroDespesa.Api.props" />
+</Project>

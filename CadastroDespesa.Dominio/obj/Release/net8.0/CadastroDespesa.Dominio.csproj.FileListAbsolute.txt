@@ -1,0 +1,12 @@
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\bin\Release\net8.0\CadastroDespesa.Dominio.deps.json
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\bin\Release\net8.0\CadastroDespesa.Dominio.dll
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\bin\Release\net8.0\CadastroDespesa.Dominio.pdb
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.AssemblyInfoInputs.cache
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.AssemblyInfo.cs
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.csproj.CoreCompileInputs.cache
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.sourcelink.json
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.dll
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\refint\CadastroDespesa.Dominio.dll
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\CadastroDespesa.Dominio.pdb
+C:\Git\cadastro-despesa-back\CadastroDespesa.Dominio\obj\Release\net8.0\ref\CadastroDespesa.Dominio.dll

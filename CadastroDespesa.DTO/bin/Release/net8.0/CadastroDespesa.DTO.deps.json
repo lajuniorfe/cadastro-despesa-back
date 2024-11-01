@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "CadastroDespesa.DTO/1.0.0": {
+        "runtime": {
+          "CadastroDespesa.DTO.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CadastroDespesa.DTO/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,12 @@
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\bin\Release\net8.0\CadastroDespesa.DTO.deps.json
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\bin\Release\net8.0\CadastroDespesa.DTO.dll
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\bin\Release\net8.0\CadastroDespesa.DTO.pdb
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.AssemblyInfoInputs.cache
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.AssemblyInfo.cs
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.csproj.CoreCompileInputs.cache
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.sourcelink.json
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.dll
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\refint\CadastroDespesa.DTO.dll
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\CadastroDespesa.DTO.pdb
+C:\Git\cadastro-despesa-back\CadastroDespesa.DTO\obj\Release\net8.0\ref\CadastroDespesa.DTO.dll
