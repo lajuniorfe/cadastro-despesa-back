@@ -1,4 +1,5 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
+using CadastroDespesa.Dominio.TiposPagamento.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces
 {
     public interface ITipoDepesaProcessar
     {
-        Task Processar(Despesa despesa, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao);
+        Task Processar(Despesa despesa, TipoPagamento tipoPagamento, int quantidadeTransacao, bool statusPagamento, decimal valorTransacao);
     }
 }

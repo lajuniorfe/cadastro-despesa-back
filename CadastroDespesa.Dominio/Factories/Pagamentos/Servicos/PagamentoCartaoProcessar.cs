@@ -8,6 +8,9 @@ using CadastroDespesa.Dominio.Faturas.Entidades;
 using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Parcelas.Entidades;
 using CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TiposPagamento.Entidades;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 
 namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 {
@@ -17,13 +20,15 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
         private readonly IFaturaServico faturaServico;
         private readonly IParcelaServico parcelaServico;
         private readonly ProcessamentoTipoDespesaFactory _tipoDespesaFactory;
+        private readonly ITipoPagamentoServico tipoPagamentoServico;
 
-        public PagamentoCartaoProcessar(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, ProcessamentoTipoDespesaFactory tipoDespesaFactory)
+        public PagamentoCartaoProcessar(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, ProcessamentoTipoDespesaFactory tipoDespesaFactory, ITipoPagamentoServico tipoPagamentoServico)
         {
             this.cartaoServico = cartaoServico;
             this.faturaServico = faturaServico;
             this.parcelaServico = parcelaServico;
             _tipoDespesaFactory = tipoDespesaFactory;
+            this.tipoPagamentoServico = tipoPagamentoServico;
         }
 
         public async Task Processar(Despesa despesa, int? idCartao, int? totalParcelas)
@@ -43,7 +48,9 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 
             ITipoDepesaProcessar processadorTipoDespesa =  _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
 
-            await processadorTipoDespesa.Processar(despesa, parcelas.Count, true, parcelas[0].Valor);
+            TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(2);
+
+            await processadorTipoDespesa.Processar(despesa, tipoPagamento, parcelas.Count, true, parcelas[0].Valor);
 
         }
     }

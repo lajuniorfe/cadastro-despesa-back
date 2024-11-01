@@ -1,35 +1,34 @@
 using CadastroDespesa.Dominio.Despesas.Entidades;
-using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Factories.TiposDespesas;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
+using CadastroDespesa.Dominio.TiposPagamento.Entidades;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 
 namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos;
 
 public class PagamentoPixDinheiroProcessar : IPagamentoPixDinheiroProcessar
 {
-    private readonly IDespesaRepositorio despesasRepositorio;
     private readonly ProcessamentoTipoDespesaFactory _tipoDespesaFactory;
+    private readonly ITipoPagamentoServico tipoPagamentoServico;
 
-    public PagamentoPixDinheiroProcessar(IDespesaRepositorio despesasRepositorio, ProcessamentoTipoDespesaFactory tipoDespesaFactory)
+    public PagamentoPixDinheiroProcessar(ProcessamentoTipoDespesaFactory tipoDespesaFactory, ITipoPagamentoServico tipoPagamentoServico)
     {
-        this.despesasRepositorio = despesasRepositorio;
         _tipoDespesaFactory = tipoDespesaFactory;
+        this.tipoPagamentoServico = tipoPagamentoServico;
     }
 
     public async Task Processar(Despesa despesa, int? idCartao, int? totalParcelas)
     {
         await ProcessarPagamentoPixEDinheiro(despesa);
-       
+
     }
 
     public async Task ProcessarPagamentoPixEDinheiro(Despesa despesa)
     {
-        despesa.SetStatusPagamento(true);
-        await despesasRepositorio.Alterar(despesa);
-
         ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
 
-        await processadorTipoDespesa.Processar(despesa, 1, true, despesa.Valor);
+        TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(2);
+        await processadorTipoDespesa.Processar(despesa, tipoPagamento, 1, true, despesa.Valor);
     }
 }

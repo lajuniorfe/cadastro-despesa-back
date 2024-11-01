@@ -38,11 +38,9 @@ public class DespesaServico : IDespesaServico
 
         Categoria categoria = await categoriaServico.ValidarCategoriaAsync(idCategoria);
 
-        TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(idTipoPagamento);
-
         TipoDespesa tipoDespesa = await tipoDespesaServico.ValidarTipoDespesaAsync(idTipoDespesa);
 
-        Despesa despesa = new(descricao, valor, categoria, tipoDespesa, tipoPagamento);
+        Despesa despesa = new(descricao, valor, categoria, tipoDespesa);
 
         return despesa;
     }
