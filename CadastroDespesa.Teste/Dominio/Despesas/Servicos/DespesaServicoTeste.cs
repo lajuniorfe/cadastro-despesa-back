@@ -5,13 +5,7 @@ using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Despesas.Servicos;
 using CadastroDespesa.Dominio.TipoDespesas.Entidades;
 using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
 {
@@ -62,7 +56,7 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
         }
 
         [Fact]
-        public async Task Quando_Receber_Id_Despesa_Espero_Retornar_Despesa_Validar()
+        public async Task Quando_Receber_Id_Despesa_Espero_Retornar_Despesa_Valida()
         {
             int idDespesa = 1;
             var despesaValida = new Mock<Despesa>();

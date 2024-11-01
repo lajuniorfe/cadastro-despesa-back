@@ -9,6 +9,7 @@ namespace CadastroDespesa.Dominio.Cartoes.Entidades
         public virtual int Vencimento { get; protected set; }
         public virtual int Fechamento { get; protected set; }
 
+        public Cartao() { }
         public Cartao(string nome, decimal limite, int vencimento, int fechamento)
         {
             SetNome(nome);

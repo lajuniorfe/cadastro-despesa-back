@@ -130,3 +130,5 @@
 /CadastroDespesa.Teste/obj/Debug/net8.0/CadastroDespesa.Teste.assets.cache
 /CadastroDespesa.Teste/obj/Debug/net8.0/CadastroDespesa.Teste.csproj.AssemblyReference.cache
 /CadastroDespesa.Teste/obj/Debug/net8.0/CadastroDespesa.Teste.sourcelink.json
+*.testlog
+/CadastroDespesa.Teste/obj/Debug/net8.0/CadastroDespesa.Teste.csproj.CoreCompileInputs.cache
