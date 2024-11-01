@@ -52,7 +52,7 @@ public class DespesaApp : IDespesaApp
             await unitOfWork.BeginTransaction();
 
             Despesa despesa = await despesaServico
-                .InstanciaDespesaParaCadastro(despesaRequest.Descricao, despesaRequest.Valor, despesaRequest.IdCategoria, despesaRequest.IdTipoDespesa, despesaRequest.IdTipoPagamento);
+                .InstanciaDespesaParaCadastro(despesaRequest.Descricao, despesaRequest.Valor, despesaRequest.Data, despesaRequest.IdCategoria, despesaRequest.IdTipoDespesa);
 
             await despesasRepositorio.Criar(despesa);
 
