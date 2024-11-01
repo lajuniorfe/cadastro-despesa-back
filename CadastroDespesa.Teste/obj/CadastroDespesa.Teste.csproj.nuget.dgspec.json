@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Test\\CadastroDespesa.Teste.csproj": {}
+    "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Teste\\CadastroDespesa.Teste.csproj": {}
   },
   "projects": {
     "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Dominio\\CadastroDespesa.Dominio.csproj": {
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Test\\CadastroDespesa.Teste.csproj": {
+    "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Teste\\CadastroDespesa.Teste.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Test\\CadastroDespesa.Teste.csproj",
+        "projectUniqueName": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Teste\\CadastroDespesa.Teste.csproj",
         "projectName": "CadastroDespesa.Teste",
-        "projectPath": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Test\\CadastroDespesa.Teste.csproj",
+        "projectPath": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Teste\\CadastroDespesa.Teste.csproj",
         "packagesPath": "C:\\Users\\lajun\\.nuget\\packages\\",
-        "outputPath": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Test\\obj\\",
+        "outputPath": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Teste\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

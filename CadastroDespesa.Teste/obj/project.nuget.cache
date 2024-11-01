@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9Q6qtaSHV50=",
+  "dgSpecHash": "sv5XfPMvO6s=",
   "success": true,
-  "projectFilePath": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Test\\CadastroDespesa.Teste.csproj",
+  "projectFilePath": "C:\\Git\\cadastro-despesa-back\\CadastroDespesa.Teste\\CadastroDespesa.Teste.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lajun\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\lajun\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",

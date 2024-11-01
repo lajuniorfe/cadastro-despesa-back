@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.DTO", "Cada
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadastroDespesa.IOC", "CadastroDespesa.IOC\CadastroDespesa.IOC.csproj", "{261461A4-1D7C-4ABC-8317-303E86367F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Teste", "CadastroDespesa.Test\CadastroDespesa.Teste.csproj", "{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadastroDespesa.Teste", "CadastroDespesa.Teste\CadastroDespesa.Teste.csproj", "{6F99B6B9-E649-48F7-B8B5-8A997BCCFF1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
