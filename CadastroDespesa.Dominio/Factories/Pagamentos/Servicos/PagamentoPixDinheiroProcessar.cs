@@ -21,7 +21,6 @@ public class PagamentoPixDinheiroProcessar : IPagamentoPixDinheiroProcessar
     public async Task Processar(Despesa despesa, int? idCartao, int? totalParcelas)
     {
         await ProcessarPagamentoPixEDinheiro(despesa);
-
     }
 
     public async Task ProcessarPagamentoPixEDinheiro(Despesa despesa)

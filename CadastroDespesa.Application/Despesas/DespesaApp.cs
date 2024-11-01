@@ -49,8 +49,6 @@ public class DespesaApp : IDespesaApp
     {
         try
         {
-
-            //usar fluent validator
             await unitOfWork.BeginTransaction();
 
             Despesa despesa = await despesaServico

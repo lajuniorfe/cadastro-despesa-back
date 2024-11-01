@@ -34,8 +34,9 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
             {
                 1 => new PagamentoCartaoProcessar(cartaoServico, faturaServico, parcelaServico, processamentoTipoDespesaFactory, tipoPagamentoServico),
                 2 => new PagamentoPixDinheiroProcessar(processamentoTipoDespesaFactory, tipoPagamentoServico),
+                3 => new PagamentoBoletoProcessar(tipoPagamentoServico, processamentoTipoDespesaFactory),
                 _ => throw new ArgumentException("Tipo Pagamento não suportado")
-            };
+            }; 
         }
     }
 }
