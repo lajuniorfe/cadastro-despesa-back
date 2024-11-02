@@ -40,17 +40,11 @@ namespace CadastroDespesa.Dominio.Cartoes.Entidades
 
         public DateTime CalcularProximaDataVencimento( DateTime ultimoVencimento)
         {
-            if (ultimoVencimento.Month == 12)
-                return ultimoVencimento.AddMonths(1).AddYears(1);
-
             return ultimoVencimento.AddMonths(1);
         }
 
         public DateTime CalcularProximaDataFechamento(DateTime ultimoFechamento)
         {
-            if (ultimoFechamento.Month == 12)
-                return ultimoFechamento.AddMonths(1).AddYears(1);
-
             return ultimoFechamento.AddMonths(1);
         }
     }

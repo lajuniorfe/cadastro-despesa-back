@@ -21,11 +21,7 @@ namespace CadastroDespesa.Dominio.Cartoes.Servicos
         public async Task<Cartao> ValidarCartaoAsync(int idCartao)
         {
             Cartao retorno = await cartaoRepositorio.ObterPorId(idCartao);
-
-            if (retorno is null)
-                return null; 
-
-           return retorno;
+            return retorno;
         }
     }
 }
