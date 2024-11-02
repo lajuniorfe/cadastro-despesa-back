@@ -164,3 +164,9 @@
 /CadastroDespesa.Teste/obj/Release/net8.0/CadastroDespesa.Teste.csproj.AssemblyReference.cache
 /CadastroDespesa.Teste/obj/Release/net8.0/CadastroDespesa.Teste.csproj.CoreCompileInputs.cache
 /CadastroDespesa.Teste/obj/Release/net8.0/CadastroDespesa.Teste.sourcelink.json
+/CadastroDespesa.Teste/bin/Debug/net8.0
+/CadastroDespesa.Teste/TestResults
+/GenerateReportAndOpen.ps1
+/CadastroDespesa.Teste/obj/CadastroDespesa.Teste.csproj.nuget.g.props
+/CadastroDespesa.Teste/obj/Debug/net8.0/CadastroDespesa.Teste.csproj.FileListAbsolute.txt
+/build.cake
