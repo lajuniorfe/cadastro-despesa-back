@@ -57,13 +57,13 @@ namespace CadastroDespesa.Teste.Dominio.Faturas.Servicos
 
             cartaoValido.SetVencimento(vencimentoCartao);
 
-            _faturaRepositorioMock.Setup(r => r.Buscar(a => a.Cartao.Id == idCartao &&
+            _faturaRepositorioMock.Setup(r => r.Listar(a => a.Cartao.Id == idCartao &&
                     (a.MesCorrespondente.Month == dataFatura.Month
                     && a.MesCorrespondente.Year == dataFatura.Year))).ReturnsAsync(faturas);
 
             var faturaCartaoRetornada = await _faturaServico.VerificarFaturaCartaoAsync(idCartao, valorDespesa, dataFatura);
 
-            Assert.NotNull(faturaCartaoRetornada);
+            Assert.Null(faturaCartaoRetornada);
         }
 
         [Fact]

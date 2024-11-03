@@ -21,15 +21,12 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos
 
         public async Task<Fatura> VerificarFaturaCartaoAsync(int idCartao, decimal valorDespesa, DateTime dataFatura)
         {
-            IEnumerable<Fatura> response = await faturaRepositorio.Buscar(x =>
+            Fatura response = await faturaRepositorio.Buscar(x =>
             x.Cartao.Id == idCartao
             && (x.MesCorrespondente.Month == dataFatura.Month
             && x.MesCorrespondente.Year == dataFatura.Year));
 
-
-            return response.First();
-
-           
+            return response;
         }
 
         public async Task<Fatura> AlterarFaturaCartaoExistenteAsync(Fatura faturaCartaoExistente, decimal valorDespesa)
