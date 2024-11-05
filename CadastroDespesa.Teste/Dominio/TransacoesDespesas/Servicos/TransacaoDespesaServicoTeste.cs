@@ -1,16 +1,7 @@
-﻿using CadastroDespesa.Dominio.Parcelas.Entidades;
-using CadastroDespesa.Dominio.Parcelas.Repositorios;
-using CadastroDespesa.Dominio.Parcelas.Servicos;
-using CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
+﻿using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
 using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 using CadastroDespesa.Dominio.TransacoesDespesas.Servicos;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroDespesa.Teste.Dominio.TransacoesDespesas.Servicos
 {
@@ -41,3 +32,12 @@ namespace CadastroDespesa.Teste.Dominio.TransacoesDespesas.Servicos
         }
     }
 }
+
+
+//1 => new TipoDespesaFixaProcessar(transacaoDespesaRepositorio),
+// 	0   29                      2 => new TipoDespesaVariavelProcessar(transacaoDespesaRepositorio),
+// 	0   30                      3 => new TipoDespesaRecorrenteProcessar(transacaoDespesaRepositorio),
+// 	0   31                      4 => new TipoDespesaExtraordinariaProcessar(transacaoDespesaRepositorio),
+// 	0   32                      5 => new TipoDespesaEmergencialProcessar(transacaoDespesaRepositorio),
+// 	0   33                      6 => new TipoDespesaConvenienciaProcessar(transacaoDespesaRepositorio),
+// 	0   34                      _ => throw new ArgumentException("Tipo Despesa não suportado")
