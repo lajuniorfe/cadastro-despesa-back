@@ -49,13 +49,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lajuniorfe_cadastro-despesa-back" /o:"lajuniorfe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" **/d:sonar.cs.opencover.reportsPaths="**/TestResults/coverage.opencover.xml"**
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"lajuniorfe_cadastro-despesa-back" /o:"lajuniorfe" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/TestResults/coverage.opencover.xml"
 
           # Build the project
           dotnet build
           
           # Run tests with coverage
-          **dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults**
+          dotnet test --collect:"XPlat Code Coverage" --results-directory TestResults
 
           # Complete SonarCloud analysis
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
