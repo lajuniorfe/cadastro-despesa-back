@@ -9,6 +9,7 @@ namespace CadastroDespesa.Dominio.Cartoes.Entidades
         public virtual int Vencimento { get; protected set; }
         public virtual int Fechamento { get; protected set; }
 
+        public Cartao() { }
         public Cartao(string nome, decimal limite, int vencimento, int fechamento)
         {
             SetNome(nome);
@@ -39,17 +40,11 @@ namespace CadastroDespesa.Dominio.Cartoes.Entidades
 
         public DateTime CalcularProximaDataVencimento( DateTime ultimoVencimento)
         {
-            if (ultimoVencimento.Month == 12)
-                return ultimoVencimento.AddMonths(1).AddYears(1);
-
             return ultimoVencimento.AddMonths(1);
         }
 
         public DateTime CalcularProximaDataFechamento(DateTime ultimoFechamento)
         {
-            if (ultimoFechamento.Month == 12)
-                return ultimoFechamento.AddMonths(1).AddYears(1);
-
             return ultimoFechamento.AddMonths(1);
         }
     }

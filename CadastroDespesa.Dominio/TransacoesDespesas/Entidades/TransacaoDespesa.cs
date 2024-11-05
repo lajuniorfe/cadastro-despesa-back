@@ -20,11 +20,11 @@ namespace CadastroDespesa.Dominio.TransacoesDespesas.Entidades
         public TransacaoDespesa() { }
         public TransacaoDespesa(Despesa despesa, DateTime data, decimal valor, TipoPagamento tipoPagamento, bool statusPagamento)
         {
-            Despesa = despesa;
-            Data = data;
-            Valor = valor;
-            TipoPagamento = tipoPagamento;
-            StatusPagamento = statusPagamento;
+            SetDespesa(despesa);
+            SetData(data);
+            SetValor(valor);
+            SetTipoPagamento(tipoPagamento);
+            SetStatusPagamento(statusPagamento);
         }
 
         public virtual void SetDespesa(Despesa despesa)
@@ -32,9 +32,9 @@ namespace CadastroDespesa.Dominio.TransacoesDespesas.Entidades
             Despesa = despesa;
         }
 
-        public virtual void SetData(DateTime data) 
-        { 
-            Data = data; 
+        public virtual void SetData(DateTime data)
+        {
+            Data = data;
         }
 
         public virtual void SetValor(decimal valor)
@@ -47,7 +47,7 @@ namespace CadastroDespesa.Dominio.TransacoesDespesas.Entidades
             TipoPagamento = tipoPagamento;
         }
 
-        public virtual void SetStatusPagamento(bool statusPagamento) 
+        public virtual void SetStatusPagamento(bool statusPagamento)
         {
             StatusPagamento = statusPagamento;
         }

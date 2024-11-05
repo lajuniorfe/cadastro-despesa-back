@@ -19,9 +19,14 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         await contexto.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<T>> Buscar(Expression<Func<T, bool>> predicate)
+    public async Task<IEnumerable<T>> Listar(Expression<Func<T, bool>> predicate)
     {
         return await contexto.GetDbSet<T>().Where(predicate).ToListAsync();
+    }
+
+    public async Task<T> Buscar(Expression<Func<T, bool>> predicate)
+    {
+        return await contexto.GetDbSet<T>().Where(predicate).FirstOrDefaultAsync();
     }
 
     public async Task<int> Criar(T entity)

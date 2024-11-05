@@ -39,14 +39,23 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
         public async Task ProcessarPagamentoCartao(Despesa despesa, int? idCartao, int? totalParcelas)
         {
             Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao.Value);
-            Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(cartaoRetornado, despesa.Valor, despesa.Data);
+            Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(idCartao.Value, despesa.Valor, despesa.Data);
+
+            if (faturaRetornada != null)
+            {
+                faturaRetornada = await faturaServico.AlterarFaturaCartaoExistenteAsync(faturaRetornada, despesa.Valor);
+            }
+            else
+            {
+                faturaRetornada = await faturaServico.CriarFaturaCartaoAsync(despesa.Data, cartaoRetornado, despesa.Valor);
+            }
 
             Parcela parcela = parcelaServico.InstanciarParcela();
 
             IList<Parcela> parcelas = parcela.CalcularDataParcela(totalParcelas.Value, despesa);
             await parcelaServico.CriarParcelasDespesa(parcelas, faturaRetornada);
 
-            ITipoDepesaProcessar processadorTipoDespesa =  _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
+            ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
 
             TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(2);
 
