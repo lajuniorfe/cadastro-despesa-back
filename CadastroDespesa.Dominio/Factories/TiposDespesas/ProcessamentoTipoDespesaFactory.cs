@@ -21,7 +21,7 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas
             this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public ITipoDepesaProcessar ProcessarTipoDespesa(int idTipoDespesa)
+        public virtual ITipoDepesaProcessar ProcessarTipoDespesa(int idTipoDespesa)
         {
             return idTipoDespesa switch
             {
