@@ -5,6 +5,7 @@ using CadastroDespesa.Dominio.Factories.TiposDespesas;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
 using CadastroDespesa.Dominio.TipoDespesas.Entidades;
 using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TransacoesDespesas.Entidades;
 using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 using Moq;
 
@@ -43,7 +44,10 @@ namespace CadastroDespesa.Teste.Dominio.Factories.Pagamentos
 
             _tipoDespesaFactoryMock
                 .Setup(factory => factory.ProcessarTipoDespesa(It.IsAny<int>()))
-                .Returns(_tipoDespesaProcessarMock.Object);
+            .Returns(_tipoDespesaProcessarMock.Object);
+
+
+          
 
             await _pagamentoBoletoProcessar.Processar(despesa, 0, 0);
             await _pagamentoBoletoProcessar.ProcessarPagamentoBoleto(despesa);

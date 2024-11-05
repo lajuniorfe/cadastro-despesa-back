@@ -12,7 +12,6 @@ namespace CadastroDespesa.Teste.Dominio.Faturas.Servicos
     {
         private readonly Mock<IFaturaRepositorio> _faturaRepositorioMock;
         private readonly FaturaServico _faturaServico;
-        private readonly Mock<FaturaServico> _faturaServicoMock;
         private readonly Mock<ICartaoRepositorio> _cartaoRepositorioMock;
         private readonly CartaoServico _cartaoServico;
 
@@ -106,7 +105,7 @@ namespace CadastroDespesa.Teste.Dominio.Faturas.Servicos
             cartaoValido.SetVencimento(vencimentoCartao);
 
             Fatura fatura = new(valorFatura, dataFatura, dataFatura, cartao);
-            
+
             _faturaRepositorioMock.Setup(r => r.Criar(fatura));
 
             var faturaCriada = await _faturaServico.CriarFaturaCartaoAsync(dataFatura, cartao, valorFatura);

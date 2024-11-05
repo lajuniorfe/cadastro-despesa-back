@@ -9,7 +9,6 @@ using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Parcelas.Entidades;
 using CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.TiposPagamento.Entidades;
-using CadastroDespesa.Dominio.TiposPagamento.Servicos;
 using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 
 namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos

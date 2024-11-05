@@ -28,7 +28,7 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
             this.tipoPagamentoServico = tipoPagamentoServico;
         }
 
-        public IPagamentoProcessar ProcessarPagamento(int idTipoPagamento)
+        public virtual IPagamentoProcessar ProcessarPagamento(int idTipoPagamento)
         {
             return idTipoPagamento switch
             {
@@ -36,7 +36,7 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
                 2 => new PagamentoPixDinheiroProcessar(processamentoTipoDespesaFactory, tipoPagamentoServico),
                 3 => new PagamentoBoletoProcessar(tipoPagamentoServico, processamentoTipoDespesaFactory),
                 _ => throw new ArgumentException("Tipo Pagamento não suportado")
-            }; 
+            };
         }
     }
 }

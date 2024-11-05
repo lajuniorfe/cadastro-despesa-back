@@ -1,15 +1,6 @@
-﻿using CadastroDespesa.Dominio.Despesas.Repositorios;
-using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
+﻿using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
 using CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos;
-using CadastroDespesa.Dominio.TipoDespesas.Repositorios;
-using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroDespesa.Dominio.Factories.TiposDespesas
 {
@@ -21,7 +12,7 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas
             this.transacaoDespesaRepositorio = transacaoDespesaRepositorio;
         }
 
-        public ITipoDepesaProcessar ProcessarTipoDespesa(int idTipoDespesa)
+        public virtual ITipoDepesaProcessar ProcessarTipoDespesa(int idTipoDespesa)
         {
             return idTipoDespesa switch
             {

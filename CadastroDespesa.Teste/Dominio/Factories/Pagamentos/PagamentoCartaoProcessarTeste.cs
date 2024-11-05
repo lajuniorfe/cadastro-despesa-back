@@ -1,22 +1,17 @@
-﻿using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
+﻿using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
+using CadastroDespesa.Dominio.Categorias.Entidades;
+using CadastroDespesa.Dominio.Despesas.Entidades;
+using CadastroDespesa.Dominio.Factories.Pagamentos.Servicos;
 using CadastroDespesa.Dominio.Factories.TiposDespesas;
+using CadastroDespesa.Dominio.Factories.TiposDespesas.Interfaces;
+using CadastroDespesa.Dominio.Faturas.Entidades;
+using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.Parcelas.Entidades;
+using CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.TipoDespesas.Entidades;
 using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 using CadastroDespesa.Dominio.TransacoesDespesas.Repositorios;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CadastroDespesa.Dominio.Factories.Pagamentos.Servicos;
-using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
-using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.Categorias.Entidades;
-using CadastroDespesa.Dominio.Despesas.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Entidades;
-using CadastroDespesa.Dominio.Parcelas.Entidades;
-using CadastroDespesa.Dominio.Faturas.Entidades;
 
 namespace CadastroDespesa.Teste.Dominio.Factories.Pagamentos
 {
