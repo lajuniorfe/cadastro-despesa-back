@@ -37,7 +37,7 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 
         public async Task ProcessarPagamentoCartao(Despesa despesa, int? idCartao, int? totalParcelas)
         {
-            Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao.Value);
+            Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao.HasValue ? idCartao.Value : 0);
             Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(idCartao.Value, despesa.Valor, despesa.Data);
 
             if (faturaRetornada != null)
@@ -49,12 +49,12 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
                 faturaRetornada = await faturaServico.CriarFaturaCartaoAsync(despesa.Data, cartaoRetornado, despesa.Valor);
             }
 
-            Parcela parcela = parcelaServico.InstanciarParcela();
-
-            IList<Parcela> parcelas = Parcela.CalcularDataParcela(totalParcelas.Value, despesa);
+            IList<Parcela> parcelas = Parcela.CalcularDataParcela(
+                totalParcelas.HasValue ? totalParcelas.Value : 0,
+                despesa);
             await parcelaServico.CriarParcelasDespesa(parcelas, faturaRetornada);
 
-            ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
+            ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa is not null ? despesa.TipoDespesa.Id : 0);
 
             TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(2);
 

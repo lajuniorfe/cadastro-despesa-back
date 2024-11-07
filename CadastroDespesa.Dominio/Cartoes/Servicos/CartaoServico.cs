@@ -22,10 +22,7 @@ namespace CadastroDespesa.Dominio.Cartoes.Servicos
         {
             Cartao retorno = await cartaoRepositorio.ObterPorId(idCartao);
 
-            if (retorno is null)
-                return null; 
-
-           return retorno;
+            return retorno;
         }
     }
 }

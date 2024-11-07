@@ -49,7 +49,7 @@ public static class InjecaoDependecia
 
         foreach (var type in types)
         {
-            var interfaceType = type.GetInterfaces().FirstOrDefault(i => i.Name.EndsWith(suffix));
+            var interfaceType = type.GetInterfaces().First(i => i.Name.EndsWith(suffix));
             if (interfaceType != null)
             {
                 services.AddScoped(interfaceType, type);

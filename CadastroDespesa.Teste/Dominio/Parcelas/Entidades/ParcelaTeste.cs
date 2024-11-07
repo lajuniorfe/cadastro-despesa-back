@@ -36,9 +36,7 @@ namespace CadastroDespesa.Teste.Dominio.Parcelas.Entidades
             int totalParcelas = 2;
             var despesaMock = new Mock<Despesa>();
 
-            Parcela parcela = new();
-
-            var listaParcelas = parcela.CalcularDataParcela(totalParcelas, despesaMock.Object);
+            var listaParcelas = Parcela.CalcularDataParcela(totalParcelas, despesaMock.Object);
 
             Assert.NotNull(listaParcelas);
             Assert.NotEmpty(listaParcelas);

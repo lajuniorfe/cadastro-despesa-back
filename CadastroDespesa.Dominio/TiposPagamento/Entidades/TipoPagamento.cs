@@ -5,7 +5,7 @@ namespace CadastroDespesa.Dominio.TiposPagamento.Entidades
     public class TipoPagamento : BaseEntidade
     {
         public virtual string? Nome { get; protected set; }
-        
+
         public TipoPagamento()
         {
 
@@ -14,7 +14,7 @@ namespace CadastroDespesa.Dominio.TiposPagamento.Entidades
         {
             SetNome(nome);
         }
-        public virtual void SetNome(string nome)
+        public void SetNome(string nome)
         {
             Nome = nome;
         }

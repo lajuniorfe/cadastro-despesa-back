@@ -25,7 +25,7 @@ public class PagamentoPixDinheiroProcessar : IPagamentoPixDinheiroProcessar
 
     public async Task ProcessarPagamentoPixEDinheiro(Despesa despesa)
     {
-        ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
+        ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa is not null ? despesa.TipoDespesa.Id : 0);
 
         TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(2);
         await processadorTipoDespesa.Processar(despesa, tipoPagamento, 1, true, despesa.Valor);

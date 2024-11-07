@@ -25,7 +25,8 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 
         public async Task ProcessarPagamentoBoleto(Despesa despesa)
         {
-            ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);
+            ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(
+                despesa.TipoDespesa is not null ? despesa.TipoDespesa.Id : 0);
             TipoPagamento tipoPagamento = await tipoPagamentoServico.ValidarPagamentoAsync(3);
             await processadorTipoDespesa.Processar(despesa, tipoPagamento, 1, true, despesa.Valor);
 
