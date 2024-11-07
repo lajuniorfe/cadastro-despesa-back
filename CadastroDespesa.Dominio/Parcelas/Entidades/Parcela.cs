@@ -15,7 +15,7 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
         public virtual decimal Valor { get; protected set; }
         public virtual int NumeroParcela { get; protected set; }
         public virtual DateTime Data { get; protected set; }
-        public virtual Fatura? Fatura {get; protected set; }
+        public virtual Fatura? Fatura { get; protected set; }
 
         public Parcela(Despesa despesa, decimal valor, int numeroParcela, DateTime data, Fatura fatura)
         {
@@ -29,43 +29,43 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
         {
 
         }
-        public virtual void SetDespesa(Despesa despesa)
+        public void SetDespesa(Despesa despesa)
         {
             Despesa = despesa;
         }
 
-        public virtual void SetValor(decimal valor)
+        public void SetValor(decimal valor)
         {
             Valor = valor;
         }
 
-        public virtual void SetNumeroParcela(int numeroParcela)
+        public void SetNumeroParcela(int numeroParcela)
         {
             NumeroParcela = numeroParcela;
         }
 
-        public virtual void SetData(DateTime data)
+        public void SetData(DateTime data)
         {
             Data = data;
         }
 
-        public virtual void SetFatura(Fatura fatura)
+        public void SetFatura(Fatura fatura)
         {
             Fatura = fatura;
         }
 
-        public IList<Parcela> CalcularDataParcela(int totalParcelas, Despesa despesa)
+        public static IList<Parcela> CalcularDataParcela(int totalParcelas, Despesa despesa)
         {
-            IList<Parcela> parcelas = new List<Parcela>();
-            for (var i = 0; i < totalParcelas; i++)
+            List<Parcela> parcelas = new List<Parcela>();
+            for (var quantidade = 0; quantidade < totalParcelas; quantidade++)
             {
                 Parcela parcela = new()
                 {
                     Id = 0,
                     Despesa = despesa,
                     Valor = despesa.Valor / totalParcelas,
-                    NumeroParcela = i == 0 ? 1 : i++,
-                    Data = i == 0 ? despesa.Data : despesa.Data.AddMonths(1),
+                    NumeroParcela = quantidade == 0 ? 1 : quantidade++,
+                    Data = quantidade == 0 ? despesa.Data : despesa.Data.AddMonths(1),
                     Fatura = null
                 };
 

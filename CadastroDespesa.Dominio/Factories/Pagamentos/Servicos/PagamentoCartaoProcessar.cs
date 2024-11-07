@@ -51,7 +51,7 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 
             Parcela parcela = parcelaServico.InstanciarParcela();
 
-            IList<Parcela> parcelas = parcela.CalcularDataParcela(totalParcelas.Value, despesa);
+            IList<Parcela> parcelas = Parcela.CalcularDataParcela(totalParcelas.Value, despesa);
             await parcelaServico.CriarParcelasDespesa(parcelas, faturaRetornada);
 
             ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa.Id);

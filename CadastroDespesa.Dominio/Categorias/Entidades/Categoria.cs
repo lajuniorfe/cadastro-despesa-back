@@ -14,7 +14,7 @@ namespace CadastroDespesa.Dominio.Categorias.Entidades
         {
             SetNome(nome);
         }
-        public virtual void SetNome(string nome)
+        public void SetNome(string nome)
         {
             Nome = nome;
         }

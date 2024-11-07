@@ -31,7 +31,7 @@ public class DespesaApp : IDespesaApp
     public async Task<IList<DespesaResponse>> BuscarDespesas()
     {
         IEnumerable<Despesa> despesas = await despesasRepositorio.ObterTodos();
-        return _mapper.Map<List<DespesaResponse>>(despesas); ;
+        return _mapper.Map<List<DespesaResponse>>(despesas); 
     }
 
     public async Task CadastrarDespesa(CadastrarDespesaRequest despesaRequest)
@@ -58,11 +58,10 @@ public class DespesaApp : IDespesaApp
 
             await unitOfWork.CommitAsync();
         }
-        catch (Exception ex)
+        catch
         {
-            //criar log
-            Console.WriteLine($"Erro: {ex.Message}");
-            throw;
+            await unitOfWork.RollbackAsync();
+            throw new Exception();
         }
 
 

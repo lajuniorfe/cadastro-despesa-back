@@ -27,27 +27,27 @@ namespace CadastroDespesa.Dominio.TransacoesDespesas.Entidades
             StatusPagamento = statusPagamento;
         }
 
-        public virtual void SetDespesa(Despesa despesa)
+        public void SetDespesa(Despesa despesa)
         {
             Despesa = despesa;
         }
 
-        public virtual void SetData(DateTime data) 
-        { 
-            Data = data; 
+        public void SetData(DateTime data)
+        {
+            Data = data;
         }
 
-        public virtual void SetValor(decimal valor)
+        public void SetValor(decimal valor)
         {
             Valor = valor;
         }
 
-        public virtual void SetTipoPagamento(TipoPagamento tipoPagamento)
+        public void SetTipoPagamento(TipoPagamento tipoPagamento)
         {
             TipoPagamento = tipoPagamento;
         }
 
-        public virtual void SetStatusPagamento(bool statusPagamento) 
+        public void SetStatusPagamento(bool statusPagamento)
         {
             StatusPagamento = statusPagamento;
         }

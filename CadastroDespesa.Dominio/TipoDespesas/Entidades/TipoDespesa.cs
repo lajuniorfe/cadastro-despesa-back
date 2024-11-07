@@ -14,12 +14,12 @@ namespace CadastroDespesa.Dominio.TipoDespesas.Entidades
             SetDescricao(descricao);
         }
 
-        public virtual void SetNome(string nome)
+        public void SetNome(string nome)
         {
             Nome = nome;
         }
 
-        public virtual void SetDescricao(string descricao)
+        public void SetDescricao(string descricao)
         {
             Descricao = descricao;
         }

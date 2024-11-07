@@ -24,22 +24,22 @@ namespace CadastroDespesa.Dominio.Faturas.Entidades
             SetCartao(cartao);
         }
 
-        public virtual void SetValor(decimal valor)
+        public void SetValor(decimal valor)
         {
             Valor = valor;
         }
 
-        public virtual void SetDataVencimento(DateTime dataVencimento)
+        public void SetDataVencimento(DateTime dataVencimento)
         {
             DataVencimento = dataVencimento;
         }
 
-        public virtual void SetMesCorrespondente(DateTime dataMesCorrespondente)
+        public void SetMesCorrespondente(DateTime dataMesCorrespondente)
         {
             MesCorrespondente = dataMesCorrespondente;
         }
 
-        public virtual void SetCartao(Cartao cartao) 
+        public void SetCartao(Cartao cartao)
         {
             Cartao = cartao;
         }

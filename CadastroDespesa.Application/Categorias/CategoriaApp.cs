@@ -5,7 +5,6 @@ using CadastroDespesa.Dominio.Categorias.Repositorios;
 using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.DTO.Categorias.Requests;
 using CadastroDespesa.DTO.Categorias.Responses;
-using CadastroDespesa.Infra.UnitOfWork;
 
 namespace CadastroDespesa.Application.Categorias
 {
@@ -26,11 +25,11 @@ namespace CadastroDespesa.Application.Categorias
             try
             {
                 IEnumerable<Categoria> retorno = await categoriaRepositorio.ObterTodos();
-                return _mapper.Map<IList<CategoriaResponse>>(retorno); ;
+                return _mapper.Map<IList<CategoriaResponse>>(retorno); 
             }
             catch 
             {
-                throw;
+                throw new Exception();
             }
         }
 
@@ -49,6 +48,7 @@ namespace CadastroDespesa.Application.Categorias
             catch
             {
                 await unitOfWork.RollbackAsync();
+                throw new Exception();
             }
         }
     }

@@ -36,7 +36,7 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
             }
             catch
             {
-                throw;
+                throw new Exception();
             }
 
         }

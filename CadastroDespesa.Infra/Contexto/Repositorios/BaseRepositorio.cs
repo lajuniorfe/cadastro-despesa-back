@@ -54,7 +54,7 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
 
     public async Task<IEnumerable<T>> ObterTodos()
     {
-        return await contexto.GetDbSet<T>().ToListAsync(); ;
+        return await contexto.GetDbSet<T>().ToListAsync();
     }
 
 }

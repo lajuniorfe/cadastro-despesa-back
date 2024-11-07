@@ -21,27 +21,27 @@ namespace CadastroDespesa.Dominio.Cartoes.Entidades
             SetFechamento(fechamento);
         }
 
-        public  void SetNome(string nome)
+        public void SetNome(string nome)
         {
             Nome = nome;
         }
 
-        public  void SetLimite(decimal limite)
+        public void SetLimite(decimal limite)
         {
             Limite = limite;
         }
 
-        public  void SetVencimento(int vencimento)
+        public void SetVencimento(int vencimento)
         {
             Vencimento = vencimento;
         }
 
-        public virtual void SetFechamento(int fechamento)
+        public void SetFechamento(int fechamento)
         {
             Fechamento = fechamento;
         }
 
-        public static DateTime CalcularProximaDataVencimento( DateTime ultimoVencimento)
+        public static DateTime CalcularProximaDataVencimento(DateTime ultimoVencimento)
         {
             if (ultimoVencimento.Month == 12)
                 return ultimoVencimento.AddMonths(1).AddYears(1);
