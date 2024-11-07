@@ -1,6 +1,5 @@
 using AutoMapper;
 using CadastroDespesa.Application.Despesas.Interfaces;
-using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Despesas.Servicos.Interfaces;
@@ -18,16 +17,14 @@ public class DespesaApp : IDespesaApp
     private readonly IMapper _mapper;
     private readonly IDespesaRepositorio despesasRepositorio;
     private readonly ProcessamentoPagamentoFactory _pagamentoFactory;
-    private readonly ProcessamentoTipoDespesaFactory _tipoDespesaFactory;
     private readonly IUnitOfWork unitOfWork;
     private readonly IDespesaServico despesaServico;
-    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, ProcessamentoTipoDespesaFactory tipoDespesaFactory, IDespesaServico despesaServico)
+    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, ProcessamentoPagamentoFactory _pagamentoFactory, IUnitOfWork unitOfWork, IDespesaServico despesaServico)
     {
         _mapper = mapper;
         this._pagamentoFactory = _pagamentoFactory;
         this.despesasRepositorio = despesasRepositorio;
         this.unitOfWork = unitOfWork;
-        _tipoDespesaFactory = tipoDespesaFactory;
         this.despesaServico = despesaServico;
     }
 
