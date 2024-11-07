@@ -32,13 +32,13 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 
         public async Task Processar(Despesa despesa, int? idCartao, int? totalParcelas)
         {
-            await ProcessarPagamentoCartao(despesa, idCartao, totalParcelas);
+            await ProcessarPagamentoCartao(despesa, idCartao.HasValue? idCartao.Value : 0, totalParcelas.HasValue ? totalParcelas.Value : 0);
         }
 
-        public async Task ProcessarPagamentoCartao(Despesa despesa, int? idCartao, int? totalParcelas)
+        public async Task ProcessarPagamentoCartao(Despesa despesa, int idCartao, int totalParcelas)
         {
-            Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao.HasValue ? idCartao.Value : 0);
-            Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(idCartao.Value, despesa.Valor, despesa.Data);
+            Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao);
+            Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(idCartao, despesa.Valor, despesa.Data);
 
             if (faturaRetornada != null)
             {
@@ -50,7 +50,7 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
             }
 
             IList<Parcela> parcelas = Parcela.CalcularDataParcela(
-                totalParcelas.HasValue ? totalParcelas.Value : 0,
+                totalParcelas,
                 despesa);
             await parcelaServico.CriarParcelasDespesa(parcelas, faturaRetornada);
 
