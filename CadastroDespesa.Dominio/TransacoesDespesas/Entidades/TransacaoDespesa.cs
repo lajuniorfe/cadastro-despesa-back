@@ -11,10 +11,10 @@ namespace CadastroDespesa.Dominio.TransacoesDespesas.Entidades
 {
     public class TransacaoDespesa : BaseEntidade
     {
-        public virtual Despesa Despesa { get; protected set; }
+        public virtual Despesa? Despesa { get; protected set; }
         public virtual DateTime Data { get; protected set; }
         public virtual decimal Valor { get; protected set; }
-        public virtual TipoPagamento TipoPagamento { get; protected set; }
+        public virtual TipoPagamento? TipoPagamento { get; protected set; }
         public virtual bool StatusPagamento { get; protected set; }
 
         public TransacaoDespesa() { }

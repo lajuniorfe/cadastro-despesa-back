@@ -24,12 +24,11 @@ namespace CadastroDespesa.Dominio.Factories.TiposDespesas.Servicos
         {
             try
             {
-                TransacaoDespesa transacaoDespesa = new();
                 var dataAtual = despesa.Data;
 
                 for (var i = 0; i < quantidadeTransacao; i++)
                 {
-                    transacaoDespesa = new(despesa, dataAtual, valorTransacao, tipoPagamento, statusPagamento);
+                    TransacaoDespesa transacaoDespesa = new(despesa, dataAtual, valorTransacao, tipoPagamento, statusPagamento);
                     await transacaoDespesaRepositorio.Criar(transacaoDespesa);
 
                     dataAtual.AddMonths(1);

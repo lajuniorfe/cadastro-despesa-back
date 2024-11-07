@@ -8,7 +8,7 @@ namespace CadastroDespesa.Infra.UnitOfWork;
 public class UnitOfWork : IUnitOfWork, IAsyncDisposable
 {
     private readonly EntityContexto contexto;
-    private IDbContextTransaction _transaction;
+    private IDbContextTransaction? _transaction;
 
     public UnitOfWork(EntityContexto contexto)
     {

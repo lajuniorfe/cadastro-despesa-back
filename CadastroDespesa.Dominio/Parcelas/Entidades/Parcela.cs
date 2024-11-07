@@ -11,11 +11,11 @@ namespace CadastroDespesa.Dominio.Parcelas.Entidades
 {
     public class Parcela : BaseEntidade
     {
-        public virtual Despesa Despesa { get; protected set; }
+        public virtual Despesa? Despesa { get; protected set; }
         public virtual decimal Valor { get; protected set; }
         public virtual int NumeroParcela { get; protected set; }
         public virtual DateTime Data { get; protected set; }
-        public virtual Fatura Fatura {get; protected set; }
+        public virtual Fatura? Fatura {get; protected set; }
 
         public Parcela(Despesa despesa, decimal valor, int numeroParcela, DateTime data, Fatura fatura)
         {

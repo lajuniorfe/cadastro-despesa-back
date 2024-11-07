@@ -39,7 +39,7 @@ namespace CadastroDespesa.Teste.Dominio.Factories
             tipoDespesafactoryMock = new ProcessamentoTipoDespesaFactory(transacaoDespesaRepositorioMock.Object);
 
             processamentoPagamentoFactory = new ProcessamentoPagamentoFactory(cartaoServicoMock.Object, faturaServicoMock.Object,
-                parcelaServicoMock.Object, despesaRepositorioMock.Object, tipoDespesafactoryMock, tipoPagamentoServicoMock.Object);
+                parcelaServicoMock.Object,  tipoDespesafactoryMock, tipoPagamentoServicoMock.Object);
         }
 
         [Fact]

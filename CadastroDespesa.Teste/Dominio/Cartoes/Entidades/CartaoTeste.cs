@@ -32,9 +32,7 @@ namespace CadastroDespesa.Teste.Dominio.Cartoes.Entidades
         {
             DateTime dataVencimento = DateTime.Now;
 
-            var cartaoMock = new Mock<Cartao>();
-
-            var dataRecebida = cartaoMock.Object.CalcularProximaDataVencimento(dataVencimento);
+            var dataRecebida = Cartao.CalcularProximaDataVencimento(dataVencimento);
 
             Assert.Equal(dataVencimento.Date.Month + 1, dataRecebida.Month);
         }
@@ -44,9 +42,7 @@ namespace CadastroDespesa.Teste.Dominio.Cartoes.Entidades
         {
             DateTime dataFechamento = DateTime.Now;
 
-            var cartaoMock = new Mock<Cartao>();
-
-            var dataRecebida = cartaoMock.Object.CalcularProximaDataFechamento(dataFechamento);
+            var dataRecebida = Cartao.CalcularProximaDataFechamento(dataFechamento);
 
             Assert.Equal(dataFechamento.Date.Month + 1, dataRecebida.Month);
         }

@@ -14,16 +14,14 @@ namespace CadastroDespesa.Dominio.Fatories.Pagamentos
         private readonly ICartaoServico cartaoServico;
         private readonly IFaturaServico faturaServico;
         private readonly IParcelaServico parcelaServico;
-        private readonly IDespesaRepositorio despesasRepositorio;
         private readonly ProcessamentoTipoDespesaFactory processamentoTipoDespesaFactory;
         private readonly ITipoPagamentoServico tipoPagamentoServico;
 
-        public ProcessamentoPagamentoFactory(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, IDespesaRepositorio despesasRepositorio, ProcessamentoTipoDespesaFactory processamentoTipoDespesaFactory, ITipoPagamentoServico tipoPagamentoServico)
+        public ProcessamentoPagamentoFactory(ICartaoServico cartaoServico, IFaturaServico faturaServico, IParcelaServico parcelaServico, ProcessamentoTipoDespesaFactory processamentoTipoDespesaFactory, ITipoPagamentoServico tipoPagamentoServico)
         {
             this.cartaoServico = cartaoServico;
             this.faturaServico = faturaServico;
             this.parcelaServico = parcelaServico;
-            this.despesasRepositorio = despesasRepositorio;
             this.processamentoTipoDespesaFactory = processamentoTipoDespesaFactory;
             this.tipoPagamentoServico = tipoPagamentoServico;
         }

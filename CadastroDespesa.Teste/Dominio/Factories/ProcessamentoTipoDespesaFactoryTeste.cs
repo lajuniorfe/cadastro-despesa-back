@@ -22,7 +22,6 @@ namespace CadastroDespesa.Teste.Dominio.Factories
         private readonly Mock<ICartaoServico> cartaoServicoMock;
         private readonly Mock<IFaturaServico> faturaServicoMock;
         private readonly Mock<IParcelaServico> parcelaServicoMock;
-        private readonly Mock<IDespesaRepositorio> despesaRepositorioMock;
         private readonly Mock<ITipoPagamentoServico> tipoPagamentoServicoMock;
         private readonly Mock<ITransacaoDespesaRepositorio> transacaoDespesaRepositorioMock;
         private readonly ProcessamentoTipoDespesaFactory tipoDespesafactoryMock;
@@ -33,13 +32,12 @@ namespace CadastroDespesa.Teste.Dominio.Factories
             cartaoServicoMock = new Mock<ICartaoServico>();
             faturaServicoMock = new Mock<IFaturaServico>();
             parcelaServicoMock = new Mock<IParcelaServico>();
-            despesaRepositorioMock = new Mock<IDespesaRepositorio>();
             tipoPagamentoServicoMock = new Mock<ITipoPagamentoServico>();
             transacaoDespesaRepositorioMock = new Mock<ITransacaoDespesaRepositorio>();
             tipoDespesafactoryMock = new ProcessamentoTipoDespesaFactory(transacaoDespesaRepositorioMock.Object);
 
             processamentoPagamentoFactory = new ProcessamentoPagamentoFactory(cartaoServicoMock.Object, faturaServicoMock.Object,
-                parcelaServicoMock.Object, despesaRepositorioMock.Object, tipoDespesafactoryMock, tipoPagamentoServicoMock.Object);
+                parcelaServicoMock.Object, tipoDespesafactoryMock, tipoPagamentoServicoMock.Object);
         }
 
 
