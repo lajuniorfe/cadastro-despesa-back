@@ -26,7 +26,7 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
 
     public async Task<T> Buscar(Expression<Func<T, bool>> predicate)
     {
-        return await contexto.GetDbSet<T>().Where(predicate).FirstAsync();
+        return await contexto.GetDbSet<T>().Where(predicate).FirstOrDefaultAsync();
     }
     public async Task<int> Criar(T entity)
     {
