@@ -32,27 +32,35 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
 
         public async Task Processar(Despesa despesa, int? idCartao, int? totalParcelas)
         {
-            await ProcessarPagamentoCartao(despesa, idCartao.HasValue? idCartao.Value : 0, totalParcelas.HasValue ? totalParcelas.Value : 0);
+            await ProcessarPagamentoCartao(despesa, idCartao.HasValue ? idCartao.Value : 0, totalParcelas.HasValue ? totalParcelas.Value : 0);
         }
 
         public async Task ProcessarPagamentoCartao(Despesa despesa, int idCartao, int totalParcelas)
         {
             Cartao cartaoRetornado = await cartaoServico.ValidarCartaoAsync(idCartao);
-            Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(idCartao, despesa.Valor, despesa.Data);
 
-            if (faturaRetornada != null)
-            {
-                faturaRetornada = await faturaServico.AlterarFaturaCartaoExistenteAsync(faturaRetornada, despesa.Valor);
-            }
-            else
-            {
-                faturaRetornada = await faturaServico.CriarFaturaCartaoAsync(despesa.Data, cartaoRetornado, despesa.Valor);
-            }
+            IList<Parcela> parcelas = Parcela.CalcularDataParcela(totalParcelas, despesa);
 
-            IList<Parcela> parcelas = Parcela.CalcularDataParcela(
-                totalParcelas,
-                despesa);
-            await parcelaServico.CriarParcelasDespesa(parcelas, faturaRetornada);
+            DateTime dataFatura = Fatura.CalcularDataFatura(despesa.Data, cartaoRetornado.Fechamento);
+            for (var item = 0; item < parcelas.Count; item++)
+            {
+
+                dataFatura = item == 0 ? dataFatura : dataFatura.AddMonths(1);
+                Fatura faturaRetornada = await faturaServico.VerificarFaturaCartaoAsync(idCartao, dataFatura);
+
+                if (faturaRetornada != null)
+                {
+                    faturaRetornada = await faturaServico.AlterarFaturaCartaoExistenteAsync(faturaRetornada, parcelas[item].Valor);
+                }
+                else
+                {
+                    faturaRetornada = await faturaServico.CriarFaturaCartaoAsync(dataFatura, cartaoRetornado, despesa.Valor);
+                }
+
+                parcelas[item].SetData(dataFatura);
+                parcelas[item].SetFatura(faturaRetornada);
+                await parcelaServico.CriarParcelasDespesa(parcelas[item]);
+            }
 
             ITipoDepesaProcessar processadorTipoDespesa = _tipoDespesaFactory.ProcessarTipoDespesa(despesa.TipoDespesa is not null ? despesa.TipoDespesa.Id : 0);
 

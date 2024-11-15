@@ -5,7 +5,7 @@ namespace CadastroDespesa.Dominio.Parcelas.Servicos.Interfaces
 {
     public interface IParcelaServico
     {
-        Task CriarParcelasDespesa(IList<Parcela> parcelas, Fatura fatura);
+        Task CriarParcelasDespesa(Parcela parcela);
         Task<Parcela> ValidarParcelaAsync(int idParcela);
         Parcela InstanciarParcela();
     }

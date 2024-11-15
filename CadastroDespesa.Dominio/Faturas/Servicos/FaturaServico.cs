@@ -19,7 +19,7 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos
             return await faturaRepositorio.ObterPorId(id);
         }
 
-        public async Task<Fatura> VerificarFaturaCartaoAsync(int idCartao, decimal valorDespesa, DateTime dataFatura)
+        public async Task<Fatura> VerificarFaturaCartaoAsync(int idCartao, DateTime dataFatura)
         {
             Fatura response = await faturaRepositorio.Buscar(x =>
             x.Cartao.Id == idCartao

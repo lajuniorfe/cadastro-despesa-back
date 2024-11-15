@@ -14,13 +14,9 @@ namespace CadastroDespesa.Dominio.Parcelas.Servicos
             this.parcelaRepositorio = parcelaRepositorio;
         }
 
-        public async Task CriarParcelasDespesa(IList<Parcela> parcelas, Fatura fatura)
+        public async Task CriarParcelasDespesa(Parcela parcela)
         {
-            foreach (var i in parcelas)
-            {
-                i.SetFatura(fatura);
-                await parcelaRepositorio.Criar(i);
-            }
+            await parcelaRepositorio.Criar(parcela);
         }
 
         public async Task<Parcela> ValidarParcelaAsync(int idParcela)

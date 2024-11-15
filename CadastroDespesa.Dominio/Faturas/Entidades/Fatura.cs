@@ -43,5 +43,20 @@ namespace CadastroDespesa.Dominio.Faturas.Entidades
         {
             Cartao = cartao;
         }
+
+        public static DateTime CalcularDataFatura(DateTime dataDespesa, int fechamentoCartao)
+        {
+
+            var dataFaturaAtual = new DateTime(dataDespesa.Year, dataDespesa.Month, fechamentoCartao);
+
+            if(dataDespesa <= dataFaturaAtual)
+            {
+                return dataFaturaAtual;
+            }
+            else
+            {
+               return dataFaturaAtual.AddMonths(1);
+            }
+        }
     }
 }
