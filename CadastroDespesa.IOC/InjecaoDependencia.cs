@@ -40,7 +40,6 @@ public static class InjecaoDependencia
         RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Servico");
         RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Processar");
 
-
         services.AddHostedService<QueueConsumerWorker>();
         services.AddSingleton<IRabbitProducer, RabbitProducer>();
         services.AddSingleton<IRabbitConsumer, RabbitConsumer>();
