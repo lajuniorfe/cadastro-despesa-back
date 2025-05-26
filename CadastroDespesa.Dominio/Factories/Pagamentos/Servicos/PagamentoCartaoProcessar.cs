@@ -54,7 +54,7 @@ namespace CadastroDespesa.Dominio.Factories.Pagamentos.Servicos
                 }
                 else
                 {
-                    faturaRetornada = await faturaServico.CriarFaturaCartaoAsync(dataFatura, cartaoRetornado, despesa.Valor);
+                    faturaRetornada = await faturaServico.CriarFaturaCartaoAsync(dataFatura, cartaoRetornado, parcelas[item].Valor);
                 }
 
                 parcelas[item].SetData(dataFatura);

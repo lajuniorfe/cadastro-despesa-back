@@ -1,5 +1,4 @@
 ﻿using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
-using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Interfaces;
 using CadastroDespesa.Dominio.Factories.Pagamentos.Servicos;
 using CadastroDespesa.Dominio.Factories.TiposDespesas;

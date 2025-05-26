@@ -36,8 +36,10 @@ namespace CadastroDespesa.Api.Controller.Cartoes
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> BuscarDespesas()
+        public async Task<IActionResult> BuscarCartoes()
         {
+            var valor = Environment.GetEnvironmentVariable("MinhaVariavel");
+
             return Ok(await cartaoApp.BuscarCartoes());
         }
 

@@ -13,6 +13,12 @@ namespace CadastroDespesa.Dominio.Categorias.Servicos
             this.categoriaRepositorio = categoriaRepositorio;
         }
 
+        public async Task<Categoria> BuscarCategoriaNomeAsync(string Nome)
+        {
+            Categoria response = await categoriaRepositorio.Buscar(c => c.Nome == Nome);
+            return response;
+        }
+
         public async Task<Categoria> ValidarCategoriaAsync(int id)
         {
             Categoria response = await categoriaRepositorio.ObterPorId(id);

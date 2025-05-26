@@ -5,5 +5,6 @@ namespace CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces
     public interface ITipoDespesaServico
     {
         Task<TipoDespesa> ValidarTipoDespesaAsync(int id);
+        Task<TipoDespesa> BuscarTipoDespesaNomeAsync(string Nome);
     }
 }

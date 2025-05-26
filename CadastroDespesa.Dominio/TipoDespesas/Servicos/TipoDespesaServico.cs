@@ -1,11 +1,6 @@
 ﻿using CadastroDespesa.Dominio.TipoDespesas.Entidades;
 using CadastroDespesa.Dominio.TipoDespesas.Repositorios;
 using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroDespesa.Dominio.TipoDespesas.Servicos
 {
@@ -15,6 +10,12 @@ namespace CadastroDespesa.Dominio.TipoDespesas.Servicos
         public TipoDespesaServico(ITipoDespesaRepositorio tipoDespesaRepositorio)
         {
             this.tipoDespesaRepositorio = tipoDespesaRepositorio;
+        }
+
+        public async Task<TipoDespesa> BuscarTipoDespesaNomeAsync(string Nome)
+        {
+            TipoDespesa response = await tipoDespesaRepositorio.Buscar(c => c.Nome == Nome);
+            return response;
         }
 
         public async Task<TipoDespesa> ValidarTipoDespesaAsync(int id)
