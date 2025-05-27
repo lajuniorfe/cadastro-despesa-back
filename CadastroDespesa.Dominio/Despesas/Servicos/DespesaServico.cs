@@ -89,6 +89,7 @@ public class DespesaServico : IDespesaServico
                request.NomeDespesa, request.Valor, request.DataCriacao, categoriaRetornada.Id,
                tipoDespesaRetornada.Id);
 
+                Console.WriteLine("o erro é aqui:", despesa);
                 await despesasRepositorio.Criar(despesa);
 
                 IPagamentoProcessar processadorPagamento = _pagamentoFactory.ProcessarPagamento(1);
@@ -106,6 +107,7 @@ public class DespesaServico : IDespesaServico
                               request.NomeDespesa, request.Valor, request.DataCriacao, categoriaRetornada.Id,
                               tipoDespesaRetornada.Id);
 
+                Console.WriteLine("o erro é aqui:", despesa);
                 await despesasRepositorio.Criar(despesa);
 
                 var pagamento = request.FormaPagamento.Trim() == "Pix" ? 2 : 3;
