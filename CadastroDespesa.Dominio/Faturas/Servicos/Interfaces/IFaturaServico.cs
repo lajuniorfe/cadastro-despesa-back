@@ -7,8 +7,9 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos.Interfaces
     {
         Task<Fatura> ValidarFaturaAsync(int id);
         Task<Fatura> VerificarFaturaCartaoAsync(int idCartao, DateTime dataFatura);
-        Task<Fatura> AlterarFaturaCartaoExistenteAsync(Fatura faturaCartaoExistente, decimal valorDespesa);
-        Task<Fatura> CriarFaturaCartaoAsync(DateTime dataFatura, Cartao cartao, decimal valor);
+        Task<Fatura> AlterarFaturaCartaoExistenteAsync(Fatura faturaCartaoExistente);
+        Task<Fatura> CriarFaturaCartaoAsync(DateTime dataFatura, Cartao cartao);
+        Task<IList<Fatura>> ListarFaturasCartaoAsync(int idCartao);
 
     }
 }

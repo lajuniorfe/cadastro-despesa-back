@@ -24,18 +24,50 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
 
         builder.Property(d => d.Valor).HasColumnName("valor")
             .IsRequired()
-            .HasColumnType("numeric");
+            .HasColumnType("numeric(18,2)");
+
+
+        builder.Property(d => d.ValorParcela).HasColumnName("valor_parcela")
+            .HasColumnType("numeric(18,2)");
 
         builder.Property(d => d.Data).HasColumnName("data_despesa")
              .HasColumnType("timestamp without time zone")
              .IsRequired();
 
-        builder.HasOne(p => p.Categoria)
-                     .WithMany()
-                     .HasForeignKey("id_categoria");
+        builder.Property(d => d.NumeroParcela).HasColumnName("numero_parcela")
+            .HasColumnType("integer")
+            .IsRequired();
 
-        builder.HasOne(p => p.TipoDespesa)
-                     .WithMany()
-                     .HasForeignKey("id_tipodespesa");
+        builder.Property(d => d.TotalParcela).HasColumnName("total_parcela")
+            .HasColumnType("integer")
+            .IsRequired();
+
+        builder.Property(d => d.IdCategoria)
+             .HasColumnName("id_categoria")
+             .HasColumnType("integer")
+             .IsRequired();
+
+        builder.Property(d => d.IdTipoDespesa)
+            .HasColumnName("id_tipodespesa")
+            .HasColumnType("integer")
+            .IsRequired();
+
+        builder.Property(d => d.IdFatura)
+         .HasColumnName("id_fatura")
+         .HasColumnType("integer")
+         .IsRequired();
+
+        builder.HasOne(d => d.Categoria)
+            .WithMany()
+            .HasForeignKey(d => d.IdCategoria);
+
+        builder.HasOne(d => d.TipoDespesa)
+            .WithMany()
+            .HasForeignKey(d => d.IdTipoDespesa);
+
+        builder.HasOne(d => d.Fatura)
+           .WithMany()
+           .HasForeignKey(d => d.IdFatura);
+
     }
 }

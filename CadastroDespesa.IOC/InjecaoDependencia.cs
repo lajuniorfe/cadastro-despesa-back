@@ -1,6 +1,5 @@
 ﻿using CadastroDespesa.Application.TiposPagamento.Profiles;
-using CadastroDespesa.Dominio.Factories.TiposDespesas;
-using CadastroDespesa.Dominio.Fatories.Pagamentos;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys;
 using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.Dominio.Worker.Consumer;
 using CadastroDespesa.Dominio.Worker.Consumer.Interface;
@@ -38,14 +37,16 @@ public static class InjecaoDependencia
         RegisterTypesFromAssembly(services, "CadastroDespesa.Infra", "Repositorio");
         RegisterTypesFromAssembly(services, "CadastroDespesa.Application", "App");
         RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Servico");
-        RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Processar");
+        RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Factory");
+
+        services.AddScoped<CartaoPagamentoStrategy>();
+        services.AddScoped<SaldoPagamentoStrategy>();
 
         services.AddHostedService<QueueConsumerWorker>();
         services.AddSingleton<IRabbitProducer, RabbitProducer>();
         services.AddSingleton<IRabbitConsumer, RabbitConsumer>();
 
-        services.AddScoped<ProcessamentoPagamentoFactory>();
-        services.AddScoped<ProcessamentoTipoDespesaFactory>();
+      
    
 
     }

@@ -29,22 +29,29 @@ namespace CadastroDespesa.Dominio.Faturas.Servicos
             return response;
         }
 
-        public async Task<Fatura> AlterarFaturaCartaoExistenteAsync(Fatura faturaCartaoExistente, decimal valorDespesa)
+        public async Task<Fatura> AlterarFaturaCartaoExistenteAsync(Fatura faturaCartaoExistente)
         {
-            faturaCartaoExistente.SetValor(faturaCartaoExistente.Valor + valorDespesa);
             await faturaRepositorio.Alterar(faturaCartaoExistente);
             return faturaCartaoExistente;
         }
 
-        public async Task<Fatura> CriarFaturaCartaoAsync(DateTime dataFatura, Cartao cartao, decimal valor)
+        public async Task<Fatura> CriarFaturaCartaoAsync(DateTime dataFatura, Cartao cartao)
         {
             DateTime dataVencimento = new DateTime(dataFatura.Year, dataFatura.Month, cartao.Vencimento);
 
-            Fatura novaFatura = new(valor, dataVencimento, dataFatura, cartao);
+            Fatura novaFatura = new(dataVencimento, dataFatura, cartao.Id);
 
             await faturaRepositorio.Criar(novaFatura);
 
             return novaFatura;
+        }
+
+        public async Task<IList<Fatura>> ListarFaturasCartaoAsync(int idCartao)
+        {
+            IEnumerable<Fatura> response = await faturaRepositorio.Listar(x =>
+            x.IdCartao == idCartao);
+
+            return response.ToList();
         }
     }
 }

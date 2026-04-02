@@ -57,4 +57,10 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         return await contexto.GetDbSet<T>().ToListAsync();
     }
 
+    public async Task CriarLista(IEnumerable<T> entities)
+    {
+        await contexto.GetDbSet<T>().AddRangeAsync(entities);
+        await contexto.SaveChangesAsync();
+
+    }
 }

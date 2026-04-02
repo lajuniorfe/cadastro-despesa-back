@@ -17,11 +17,6 @@ namespace CadastroDespesa.Infra.Faturas.Mapeamentos
                   .HasColumnName("id")
                   .HasColumnType("integer");
 
-            builder.Property(d => d.Valor)
-                .HasColumnName("valor")
-                .IsRequired()
-                .HasMaxLength(100);
-
             builder.Property(d => d.MesCorrespondente)
                .HasColumnName("mes_correspondente")
                .HasColumnType("timestamp without time zone")
@@ -34,9 +29,15 @@ namespace CadastroDespesa.Infra.Faturas.Mapeamentos
               .IsRequired()
               .HasMaxLength(100);
 
+
+            builder.Property(d => d.IdCartao)
+                 .HasColumnName("id_cartao")
+                 .HasColumnType("integer")
+                 .IsRequired();
+
             builder.HasOne(p => p.Cartao)
                        .WithMany()
-                       .HasForeignKey("id_cartao");
+                       .HasForeignKey(p => p.IdCartao);
         }
     }
 }
