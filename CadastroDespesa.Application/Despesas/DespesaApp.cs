@@ -2,8 +2,10 @@ using AutoMapper;
 using CadastroDespesa.Application.Despesas.Interfaces;
 using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Categorias.Servicos.Interfaces;
+using CadastroDespesa.Dominio.Despesas.Commands;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
+using CadastroDespesa.Dominio.Despesas.Servicos.Factory;
 using CadastroDespesa.Dominio.Despesas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
@@ -27,7 +29,8 @@ public class DespesaApp : IDespesaApp
     private readonly ICartaoServico cartaoServico;
     private readonly IFaturaServico faturaServico;
     private readonly IFormaPagamentoFactory formaPagamentoFactory;
-    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, IUnitOfWork unitOfWork, IDespesaServico despesaServico, ICategoriaServico categoriaServico, ITipoDespesaServico tipoDespesaServico, ICartaoServico cartaoServico, IFaturaServico faturaServico, IFormaPagamentoFactory formaPagamentoFactory)
+    private readonly IDespesaFactory despesaFactory;
+    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, IUnitOfWork unitOfWork, IDespesaServico despesaServico, ICategoriaServico categoriaServico, ITipoDespesaServico tipoDespesaServico, ICartaoServico cartaoServico, IFaturaServico faturaServico, IFormaPagamentoFactory formaPagamentoFactory, IDespesaFactory despesaFactory)
     {
         _mapper = mapper;
         this.despesasRepositorio = despesasRepositorio;
@@ -38,6 +41,7 @@ public class DespesaApp : IDespesaApp
         this.cartaoServico = cartaoServico;
         this.faturaServico = faturaServico;
         this.formaPagamentoFactory = formaPagamentoFactory;
+        this.despesaFactory = despesaFactory;
     }
 
     public async Task<IList<DespesaResponse>> BuscarDespesas()
@@ -53,46 +57,81 @@ public class DespesaApp : IDespesaApp
         {
             await unitOfWork.BeginTransaction();
 
-            IEnumerable<Despesa> despesas;
+            var despesaStrategy = despesaFactory.Obter(despesaRequest.IdTipoDespesa);
 
-            int totalParcelas = despesaRequest.Parcela ?? 1;
-            if ((despesaRequest.Parcela ?? 1) > 1)
+            DespesaCommand commandDespesa = despesaRequest.IdTipoDespesa switch
             {
-                despesas = Despesa.CriarParcelada(despesaRequest.Descricao ?? ""
-                      , despesaRequest.Valor
-                      , despesaRequest.Data
-                      , despesaRequest.IdCategoria
-                      , despesaRequest.IdTipoDespesa
-                      , totalParcelas);
-            }
-            else
-            {
-                despesas = new List<Despesa>
-                {
-                    Despesa.CriarSemParcela(
-                        despesaRequest.Descricao ?? ""
-                      , despesaRequest.Valor
-                      , despesaRequest.Data
-                      , despesaRequest.IdCategoria
-                      , despesaRequest.IdTipoDespesa)
-                };
-            }
+
+                2 => new DespesaParceladaCommand(
+                   despesaRequest.Parcela.Value,
+                   despesaRequest.Descricao,
+                   despesaRequest.Data,
+                   despesaRequest.Valor,
+                   despesaRequest.IdCategoria,
+                   despesaRequest.IdTipoPagamento),
+
+               _ => new DespesaCommandBase(
+                   despesaRequest.Descricao,
+                   despesaRequest.Data,
+                   despesaRequest.Valor,
+                   despesaRequest.IdCategoria,
+                   despesaRequest.IdTipoPagamento)
+            };
+
+            IEnumerable<Despesa> despesas = despesaStrategy.Criar(commandDespesa);
 
             var formaPagamento = formaPagamentoFactory.Obter(despesaRequest.IdTipoPagamento);
 
-            PagamentoCommand command = despesaRequest.IdTipoPagamento switch
+            PagamentoCommand commandPagamento = despesaRequest.IdTipoPagamento switch
             {
                 1 => new CartaoPagamentoCommand(despesaRequest.IdCartao!.Value, despesaRequest.Data),
                 _ => new PagamentoCommandBase()
             };
 
-            foreach ( var despesa in despesas)
+            foreach (var despesa in despesas)
             {
-                await formaPagamento.ProcessarAsync(despesa, command);
+                await formaPagamento.ProcessarAsync(despesa, commandPagamento);
                 await despesasRepositorio.Criar(despesa);
             }
 
             await unitOfWork.CommitAsync();
+
+
+            //if (despesaRequest.IdTipoDespesa == 1)
+            //{
+            //    despesas = new List<Despesa>
+            //    {
+            //        Despesa.CriarFixa(
+            //            despesaRequest.Descricao ?? ""
+            //          , despesaRequest.Valor
+            //          , despesaRequest.Data
+            //          , despesaRequest.IdCategoria
+            //          , despesaRequest.IdTipoDespesa)
+            //    };
+            //}
+            //else if ((despesaRequest.Parcela ?? 1) > 1)
+            //{
+            //    int totalParcelas = despesaRequest.Parcela ?? 1;
+            //    despesas = Despesa.CriarParcelada(despesaRequest.Descricao ?? ""
+            //          , despesaRequest.Valor
+            //          , despesaRequest.Data
+            //          , despesaRequest.IdCategoria
+            //          , despesaRequest.IdTipoDespesa
+            //          , totalParcelas);
+            //}
+            //else
+            //{
+            //    despesas = new List<Despesa>
+            //    {
+            //        Despesa.CriarSemParcela(
+            //            despesaRequest.Descricao ?? ""
+            //          , despesaRequest.Valor
+            //          , despesaRequest.Data
+            //          , despesaRequest.IdCategoria
+            //          , despesaRequest.IdTipoDespesa)
+            //    };
+            //}
+
         }
         catch
         {

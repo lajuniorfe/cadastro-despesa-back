@@ -14,6 +14,8 @@ public class Despesa : BaseEntidade
     public virtual int? TotalParcela { get; protected set; }
     public virtual decimal ValorParcela { get; protected set; }
 
+    //despesa tem que ter um dono (casal ou usuario)
+
     #region relacionamento
     public virtual int IdCategoria { get; protected set; }
     public virtual int IdTipoDespesa { get; protected set; }
@@ -129,6 +131,26 @@ public class Despesa : BaseEntidade
         );
 
         despesa.SetNumeroParcela(1);
+
+        return despesa;
+    }
+
+
+    public static Despesa CriarFixa(
+        string descricao,
+        decimal valor,
+        DateTime data,
+        int idCategoria,
+        int idTipoDespesa)
+    {
+        var despesa = new Despesa(
+            descricao,
+            valor,
+            data,
+            idCategoria,
+            idTipoDespesa,
+            1
+         );
 
         return despesa;
     }
