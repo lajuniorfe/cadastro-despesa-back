@@ -9,6 +9,7 @@ namespace CadastroDespesa.Dominio.Cartoes.Entidades
         public virtual int Vencimento { get; protected set; }
         public virtual int Fechamento { get; protected set; }
 
+
         public Cartao()
         {
 

@@ -19,7 +19,7 @@ namespace CadastroDespesa.Dominio.Worker.Consumer
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await rabbitConsumer.OuvirFilaPersistenciaDespesa(stoppingToken);
+           //await rabbitConsumer.OuvirFilaPersistenciaDespesa(stoppingToken);
         }
     }
 }

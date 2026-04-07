@@ -8,4 +8,7 @@ public interface IDespesaApp
 {
     Task<IList<DespesaResponse>> BuscarDespesas();
     Task CadastrarDespesa(CadastrarDespesaRequest despesaRequest);
+
+    Task<IList<DespesaResponse>> BuscarDespesasMesCorrespondente(int mes);
+
 }

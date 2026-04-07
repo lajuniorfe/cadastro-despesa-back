@@ -3,7 +3,6 @@ using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.TiposPagamento.commands;
-using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
 
 namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys
 {

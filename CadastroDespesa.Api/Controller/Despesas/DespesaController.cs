@@ -35,5 +35,12 @@ namespace CadastroDespesa.Api.Controller.Despesas
             return Ok(await despesaApp.BuscarDespesas());
 
         }
+
+        [HttpGet("mes/{mes}")]
+        public async Task<IActionResult> BuscarDespesasMesCorrespondente(int mes)
+        {
+            return Ok(await despesaApp.BuscarDespesasMesCorrespondente(mes));
+
+        }
     }
 }

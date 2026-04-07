@@ -1,4 +1,4 @@
-﻿using CadastroDespesa.Dominio.TiposPagamento.Servicos.Interfaces;
+﻿using CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys;
 
 namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Factorys
 {

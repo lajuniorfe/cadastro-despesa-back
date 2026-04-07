@@ -1,9 +1,9 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Commands;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 
-namespace CadastroDespesa.Dominio.Despesas.Servicos.Strategys
+namespace CadastroDespesa.Dominio.TipoDespesas.Servicos.Strategys
 {
-    public class DespesaUnicaStrategy : IDespesaStrategy
+    public class TipoDespesaUnicaStrategy : ITipoDespesaStrategy
     {
         public IEnumerable<Despesa> Criar(DespesaCommand command)
         {

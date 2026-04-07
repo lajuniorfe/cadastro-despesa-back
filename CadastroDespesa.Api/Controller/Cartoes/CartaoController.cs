@@ -23,7 +23,7 @@ namespace CadastroDespesa.Api.Controller.Cartoes
         /// <param name="cartao"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> CadastrarDespesa([FromBody] CadastrarCartaoRequest request)
+        public async Task<IActionResult> CadastrarCartao([FromBody] CadastrarCartaoRequest request)
         {
 
             await cartaoApp.CadastrarCartao(request);
