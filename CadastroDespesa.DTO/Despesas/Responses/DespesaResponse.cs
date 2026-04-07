@@ -1,6 +1,6 @@
 using CadastroDespesa.DTO.Categorias.Responses;
 using CadastroDespesa.DTO.Faturas.Responses;
-using CadastroDespesa.DTO.TipoDespesas.Responses;
+using CadastroDespesa.DTO.Recorrencias.Responses;
 
 namespace CadastroDespesa.DTO.Despesas.Responses;
 
@@ -12,7 +12,7 @@ public class DespesaResponse
     public decimal Valor { get; set; }
     public bool StatusPagamento { get; set; }
     public CategoriaResponse? Categoria { get; set; }
-    public TipoDespesaResponse? TipoDespesa { get; set; }
+    public RecorrenciaResponse? Recorrencia { get; set; }
     //public TipoPagamentoResponse? TipoPagamento { get; set; }
     public FaturaResponse? Fatura { get; set; }
 }

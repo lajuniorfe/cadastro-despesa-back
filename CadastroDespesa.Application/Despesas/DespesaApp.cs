@@ -3,7 +3,7 @@ using CadastroDespesa.Application.Despesas.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Commands;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
-using CadastroDespesa.Dominio.TipoDespesas.Servicos.Factorys;
+using CadastroDespesa.Dominio.Recorrencias.Servicos.Factorys;
 using CadastroDespesa.Dominio.TiposPagamento.commands;
 using CadastroDespesa.Dominio.TiposPagamento.Commands;
 using CadastroDespesa.Dominio.TiposPagamento.Servicos.Factorys;
@@ -19,8 +19,8 @@ public class DespesaApp : IDespesaApp
     private readonly IDespesaRepositorio despesasRepositorio;
     private readonly IUnitOfWork unitOfWork;
     private readonly IFormaPagamentoFactory formaPagamentoFactory;
-    private readonly ITipoDespesaFactory tipoDespesaFactory;
-    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, IUnitOfWork unitOfWork, IFormaPagamentoFactory formaPagamentoFactory, ITipoDespesaFactory tipoDespesaFactory)
+    private readonly IRecorrenciaFactory tipoDespesaFactory;
+    public DespesaApp(IMapper mapper, IDespesaRepositorio despesasRepositorio, IUnitOfWork unitOfWork, IFormaPagamentoFactory formaPagamentoFactory, IRecorrenciaFactory tipoDespesaFactory)
     {
         _mapper = mapper;
         this.despesasRepositorio = despesasRepositorio;
@@ -49,9 +49,9 @@ public class DespesaApp : IDespesaApp
         {
             await unitOfWork.BeginTransaction();
 
-            var tipoDespesaStrategy = tipoDespesaFactory.Obter(despesaRequest.IdTipoDespesa);
+            var tipoDespesaStrategy = tipoDespesaFactory.Obter(despesaRequest.idRecorrencia);
 
-            DespesaCommand commandDespesa = despesaRequest.IdTipoDespesa switch
+            DespesaCommand commandDespesa = despesaRequest.idRecorrencia switch
             {
 
                 2 => new DespesaParceladaCommand(

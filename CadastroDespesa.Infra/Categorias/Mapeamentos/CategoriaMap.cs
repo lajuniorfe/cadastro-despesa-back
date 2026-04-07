@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CadastroDespesa.Infra.Categorias.Mapeamentos
 {
-    public class CategoriaMap: IEntityTypeConfiguration<Categoria>
+    public class CategoriaMap : IEntityTypeConfiguration<Categoria>
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
@@ -20,6 +20,9 @@ namespace CadastroDespesa.Infra.Categorias.Mapeamentos
             builder.Property(d => d.Nome).HasColumnName("nome")
                 .IsRequired()
                 .HasMaxLength(100);
+
+            builder.Property(d => d.Tipo).HasColumnName("tipo")
+                .IsRequired();
         }
     }
 }

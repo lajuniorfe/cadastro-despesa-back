@@ -35,7 +35,7 @@ namespace CadastroDespesa.Teste.Dominio.Factories.Pagamentos
         public async Task Quando_Tipo_Pagamento_For_PixDinheiro_Espero_Processar_Pagamento_PixDinheiro()
         {
             int idTipoDespesa = 1;
-            var tipoDespesa = new TipoDespesa { Id = idTipoDespesa };
+            var tipoDespesa = new Recorrencia { Id = idTipoDespesa };
             var descricao = "Despesa Teste";
             var data = DateTime.Now.Date;
             var valor = 10;

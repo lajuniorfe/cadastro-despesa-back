@@ -50,7 +50,7 @@ namespace CadastroDespesa.Teste.Dominio.Factories.Pagamentos
             int idTipoDespesa = 1;
             int idCartao = 1;
             int parcelas = 2;
-            var tipoDespesa = new TipoDespesa { Id = idTipoDespesa };
+            var tipoDespesa = new Recorrencia { Id = idTipoDespesa };
             var descricao = "Despesa Teste";
             var data = DateTime.Now.Date;
             var valor = 10;
@@ -78,7 +78,7 @@ namespace CadastroDespesa.Teste.Dominio.Factories.Pagamentos
             int idTipoDespesa = 1;
             int idCartao = 1;
             int parcelas = 2;
-            var tipoDespesa = new TipoDespesa { Id = idTipoDespesa };
+            var tipoDespesa = new Recorrencia { Id = idTipoDespesa };
             var descricao = "Despesa Teste";
             var data = DateTime.Now.Date;
             var valor = 10;

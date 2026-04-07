@@ -26,7 +26,7 @@ namespace CadastroDespesa.Teste.Dominio.TiposDespesas.Servicos
         public async Task Quando_Receber_Id_TipoDespesa_Espero_Retornar_TipoDespesa_Valido()
         {
             int idTipoDespesa = 1;
-            var tipoDespesaValido = new Mock<TipoDespesa>();
+            var tipoDespesaValido = new Mock<Recorrencia>();
             _tipoDespesaRepositorioMock.Setup(r => r.ObterPorId(idTipoDespesa))
                                    .ReturnsAsync(tipoDespesaValido.Object);
 

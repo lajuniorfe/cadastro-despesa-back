@@ -4,8 +4,8 @@ using CadastroDespesa.Dominio.Categorias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Despesas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.TipoDespesas.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.Recorrencias.Entidades;
+using CadastroDespesa.Dominio.Recorrencias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.Dominio.Worker.Producer.Interface;
 using System.Text;
@@ -17,18 +17,17 @@ public class DespesaServico : IDespesaServico
 {
     private readonly IDespesaRepositorio despesasRepositorio;
     private readonly ICategoriaServico categoriaServico;
-    private readonly ITipoDespesaServico tipoDespesaServico;
+    private readonly IRecorrenciaServico recorrenciaServico;
     private readonly IUnitOfWork unitOfWork;
-    private readonly ICartaoServico cartaoServico;
+
     private readonly IRabbitProducer rabbitProducer;
 
-    public DespesaServico(IDespesaRepositorio despesasRepositorio, ICategoriaServico categoriaServico, ITipoDespesaServico tipoDespesaServico, IUnitOfWork unitOfWork, ICartaoServico cartaoServico, IRabbitProducer rabbitProducer)
+    public DespesaServico(IDespesaRepositorio despesasRepositorio, ICategoriaServico categoriaServico, IRecorrenciaServico recorrenciaServico, IUnitOfWork unitOfWork, IRabbitProducer rabbitProducer)
     {
         this.despesasRepositorio = despesasRepositorio;
         this.categoriaServico = categoriaServico;
-        this.tipoDespesaServico = tipoDespesaServico;
+        this.recorrenciaServico = recorrenciaServico;
         this.unitOfWork = unitOfWork;
-        this.cartaoServico = cartaoServico;
         this.rabbitProducer = rabbitProducer;
     }
 
@@ -42,23 +41,13 @@ public class DespesaServico : IDespesaServico
 
         Categoria categoria = await categoriaServico.ValidarCategoriaAsync(idCategoria);
 
-        TipoDespesa tipoDespesa = await tipoDespesaServico.ValidarTipoDespesaAsync(idTipoDespesa);
+        Recorrencia tipoDespesa = await recorrenciaServico.ValidarRecorrenciaAsync(idTipoDespesa);
 
 
         return null;
     }
 
-    public async Task PersistirDespesas(DespesaPersistencia request, CancellationToken cancellationToken)
-    {
-        try
-        {
-        }
-        catch
-        {
-            await unitOfWork.RollbackAsync();
-        }
 
-    }
 
     public static string RemoverAcentos(string texto)
     {

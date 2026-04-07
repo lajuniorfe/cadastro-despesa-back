@@ -32,7 +32,7 @@ namespace CadastroDespesa.Teste.Dominio.Factories.Pagamentos
         public async Task Quando_Tipo_pagamento_For_Boleto_Espero_processar_Pagamento_Boleto()
         {
             int idTipoDespesa = 1;
-            var tipoDespesa = new TipoDespesa { Id = idTipoDespesa };
+            var tipoDespesa = new Recorrencia { Id = idTipoDespesa };
             var descricao = "Despesa Teste";
             var data = DateTime.Now.Date;
             var valor = 10;

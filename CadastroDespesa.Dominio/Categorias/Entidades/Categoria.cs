@@ -5,11 +5,10 @@ namespace CadastroDespesa.Dominio.Categorias.Entidades
     public class Categoria : BaseEntidade
     {
         public virtual string? Nome { get; protected set; }
+        public virtual int Tipo { get; protected set; }
 
-        public Categoria()
-        {
+        protected Categoria() {}
 
-        }
         public Categoria(string nome)
         {
             SetNome(nome);
@@ -17,6 +16,10 @@ namespace CadastroDespesa.Dominio.Categorias.Entidades
         public void SetNome(string nome)
         {
             Nome = nome;
+        }
+        public void SetTipo(int tipo)
+        {
+            Tipo = tipo;
         }
     }
 }

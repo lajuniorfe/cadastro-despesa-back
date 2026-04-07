@@ -15,7 +15,7 @@ namespace CadastroDespesa.Teste.Dominio.TiposDespesas.Entidades
             string nome = "Tipo Despesa Teste";
             string descricao = "Testar Tipo Despesa";
 
-            TipoDespesa tipoDespesa = new TipoDespesa(nome, descricao);
+            Recorrencia tipoDespesa = new Recorrencia(nome, descricao);
 
             Assert.Equal(nome, tipoDespesa.Nome);
             Assert.Equal(descricao, tipoDespesa.Descricao);

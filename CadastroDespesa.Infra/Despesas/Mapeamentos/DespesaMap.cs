@@ -47,8 +47,8 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
              .HasColumnType("integer")
              .IsRequired();
 
-        builder.Property(d => d.IdTipoDespesa)
-            .HasColumnName("id_tipodespesa")
+        builder.Property(d => d.IdRecorrencia)
+            .HasColumnName("id_recorrencia")
             .HasColumnType("integer")
             .IsRequired();
 
@@ -61,9 +61,9 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
             .WithMany()
             .HasForeignKey(d => d.IdCategoria);
 
-        builder.HasOne(d => d.TipoDespesa)
+        builder.HasOne(d => d.Recorrencia)
             .WithMany()
-            .HasForeignKey(d => d.IdTipoDespesa);
+            .HasForeignKey(d => d.IdRecorrencia);
 
         builder.HasOne(d => d.Fatura)
            .WithMany()

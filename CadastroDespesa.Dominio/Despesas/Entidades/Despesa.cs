@@ -1,7 +1,7 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Categorias.Entidades;
 using CadastroDespesa.Dominio.Faturas.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Entidades;
+using CadastroDespesa.Dominio.Recorrencias.Entidades;
 
 namespace CadastroDespesa.Dominio.Despesas.Entidades;
 
@@ -18,9 +18,9 @@ public class Despesa : BaseEntidade
 
     #region relacionamento
     public virtual int IdCategoria { get; protected set; }
-    public virtual int IdTipoDespesa { get; protected set; }
+    public virtual int IdRecorrencia { get; protected set; }
     public virtual Categoria? Categoria { get; protected set; }
-    public virtual TipoDespesa? TipoDespesa { get; protected set; }
+    public virtual Recorrencia? Recorrencia { get; protected set; }
     public virtual int? IdFatura { get; protected set; }
     public virtual Fatura? Fatura { get; protected set; }
 
@@ -28,13 +28,13 @@ public class Despesa : BaseEntidade
 
 
     protected Despesa() { }
-    public Despesa(string? descricao, decimal valor, DateTime data, int categoria, int tipoDespesa, int totalParcela)
+    public Despesa(string? descricao, decimal valor, DateTime data, int categoria, int recorrencia, int totalParcela)
     {
         SetDescricao(descricao);
         SetData(data);
         SetValor(valor);
         SetCategoria(categoria);
-        SetTipoDespesa(tipoDespesa);
+        SetRecorrencia(recorrencia);
         SetTotalParcela(totalParcela);
     }
 
@@ -43,9 +43,9 @@ public class Despesa : BaseEntidade
         IdCategoria = categoria;
     }
 
-    public void SetTipoDespesa(int tipoDespesa)
+    public void SetRecorrencia(int recorrencia)
     {
-        IdTipoDespesa = tipoDespesa;
+        IdRecorrencia = recorrencia;
     }
 
     public void SetDescricao(string? descricao)

@@ -1,5 +1,5 @@
 ﻿using CadastroDespesa.Application.TiposPagamento.Profiles;
-using CadastroDespesa.Dominio.TipoDespesas.Servicos.Strategys;
+using CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys;
 using CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys;
 using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.Dominio.Worker.Consumer;
@@ -29,7 +29,7 @@ public static class InjecaoDependencia
 
         services.AddDbContext<EntityContexto>(options =>
                 options.UseLazyLoadingProxies().UseNpgsql(connectionUrl), ServiceLifetime.Scoped);
-      
+
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -41,23 +41,23 @@ public static class InjecaoDependencia
         RegisterTypesFromAssembly(services, "CadastroDespesa.Dominio", "Factory");
 
 
-       
+
         services.AddScoped<CartaoPagamentoStrategy>();
         services.AddScoped<SaldoPagamentoStrategy>();
 
 
-    
-        services.AddScoped< TipoDespesaFixaStrategy>();
-        services.AddScoped<TipoDespesaParceladaStrategy>();
-        services.AddScoped<TipoDespesaUnicaStrategy>();
+
+        services.AddScoped<RecorrenciaFixaStrategy>();
+        services.AddScoped<RecorrenciaParceladaStrategy>();
+        services.AddScoped<RecorrenciaUnicaStrategy>();
 
 
         services.AddHostedService<QueueConsumerWorker>();
         services.AddSingleton<IRabbitProducer, RabbitProducer>();
         services.AddSingleton<IRabbitConsumer, RabbitConsumer>();
 
-      
-   
+
+
 
     }
 

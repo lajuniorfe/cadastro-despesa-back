@@ -13,14 +13,14 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
     {
         private readonly Mock<IDespesaRepositorio> _despesasRepositorioMock;
         private readonly Mock<ICategoriaServico> _categoriaServicoMock;
-        private readonly Mock<ITipoDespesaServico> _tipoDespesaServicoMock;
+        private readonly Mock<IRecorrenciaServico> _tipoDespesaServicoMock;
         private readonly DespesaServico _despesaServico;
 
         public DespesaServicoTeste()
         {
             _despesasRepositorioMock = new Mock<IDespesaRepositorio>();
             _categoriaServicoMock = new Mock<ICategoriaServico>();
-            _tipoDespesaServicoMock = new Mock<ITipoDespesaServico>();
+            _tipoDespesaServicoMock = new Mock<IRecorrenciaServico>();
 
             _despesaServico = new DespesaServico(
                 _despesasRepositorioMock.Object,
@@ -32,7 +32,7 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
         public async Task Quando_Receber_Id_Despesa_Espero_Instanciar_Despesa()
         {
             var categoriaMock = new Mock<Categoria>();
-            var tipoDespesaMock = new Mock<TipoDespesa>();
+            var tipoDespesaMock = new Mock<Recorrencia>();
 
             var descricao = "Despesa Teste";
             decimal valor = 200;

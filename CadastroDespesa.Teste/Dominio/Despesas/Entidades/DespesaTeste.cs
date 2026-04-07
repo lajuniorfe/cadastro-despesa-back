@@ -20,7 +20,7 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Entidades
             var data = DateTime.Now.Date;
             var valor = 10;
             var categoria = new Mock<Categoria>();
-            var tipoDespesa = new Mock<TipoDespesa>();
+            var tipoDespesa = new Mock<Recorrencia>();
 
             //act
             Despesa despesa = new(descricao, valor,data, categoria.Object, tipoDespesa.Object);
