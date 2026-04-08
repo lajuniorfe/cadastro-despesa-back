@@ -200,3 +200,4 @@
 /CadastroDespesa.Api/obj/Debug/net8.0
 /CadastroDespesa.Dominio/CadastroDespesa.Dominio.csproj
 /.vs/VSWorkspaceState.json
+/CadastroDespesa.Api/bin/Debug/net8.0/appsettings.json
