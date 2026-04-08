@@ -10,6 +10,7 @@
         public int IdTipoPagamento { get; set; }
         public int? IdCartao { get; set; }
         public int? Parcela { get; set; }
+        public int idUsuario { get; set; }
 
     }
 }

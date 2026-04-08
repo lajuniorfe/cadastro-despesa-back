@@ -18,7 +18,8 @@ namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
                 command.Valor,
                 data,
                 command.IdCategoria,
-                command.IdTipoDespesa);
+                command.IdTipoDespesa,
+                command.IdUsuario);
 
                 despesas.Add(despesa);
             }

@@ -10,8 +10,9 @@
             DateTime data,
             decimal valor,
             int idCategoria,
-            int idTipoDespesa
-            ): base(descricao,  data,  valor,   idCategoria, idTipoDespesa)
+            int idTipoDespesa,
+            int idUsuario
+            ): base(descricao,  data,  valor,   idCategoria, idTipoDespesa, idUsuario)
         {
             Parcela = parcela;
         }

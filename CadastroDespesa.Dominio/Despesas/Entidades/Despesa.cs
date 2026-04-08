@@ -2,6 +2,7 @@ using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Categorias.Entidades;
 using CadastroDespesa.Dominio.Faturas.Entidades;
 using CadastroDespesa.Dominio.Recorrencias.Entidades;
+using CadastroDespesa.Dominio.Usuarios.Entidades;
 
 namespace CadastroDespesa.Dominio.Despesas.Entidades;
 
@@ -14,21 +15,23 @@ public class Despesa : BaseEntidade
     public virtual int? TotalParcela { get; protected set; }
     public virtual decimal ValorParcela { get; protected set; }
 
-    //despesa tem que ter um dono (casal ou usuario)
+ 
 
     #region relacionamento
     public virtual int IdCategoria { get; protected set; }
-    public virtual int IdRecorrencia { get; protected set; }
     public virtual Categoria? Categoria { get; protected set; }
+    public virtual int IdRecorrencia { get; protected set; }
     public virtual Recorrencia? Recorrencia { get; protected set; }
     public virtual int? IdFatura { get; protected set; }
     public virtual Fatura? Fatura { get; protected set; }
+    public virtual int IdUsuario { get; protected set; }
+    public virtual Usuario Usuario { get; protected set; }
 
     #endregion
 
 
     protected Despesa() { }
-    public Despesa(string? descricao, decimal valor, DateTime data, int categoria, int recorrencia, int totalParcela)
+    public Despesa(string? descricao, decimal valor, DateTime data, int categoria, int recorrencia, int totalParcela, int idUsuario)
     {
         SetDescricao(descricao);
         SetData(data);
@@ -36,6 +39,7 @@ public class Despesa : BaseEntidade
         SetCategoria(categoria);
         SetRecorrencia(recorrencia);
         SetTotalParcela(totalParcela);
+        SetUsuario(idUsuario);
     }
 
     public void SetCategoria(int categoria)
@@ -83,12 +87,18 @@ public class Despesa : BaseEntidade
         IdFatura = idFatura;
     }
 
+    public void SetUsuario(int idUsuario)
+    {
+        IdUsuario = idUsuario;
+    }
+
     public static IEnumerable<Despesa> CriarParcelada(string descricao,
             decimal valorTotal,
             DateTime dataInicial,
             int idCategoria,
             int idTipoDespesa,
-            int totalParcelas)
+            int totalParcelas,
+            int idUsuario)
     {
         var despesas = new List<Despesa>();
 
@@ -103,7 +113,8 @@ public class Despesa : BaseEntidade
                  dataParcela,
                  idCategoria,
                  idTipoDespesa,
-                 totalParcelas
+                 totalParcelas,
+                 idUsuario
              );
 
             despesa.SetNumeroParcela(i + 1);
@@ -119,7 +130,8 @@ public class Despesa : BaseEntidade
           decimal valor,
           DateTime data,
           int idCategoria,
-          int idTipoDespesa)
+          int idTipoDespesa, 
+          int idUsuario)
     {
         var despesa = new Despesa(
             descricao,
@@ -127,7 +139,8 @@ public class Despesa : BaseEntidade
             data,
             idCategoria,
             idTipoDespesa,
-            1
+            1,
+            idUsuario
         );
 
         despesa.SetNumeroParcela(1);
@@ -141,7 +154,8 @@ public class Despesa : BaseEntidade
         decimal valor,
         DateTime data,
         int idCategoria,
-        int idTipoDespesa)
+        int idTipoDespesa,
+        int idUsuario)
     {
         var despesa = new Despesa(
             descricao,
@@ -149,7 +163,8 @@ public class Despesa : BaseEntidade
             data,
             idCategoria,
             idTipoDespesa,
-            1
+            1,
+            idUsuario
          );
 
         return despesa;

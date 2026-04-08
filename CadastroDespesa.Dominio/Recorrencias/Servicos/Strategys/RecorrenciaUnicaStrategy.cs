@@ -17,7 +17,8 @@ namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
                     baseCommand.Valor,
                     baseCommand.Data,
                     baseCommand.IdCategoria,
-                    baseCommand.IdTipoDespesa
+                    baseCommand.IdTipoDespesa,
+                    baseCommand.IdUsuario
                 )
             };
         }

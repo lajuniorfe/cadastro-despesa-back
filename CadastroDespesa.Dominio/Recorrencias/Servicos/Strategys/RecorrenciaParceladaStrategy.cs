@@ -15,7 +15,8 @@ namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
              parceladaCommand.Data,
              parceladaCommand.IdCategoria,
              parceladaCommand.IdTipoDespesa,
-             parceladaCommand.Parcela);
+             parceladaCommand.Parcela,
+             parceladaCommand.IdUsuario);
         }
     }
 }

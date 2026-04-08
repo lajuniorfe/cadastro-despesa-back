@@ -60,14 +60,16 @@ public class DespesaApp : IDespesaApp
                    despesaRequest.Data,
                    despesaRequest.Valor,
                    despesaRequest.IdCategoria,
-                   despesaRequest.IdTipoPagamento),
+                   despesaRequest.IdTipoPagamento,
+                   despesaRequest.idUsuario),
 
                 _ => new DespesaCommandBase(
                     despesaRequest.Descricao,
                     despesaRequest.Data,
                     despesaRequest.Valor,
                     despesaRequest.IdCategoria,
-                    despesaRequest.IdTipoPagamento)
+                    despesaRequest.IdTipoPagamento,
+                    despesaRequest.idUsuario)
             };
 
             IEnumerable<Despesa> despesas = tipoDespesaStrategy.Criar(commandDespesa);
