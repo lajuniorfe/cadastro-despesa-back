@@ -22,8 +22,8 @@ public class Despesa : BaseEntidade
     public virtual Categoria? Categoria { get; protected set; }
     public virtual int IdRecorrencia { get; protected set; }
     public virtual Recorrencia? Recorrencia { get; protected set; }
-    public virtual int? IdFatura { get; protected set; }
-    public virtual Fatura? Fatura { get; protected set; }
+    //public virtual int? IdFatura { get; protected set; }
+    //public virtual Fatura? Fatura { get; protected set; }
     public virtual int IdUsuario { get; protected set; }
     public virtual Usuario Usuario { get; protected set; }
 
@@ -82,91 +82,19 @@ public class Despesa : BaseEntidade
         ValorParcela = valorParcela;
     }
 
-    public void SetFatura(int idFatura)
-    {
-        IdFatura = idFatura;
-    }
+    //public void SetFatura(int idFatura)
+    //{
+    //    IdFatura = idFatura;
+    //}
 
     public void SetUsuario(int idUsuario)
     {
         IdUsuario = idUsuario;
     }
 
-    public static IEnumerable<Despesa> CriarParcelada(string descricao,
-            decimal valorTotal,
-            DateTime dataInicial,
-            int idCategoria,
-            int idTipoDespesa,
-            int totalParcelas,
-            int idUsuario)
-    {
-        var despesas = new List<Despesa>();
-
-        for (int i = 0; i < totalParcelas; i++)
-        {
-            var valorParcela = valorTotal / totalParcelas;
-            var dataParcela = dataInicial.AddMonths(i);
-
-            var despesa = new Despesa(
-                 descricao,
-                 valorTotal,
-                 dataParcela,
-                 idCategoria,
-                 idTipoDespesa,
-                 totalParcelas,
-                 idUsuario
-             );
-
-            despesa.SetNumeroParcela(i + 1);
-            despesa.SetValorParcela(valorParcela);
-
-            despesas.Add(despesa);
-        }
-
-        return despesas;
-    }
-
-    public static Despesa CriarSemParcela(string descricao,
-          decimal valor,
-          DateTime data,
-          int idCategoria,
-          int idTipoDespesa, 
-          int idUsuario)
-    {
-        var despesa = new Despesa(
-            descricao,
-            valor,
-            data,
-            idCategoria,
-            idTipoDespesa,
-            1,
-            idUsuario
-        );
-
-        despesa.SetNumeroParcela(1);
-
-        return despesa;
-    }
+  
+    
 
 
-    public static Despesa CriarFixa(
-        string descricao,
-        decimal valor,
-        DateTime data,
-        int idCategoria,
-        int idTipoDespesa,
-        int idUsuario)
-    {
-        var despesa = new Despesa(
-            descricao,
-            valor,
-            data,
-            idCategoria,
-            idTipoDespesa,
-            1,
-            idUsuario
-         );
-
-        return despesa;
-    }
+   
 }

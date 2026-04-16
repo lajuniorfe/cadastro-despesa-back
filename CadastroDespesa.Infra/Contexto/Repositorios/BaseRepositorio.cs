@@ -7,60 +7,62 @@ namespace CadastroDespesa.Infra.Contexto.Repositorios;
 
 public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
 {
-    protected readonly EntityContexto contexto;
+    protected EntityContexto contexto;
+    protected DbSet<T> _dbSet;
+
     public BaseRepositorio(EntityContexto contexto)
     {
         this.contexto = contexto;
+        _dbSet = contexto.Set<T>();
     }
     public async Task Alterar(T entity)
     {
-        contexto.GetDbSet<T>().Attach(entity);
-        contexto.Entry(entity).State = EntityState.Modified;
+        contexto.Update(entity);
         await contexto.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<T>> Listar(Expression<Func<T, bool>> predicate)
     {
-        return await contexto.GetDbSet<T>().Where(predicate).ToListAsync();
+        return await _dbSet.Where(predicate).ToListAsync();
     }
 
     public async Task<T> Buscar(Expression<Func<T, bool>> predicate)
     {
-        return await contexto.GetDbSet<T>().Where(predicate).FirstOrDefaultAsync();
+        return await _dbSet.Where(predicate).FirstOrDefaultAsync();
     }
-    public async Task<int> Criar(T entity)
+    public async Task<T> Criar(T entity)
     {
-        await contexto.GetDbSet<T>().AddAsync(entity);
+        await contexto.AddAsync(entity);
         await contexto.SaveChangesAsync();
-        return entity.Id;
+        return entity;
     }
 
     public async Task Deletar(T entity)
     {
-        contexto.GetDbSet<T>().Remove(entity);
+        contexto.Remove(entity);
+        await contexto.SaveChangesAsync();
     }
 
     public async Task<T> ObterPorId(int id)
     {
-        var entity = await contexto.GetDbSet<T>().FindAsync(id);
+        var entity = await _dbSet.FindAsync(id);
         if (entity == null)
         {
             throw new KeyNotFoundException($"Entidade com Id {id} não encontrada.");
         }
 
         return entity;
-
     }
 
     public async Task<IEnumerable<T>> ObterTodos()
     {
-        return await contexto.GetDbSet<T>().ToListAsync();
+        return await _dbSet.ToListAsync();
     }
 
-    public async Task CriarLista(IEnumerable<T> entities)
+    public async Task<IEnumerable<T>> CriarLista(IEnumerable<T> entities)
     {
-        await contexto.GetDbSet<T>().AddRangeAsync(entities);
+        await contexto.AddRangeAsync(entities);
         await contexto.SaveChangesAsync();
-
+        return entities;
     }
 }

@@ -1,14 +1,15 @@
-﻿namespace CadastroDespesa.Dominio.TiposPagamento.commands
+﻿using CadastroDespesa.Dominio.Despesas.Entidades;
+
+namespace CadastroDespesa.Dominio.TiposPagamento.Commands
 {
-    public class CartaoPagamentoCommand: PagamentoCommand
+    public class CartaoPagamentoCommand: PagamentoCommandBase
     {
         public int IdCartao { get; }
-        public DateTime Data { get; }
-
-        public CartaoPagamentoCommand(int idCartao, DateTime data)
+   
+        public CartaoPagamentoCommand(int idCartao, DateTime data, IList<DespesaRelacionamento> despesasRelacionamento) : base(data, despesasRelacionamento)
         {
             IdCartao = idCartao;
-            Data = data;
+            this.DespesasRelacionamento = DespesasRelacionamento;
         }
     }
 }

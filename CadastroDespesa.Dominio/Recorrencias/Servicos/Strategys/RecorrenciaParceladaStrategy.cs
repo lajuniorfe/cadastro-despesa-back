@@ -5,18 +5,16 @@ namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
 {
     public class RecorrenciaParceladaStrategy : IRecorrenciaStrategy
     {
-        public IEnumerable<Despesa> Criar(DespesaCommand command)
+        public IEnumerable<DespesaRelacionamento> Criar(DespesaCommandBase command)
         {
-            var parceladaCommand = (DespesaParceladaCommand)command;
+            var comando = (DespesaParceladaCommand)command;
 
-            return Despesa.CriarParcelada(
-             parceladaCommand.Descricao ?? "",
-             parceladaCommand.Valor,
-             parceladaCommand.Data,
-             parceladaCommand.IdCategoria,
-             parceladaCommand.IdTipoDespesa,
-             parceladaCommand.Parcela,
-             parceladaCommand.IdUsuario);
+            IList<DespesaRelacionamento> despesaRelacionamento = DespesaRelacionamento
+                .CriarParcelada(comando.IdDespesa, comando.Valor, comando.Data, comando.Parcela);
+
+            return despesaRelacionamento;
         }
+
     }
 }
+

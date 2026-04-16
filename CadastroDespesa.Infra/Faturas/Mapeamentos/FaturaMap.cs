@@ -20,14 +20,22 @@ namespace CadastroDespesa.Infra.Faturas.Mapeamentos
             builder.Property(d => d.MesCorrespondente)
                .HasColumnName("mes_correspondente")
                .HasColumnType("timestamp without time zone")
-               .IsRequired()
-               .HasMaxLength(100);
+                .HasColumnType("timestamp without time zone")
+                 .HasConversion(v => DateTime.SpecifyKind(v, DateTimeKind.Unspecified),
+                                 v => DateTime.SpecifyKind(v, DateTimeKind.Unspecified)
+                 )
+               .IsRequired();
+
 
             builder.Property(d => d.DataVencimento)
               .HasColumnName("data_vencimento")
               .HasColumnType("timestamp without time zone")
-              .IsRequired()
-              .HasMaxLength(100);
+               .HasColumnType("timestamp without time zone")
+                 .HasConversion(v => DateTime.SpecifyKind(v, DateTimeKind.Unspecified),
+                                 v => DateTime.SpecifyKind(v, DateTimeKind.Unspecified)
+                 )
+              .IsRequired();
+              
 
 
             builder.Property(d => d.IdCartao)

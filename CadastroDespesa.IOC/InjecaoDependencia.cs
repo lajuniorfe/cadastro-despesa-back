@@ -28,7 +28,7 @@ public static class InjecaoDependencia
         }
 
         services.AddDbContext<EntityContexto>(options =>
-                options.UseLazyLoadingProxies().UseNpgsql(connectionUrl), ServiceLifetime.Scoped);
+                options.UseNpgsql(connectionUrl), ServiceLifetime.Scoped);
 
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();

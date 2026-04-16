@@ -25,9 +25,9 @@ namespace CadastroDespesa.Application.Categorias
             try
             {
                 IEnumerable<Categoria> retorno = await categoriaRepositorio.ObterTodos();
-                return _mapper.Map<IList<CategoriaResponse>>(retorno); 
+                return _mapper.Map<IList<CategoriaResponse>>(retorno);
             }
-            catch 
+            catch
             {
                 throw new Exception();
             }
@@ -48,6 +48,30 @@ namespace CadastroDespesa.Application.Categorias
             catch
             {
                 await unitOfWork.RollbackAsync();
+                throw new Exception();
+            }
+        }
+
+        public async Task<CategoriaResponse> EditarCategoria(CategoriaRequest request, int id)
+        {
+            try
+            {
+                Categoria categoriaRecebida = await categoriaRepositorio.ObterPorId(id);
+
+                if (categoriaRecebida == null)
+                    throw new Exception();
+
+                categoriaRecebida.SetTipo(request.Tipo);
+                categoriaRecebida.SetNome(request.Nome);
+
+                await categoriaRepositorio.Alterar(categoriaRecebida);
+
+                CategoriaResponse response = _mapper.Map<CategoriaResponse>(categoriaRecebida);
+
+                return response;
+            }
+            catch
+            {
                 throw new Exception();
             }
         }

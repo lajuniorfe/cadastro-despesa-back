@@ -5,26 +5,14 @@ namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
 {
     public class RecorrenciaFixaStrategy : IRecorrenciaStrategy
     {
-        public IEnumerable<Despesa> Criar(DespesaCommand command)
+        public IEnumerable<DespesaRelacionamento> Criar(DespesaCommandBase command)
         {
-            var despesas = new List<Despesa>();
+            var comando = (DespesaFixaCommand)command;
 
-            for (int mes = command.Data.Month; mes <= 12; mes++)
-            {
-                var data = new DateTime(command.Data.Year, mes, command.Data.Day);
+            IList<DespesaRelacionamento> despesaRelacionamento = DespesaRelacionamento.CriarFixa(comando.IdDespesa, comando.Valor, comando.Data);
 
-                var despesa = Despesa.CriarFixa(
-                command.Descricao ?? "",
-                command.Valor,
-                data,
-                command.IdCategoria,
-                command.IdTipoDespesa,
-                command.IdUsuario);
-
-                despesas.Add(despesa);
-            }
-
-            return despesas;
+            return despesaRelacionamento;
+           
         }
     }
 }

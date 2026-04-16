@@ -1,22 +1,14 @@
 ﻿namespace CadastroDespesa.Dominio.Despesas.Commands
 {
-    public class DespesaParceladaCommand: DespesaCommand
+    public class DespesaParceladaCommand : DespesaCommandBase
     {
         public int Parcela { get; set; }
 
-        public DespesaParceladaCommand(
-            int parcela,
-            string descricao,
-            DateTime data,
-            decimal valor,
-            int idCategoria,
-            int idTipoDespesa,
-            int idUsuario
-            ): base(descricao,  data,  valor,   idCategoria, idTipoDespesa, idUsuario)
+        public DespesaParceladaCommand(int parcela, DateTime data, decimal valor, int idDespesa) : base(data, valor, idDespesa)
         {
             Parcela = parcela;
         }
 
-        
+
     }
 }

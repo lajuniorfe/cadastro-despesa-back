@@ -1,5 +1,6 @@
 using CadastroDespesa.Application.Despesas.Interfaces;
 using CadastroDespesa.DTO.Despesas.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroDespesa.Api.Controller.Despesas
@@ -24,9 +25,7 @@ namespace CadastroDespesa.Api.Controller.Despesas
         public async Task<IActionResult> CadastrarDespesa([FromBody] CadastrarDespesaRequest despesa)
         {
 
-            await despesaApp.CadastrarDespesa(despesa);
-
-            return Ok();
+            return Ok(await despesaApp.CadastrarDespesa(despesa));
         }
 
         [HttpGet]
@@ -36,11 +35,27 @@ namespace CadastroDespesa.Api.Controller.Despesas
 
         }
 
-        [HttpGet("mes/{mes}")]
-        public async Task<IActionResult> BuscarDespesasMesCorrespondente(int mes)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> BuscarDespesasId(int id)
         {
-            return Ok(await despesaApp.BuscarDespesasMesCorrespondente(mes));
+            return Ok(await despesaApp.BuscarDespesasId(id));
 
+        }
+
+        [Authorize]
+        [HttpGet("mes/{mes}/{ano}")]
+        public async Task<IActionResult> BuscarDespesasMesCorrespondente(int mes, int ano)
+        {
+            return Ok(await despesaApp.BuscarDespesasMesCorrespondente(mes, ano));
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> BuscarDespesasMesCorrespondente(int id)
+        {
+            await despesaApp.ExcluirDespesa(id);
+
+            return Ok();
         }
     }
 }

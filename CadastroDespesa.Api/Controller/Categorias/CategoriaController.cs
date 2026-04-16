@@ -1,5 +1,6 @@
 ﻿using CadastroDespesa.Application.Categorias.Interfaces;
 using CadastroDespesa.DTO.Categorias.Requests;
+using CadastroDespesa.DTO.Categorias.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroDespesa.Api.Controller.Categorias
@@ -35,6 +36,12 @@ namespace CadastroDespesa.Api.Controller.Categorias
         public async Task<IActionResult> BuscarCategorias()
         {
             return Ok(await categoriaApp.BuscarCategorias());
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> EditarCategoria([FromBody] CategoriaRequest request, int id)
+        {
+            return Ok(await categoriaApp.EditarCategoria(request, id));
         }
     }
 }

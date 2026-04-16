@@ -22,12 +22,12 @@ namespace CadastroDespesa.Infra.Usuarios.Mapeamentos
                .IsRequired();
 
             builder.Property(d => d.Login)
-               .HasColumnName("login")
-               .IsRequired();
+               .HasColumnName("login");
+
 
             builder.Property(d => d.Senha)
-               .HasColumnName("senha")
-               .IsRequired();
+               .HasColumnName("senha");
+               
 
         }
     }

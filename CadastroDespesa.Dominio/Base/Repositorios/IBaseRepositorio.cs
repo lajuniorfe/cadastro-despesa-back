@@ -10,8 +10,8 @@ public interface IBaseRepositorio<T> where T : BaseEntidade
     Task<T> ObterPorId(int id);
     Task<IEnumerable<T>> Listar(Expression<Func<T, bool>> predicate);
     Task<T> Buscar(Expression<Func<T, bool>> predicate);
-    Task<int> Criar(T entity);
-    Task CriarLista(IEnumerable<T> entities);
+    Task<T> Criar(T entity);
+    Task<IEnumerable<T>> CriarLista(IEnumerable<T> entities);
     Task Alterar(T entity);
     Task Deletar(T entity);
   

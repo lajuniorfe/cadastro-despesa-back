@@ -56,7 +56,7 @@ namespace CadastroDespesa.Application.Auth
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(90),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -1,10 +1,10 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
-using CadastroDespesa.Dominio.TiposPagamento.commands;
+using CadastroDespesa.Dominio.TiposPagamento.Commands;
 
 namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys
 {
     public interface IFormaPagamentoStrategy
     {
-        Task ProcessarAsync(Despesa despesa, PagamentoCommand command);
+        Task<IList<DespesaRelacionamento>> ProcessarAsync(PagamentoCommandBase command);
     }
 }

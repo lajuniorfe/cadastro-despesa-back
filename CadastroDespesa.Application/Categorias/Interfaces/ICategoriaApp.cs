@@ -1,5 +1,6 @@
 ﻿using CadastroDespesa.DTO.Categorias.Requests;
 using CadastroDespesa.DTO.Categorias.Responses;
+using System.Threading.Tasks;
 
 namespace CadastroDespesa.Application.Categorias.Interfaces
 {
@@ -7,5 +8,6 @@ namespace CadastroDespesa.Application.Categorias.Interfaces
     {
         Task<IList<CategoriaResponse>> BuscarCategorias();
         Task CriarCategoria(CategoriaRequest request);
+        Task<CategoriaResponse> EditarCategoria(CategoriaRequest request, int id);
     }
 }

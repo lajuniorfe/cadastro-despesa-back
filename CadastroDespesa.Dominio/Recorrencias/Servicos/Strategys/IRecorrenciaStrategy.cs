@@ -5,6 +5,6 @@ namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
 {
     public interface IRecorrenciaStrategy
     {
-        IEnumerable<Despesa> Criar(DespesaCommand commmand);
+        IEnumerable<DespesaRelacionamento> Criar(DespesaCommandBase commmand);
     }
 }

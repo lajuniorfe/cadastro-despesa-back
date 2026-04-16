@@ -1,0 +1,89 @@
+﻿using CadastroDespesa.Dominio.Base.Entidades;
+using CadastroDespesa.Dominio.Faturas.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CadastroDespesa.Dominio.Despesas.Entidades
+{
+    public class DespesaRelacionamento : BaseEntidade
+    {
+        public virtual DateTime Data { get; protected set; }
+        public virtual int NumeroParcela { get; protected set; }
+        public virtual int TotalParcela { get; protected set; }
+        public virtual decimal Valor { get; protected set; }
+        public virtual int? IdFatura { get; protected set; }
+        public virtual Fatura? Fatura { get; protected set; }
+        public virtual int IdDespesa { get; protected set; }
+        public virtual Despesa? Despesa { get; protected set; }
+
+        protected DespesaRelacionamento()
+        {
+
+        }
+
+        public DespesaRelacionamento(DateTime data, int numeroParcela, int totalParcela, decimal valor, int idDespesa)
+        {
+            Data = data;
+            NumeroParcela = numeroParcela;
+            TotalParcela = totalParcela;
+            Valor = valor;
+            IdDespesa = idDespesa;
+        }
+
+        public void SetIdFatura(int idFatura)
+        {
+            IdFatura = idFatura;
+        }
+
+        public void SetData(DateTime data)
+        {
+            Data = data;
+
+        }
+
+        public static IList<DespesaRelacionamento> CriarFixa(int idDespesa, decimal valor, DateTime dataRecebida)
+        {
+            var despesasRelacionamento = new List<DespesaRelacionamento>();
+            for (int mes = dataRecebida.Month; mes <= 12; mes++)
+            {
+                var data = new DateTime(dataRecebida.Year, mes, dataRecebida.Day);
+
+                var despesaRelacionamento = new DespesaRelacionamento(data, 0, 0, valor, idDespesa);
+
+                despesasRelacionamento.Add(despesaRelacionamento);
+            }
+
+            return despesasRelacionamento;
+        }
+
+
+        public static IList<DespesaRelacionamento> CriarParcelada(int idDespesa, decimal valor, DateTime dataInicial, int totalParcelas)
+        {
+            var listaDespesaRelacionamento = new List<DespesaRelacionamento>();
+
+            for (int i = 0; i < totalParcelas; i++)
+            {
+                var valorParcela = valor / totalParcelas;
+                var dataParcela = dataInicial.AddMonths(i);
+
+                var despesaRelacionamento = new DespesaRelacionamento(dataParcela, i + 1, totalParcelas, valorParcela, idDespesa);
+
+                listaDespesaRelacionamento.Add(despesaRelacionamento);
+            }
+
+            return listaDespesaRelacionamento;
+        }
+
+
+        public static DespesaRelacionamento CriarSemParcela(int idDespesa, decimal valor, DateTime dataRecebida)
+        {
+            var despesaRelacionamento = new DespesaRelacionamento(dataRecebida, 0, 0, valor, idDespesa);
+
+            return despesaRelacionamento;
+        }
+    }
+}

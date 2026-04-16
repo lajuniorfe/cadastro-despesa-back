@@ -1,18 +1,20 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Entidades;
-using CadastroDespesa.Dominio.TiposPagamento.commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CadastroDespesa.Dominio.TiposPagamento.Commands;
 
 namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys
 {
     public class SaldoPagamentoStrategy : IFormaPagamentoStrategy
     {
-        Task IFormaPagamentoStrategy.ProcessarAsync(Despesa despesa, PagamentoCommand command)
+        public Task<IList<DespesaRelacionamento>> ProcessarAsync(PagamentoCommandBase command)
         {
-            return Task.CompletedTask;
+            var comando = (PagamentoSaldoCommand)command;
+
+            foreach (var i in comando.DespesasRelacionamento)
+            {
+                i.SetIdFatura(0);
+            }
+
+            return Task.FromResult(comando.DespesasRelacionamento);
         }
     }
 }

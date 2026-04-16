@@ -1,11 +1,17 @@
-﻿
-namespace CadastroDespesa.Dominio.Despesas.Commands
+﻿namespace CadastroDespesa.Dominio.Despesas.Commands
 {
-    public class DespesaCommandBase : DespesaCommand
+    public abstract class DespesaCommandBase
     {
-        public DespesaCommandBase(string? descricao, DateTime data, decimal valor, int idCategoria, int idTipoDespesa, int idUsuario) 
-            : base(descricao, data, valor, idCategoria, idTipoDespesa, idUsuario)
+        public DateTime Data { get; set; }
+        public decimal Valor { get; set; }
+        public int IdDespesa { get; set; }
+
+
+        protected DespesaCommandBase(DateTime data, decimal valor, int idDespesa)
         {
+            Data = data;
+            Valor = valor;
+            IdDespesa = idDespesa;
         }
     }
 }

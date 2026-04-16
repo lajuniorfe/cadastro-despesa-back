@@ -6,4 +6,5 @@ namespace CadastroDespesa.Dominio.Despesas.Repositorios;
 
 public interface IDespesaRepositorio : IBaseRepositorio<Despesa>
 {
+   
 }

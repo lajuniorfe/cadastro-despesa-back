@@ -1,8 +1,9 @@
 ﻿using CadastroDespesa.Dominio.Cartoes.Entidades;
 using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
+using CadastroDespesa.Dominio.Faturas.Entidades;
 using CadastroDespesa.Dominio.Faturas.Servicos.Interfaces;
-using CadastroDespesa.Dominio.TiposPagamento.commands;
+using CadastroDespesa.Dominio.TiposPagamento.Commands;
 
 namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys
 {
@@ -17,18 +18,26 @@ namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys
             this.faturaServico = faturaServico;
         }
 
-        public async Task ProcessarAsync(Despesa despesa, PagamentoCommand command)
+        public async Task<IList<DespesaRelacionamento>> ProcessarAsync(PagamentoCommandBase command)
         {
-            var cartaoCommand = (CartaoPagamentoCommand)command;
+            var comando = (CartaoPagamentoCommand)command;
+            Cartao cartao = await cartaoServico.ValidarCartaoAsync(comando.IdCartao);
 
-            var fatura = await faturaServico.VerificarFaturaCartaoAsync(cartaoCommand.IdCartao, despesa.Data);
-            if(fatura is null)
+            foreach (var i in comando.DespesasRelacionamento)
             {
-                Cartao cartao = await cartaoServico.ValidarCartaoAsync(cartaoCommand.IdCartao);
-                fatura = await faturaServico.CriarFaturaCartaoAsync(despesa.Data, cartao);
+                DateTime dataCorreta = Fatura.CalcularDataFatura(i.Data, cartao.Fechamento);
+
+                Fatura fatura = await faturaServico.VerificarFaturaCartaoAsync(comando.IdCartao, dataCorreta);
+                if (fatura is null)
+                {
+                    fatura = await faturaServico.CriarFaturaCartaoAsync(dataCorreta, cartao);
+                }
+
+                i.SetData(dataCorreta);
+                i.SetIdFatura(fatura.Id);
             }
 
-            despesa.SetFatura(fatura.Id);
+            return comando.DespesasRelacionamento;
         }
     }
 }

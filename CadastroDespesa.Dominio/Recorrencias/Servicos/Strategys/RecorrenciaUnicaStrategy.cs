@@ -1,26 +1,28 @@
 ﻿using CadastroDespesa.Dominio.Despesas.Commands;
 using CadastroDespesa.Dominio.Despesas.Entidades;
+using CadastroDespesa.Dominio.TiposPagamento.Commands;
+using CadastroDespesa.Dominio.TiposPagamento.Servicos.Factorys;
 
 namespace CadastroDespesa.Dominio.Recorrencias.Servicos.Strategys
 {
     public class RecorrenciaUnicaStrategy : IRecorrenciaStrategy
     {
-        public IEnumerable<Despesa> Criar(DespesaCommand command)
+        private readonly IFormaPagamentoFactory formaPagamentoFactory;
+
+        public RecorrenciaUnicaStrategy(IFormaPagamentoFactory formaPagamentoFactory)
+        {
+            this.formaPagamentoFactory = formaPagamentoFactory;
+        }
+
+        public IEnumerable<DespesaRelacionamento> Criar(DespesaCommandBase command)
         {
 
-            var baseCommand = (DespesaCommandBase)command;
-
-            return new List<Despesa>
+            var lista = new List<DespesaRelacionamento>
             {
-                Despesa.CriarSemParcela(
-                    baseCommand.Descricao ?? "",
-                    baseCommand.Valor,
-                    baseCommand.Data,
-                    baseCommand.IdCategoria,
-                    baseCommand.IdTipoDespesa,
-                    baseCommand.IdUsuario
-                )
+                DespesaRelacionamento.CriarSemParcela(command.IdDespesa, command.Valor, command.Data)
             };
+
+            return lista;
         }
     }
 }
