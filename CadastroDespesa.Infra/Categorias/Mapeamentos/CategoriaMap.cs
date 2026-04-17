@@ -23,6 +23,9 @@ namespace CadastroDespesa.Infra.Categorias.Mapeamentos
 
             builder.Property(d => d.Tipo).HasColumnName("tipo")
                 .IsRequired();
+
+            builder.Property(d => d.Icone).HasColumnName("icone")
+               ;
         }
     }
 }

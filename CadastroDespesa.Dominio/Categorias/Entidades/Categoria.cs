@@ -6,6 +6,7 @@ namespace CadastroDespesa.Dominio.Categorias.Entidades
     {
         public virtual string? Nome { get; protected set; }
         public virtual int Tipo { get; protected set; }
+        public virtual string Icone { get; protected set; }
 
         protected Categoria() {}
 
@@ -20,6 +21,11 @@ namespace CadastroDespesa.Dominio.Categorias.Entidades
         public void SetTipo(int tipo)
         {
             Tipo = tipo;
+        }
+
+        public void SetIcone(string icone)
+        {
+            Icone = icone;
         }
     }
 }

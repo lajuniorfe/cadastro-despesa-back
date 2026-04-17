@@ -20,10 +20,12 @@ public static class InjecaoDependencia
     public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
 
+        //var connectionUrl = Environment.GetEnvironmentVariable("DATA_URL");
         var connectionUrl = Environment.GetEnvironmentVariable("DATA_URL");
 
         if (string.IsNullOrEmpty(connectionUrl))
         {
+            //configuration["ConnectionStrings:DatabaseUrl"];
             connectionUrl = configuration.GetConnectionString("DatabaseUrl");
         }
 
