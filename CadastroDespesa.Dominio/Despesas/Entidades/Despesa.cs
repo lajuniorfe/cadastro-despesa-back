@@ -13,7 +13,7 @@ public class Despesa : BaseEntidade
     public virtual decimal Valor { get; protected set; }
     public virtual int? NumeroParcela { get; protected set; }
     public virtual int? TotalParcela { get; protected set; }
-    public virtual decimal ValorParcela { get; protected set; }
+    //public virtual decimal ValorParcela { get; protected set; }
 
  
 
@@ -77,10 +77,10 @@ public class Despesa : BaseEntidade
         NumeroParcela = numeroParcela;
     }
 
-    public void SetValorParcela(decimal valorParcela)
-    {
-        ValorParcela = valorParcela;
-    }
+    //public void SetValorParcela(decimal valorParcela)
+    //{
+    //    ValorParcela = valorParcela;
+    //}
 
     //public void SetFatura(int idFatura)
     //{

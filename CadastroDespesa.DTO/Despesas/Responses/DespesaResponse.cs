@@ -14,6 +14,6 @@ public class DespesaResponse
     public bool StatusPagamento { get; set; }
     public CategoriaResponse? Categoria { get; set; }
     public RecorrenciaResponse? Recorrencia { get; set; }
-    //public FaturaResponse? Fatura { get; set; }
     public UsuarioResponse Usuario { get; set; }
+    public int IdTipoPagamento { get; set; }
 }

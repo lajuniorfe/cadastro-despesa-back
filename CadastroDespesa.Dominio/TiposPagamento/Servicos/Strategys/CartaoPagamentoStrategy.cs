@@ -25,7 +25,7 @@ namespace CadastroDespesa.Dominio.TiposPagamento.Servicos.Strategys
 
             foreach (var i in comando.DespesasRelacionamento)
             {
-                DateTime dataCorreta = Fatura.CalcularDataFatura(i.Data, cartao.Fechamento);
+                DateTime dataCorreta = Fatura.CalcularDataFatura(i.Data, cartao.Fechamento, cartao.Vencimento);
 
                 Fatura fatura = await faturaServico.VerificarFaturaCartaoAsync(comando.IdCartao, dataCorreta);
                 if (fatura is null)

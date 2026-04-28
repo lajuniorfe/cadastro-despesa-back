@@ -27,8 +27,8 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
             .HasColumnType("numeric(18,2)");
 
 
-        builder.Property(d => d.ValorParcela).HasColumnName("valor_parcela")
-            .HasColumnType("numeric(18,2)");
+        //builder.Property(d => d.ValorParcela).HasColumnName("valor_parcela")
+        //    .HasColumnType("numeric(18,2)");
 
         builder.Property(d => d.Data).HasColumnName("data_despesa")
              .HasColumnType("timestamp without time zone")

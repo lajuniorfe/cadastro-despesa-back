@@ -57,5 +57,11 @@ namespace CadastroDespesa.Api.Controller.Despesas
 
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Alterar([FromBody] AlterarDespesaRequest request) 
+        {
+            return Ok(await despesaApp.AlterarDespesa(request););
+        }
     }
 }

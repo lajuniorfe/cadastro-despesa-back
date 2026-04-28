@@ -9,6 +9,7 @@ namespace CadastroDespesa.DTO.Despesas.Responses
 {
     public class DespesaRelacionamentoResponse
     {
+        public int Id { get; set; }
         public virtual int NumeroParcela { get; protected set; }
         public virtual int TotalParcela { get; protected set; }
         public virtual decimal Valor { get; protected set; }

@@ -21,6 +21,12 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         await contexto.SaveChangesAsync();
     }
 
+    public async Task AlterarLista(IList<T> entity)
+    {
+        contexto.UpdateRange(entity);
+        await contexto.SaveChangesAsync();
+    }
+
     public async Task<IEnumerable<T>> Listar(Expression<Func<T, bool>> predicate)
     {
         return await _dbSet.Where(predicate).ToListAsync();
@@ -64,5 +70,11 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         await contexto.AddRangeAsync(entities);
         await contexto.SaveChangesAsync();
         return entities;
+    }
+
+    public async Task DeletarLista(IList<T> entity)
+    {
+        contexto.RemoveRange(entity);
+        await contexto.SaveChangesAsync();
     }
 }

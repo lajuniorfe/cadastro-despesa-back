@@ -34,18 +34,30 @@ namespace CadastroDespesa.Dominio.Faturas.Entidades
             IdCartao = idCartao;
         }
 
-        public static DateTime CalcularDataFatura(DateTime dataDespesa, int fechamentoCartao)
+        public static DateTime CalcularDataFatura(DateTime dataDespesa, int fechamentoCartao, int vencimento)
         {
-
-            var dataFaturaAtual = new DateTime(dataDespesa.Year, dataDespesa.Month, fechamentoCartao);
-
-            if(dataDespesa <= dataFaturaAtual)
+            DateTime dataFechamento = new DateTime(dataDespesa.Year, dataDespesa.Month, fechamentoCartao);
+            if (dataDespesa <= dataFechamento)
             {
-                return dataFaturaAtual;
+                if (fechamentoCartao > vencimento)
+                {
+                    return new DateTime(dataFechamento.Year, dataFechamento.Month, vencimento).AddMonths(1);
+                }
+                else
+                {
+                    return new DateTime(dataFechamento.Year, dataFechamento.Month, vencimento);
+                }
             }
             else
             {
-               return dataFaturaAtual.AddMonths(1);
+                if (fechamentoCartao > vencimento)
+                {
+                    return new DateTime(dataFechamento.Year, dataFechamento.Month, vencimento).AddMonths(2);
+                }
+                else
+                {
+                    return new DateTime(dataFechamento.Year, dataFechamento.Month, vencimento).AddMonths(1);
+                }
             }
         }
     }

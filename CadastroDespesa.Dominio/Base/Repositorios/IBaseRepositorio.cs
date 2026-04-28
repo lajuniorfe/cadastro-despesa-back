@@ -13,6 +13,7 @@ public interface IBaseRepositorio<T> where T : BaseEntidade
     Task<T> Criar(T entity);
     Task<IEnumerable<T>> CriarLista(IEnumerable<T> entities);
     Task Alterar(T entity);
+    Task AlterarLista(IList<T> entity);
     Task Deletar(T entity);
-  
+    Task DeletarLista(IList<T> entity);
 }

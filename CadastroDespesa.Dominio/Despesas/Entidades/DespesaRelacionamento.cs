@@ -45,6 +45,21 @@ namespace CadastroDespesa.Dominio.Despesas.Entidades
 
         }
 
+        public void SetValor(decimal valor)
+        {
+            Valor = valor;
+        }
+
+        public void SetTotalParcela(int totalParcela)
+        {
+            TotalParcela = totalParcela;
+        }
+
+        public void SetNumeroParcela(int numeroParcela)
+        {
+            NumeroParcela = numeroParcela;
+        }
+
         public static IList<DespesaRelacionamento> CriarFixa(int idDespesa, decimal valor, DateTime dataRecebida)
         {
             var despesasRelacionamento = new List<DespesaRelacionamento>();
@@ -76,6 +91,42 @@ namespace CadastroDespesa.Dominio.Despesas.Entidades
             }
 
             return listaDespesaRelacionamento;
+        }
+
+        public static IList<DespesaRelacionamento> AlterarParcelas(IList<DespesaRelacionamento> despesasRelacionamento, decimal valor, DateTime dataInicial, int totalParcelas)
+        {
+            for (int i = 0; i < totalParcelas; i++)
+            {
+                if(i+1 > despesasRelacionamento.Count)
+                {
+                    var valorParcela = valor / totalParcelas;
+                    var dataParcela = dataInicial.AddMonths(i+1);
+
+                    var despesaRelacionamento = new DespesaRelacionamento(dataParcela, i + 1, totalParcelas, valorParcela, despesasRelacionamento[0].Despesa.Id);
+
+                    despesasRelacionamento.Add(despesaRelacionamento);
+                }
+                else
+                {
+
+                    var valorParcela = valor / totalParcelas;
+                    var dataParcela = dataInicial.AddMonths(i+1);
+
+                    despesasRelacionamento[i].SetData(dataParcela);
+                    despesasRelacionamento[i].SetNumeroParcela(i + 1);
+                    despesasRelacionamento[i].SetTotalParcela(totalParcelas);
+                    despesasRelacionamento[i].SetValor(valorParcela);
+                }
+
+            }
+
+
+            for (int i = despesasRelacionamento.Count - 1; i >= totalParcelas; i--)
+            {
+                despesasRelacionamento.RemoveAt(i);
+            }
+
+            return despesasRelacionamento;
         }
 
 
