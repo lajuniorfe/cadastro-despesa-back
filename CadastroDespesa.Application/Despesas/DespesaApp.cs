@@ -223,7 +223,7 @@ public class DespesaApp : IDespesaApp
 
             #endregion
 
-            //await unitOfWork.CommitAsync();
+            await unitOfWork.CommitAsync();
 
 
             return response;
