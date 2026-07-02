@@ -33,4 +33,9 @@
     <EditorConfigFiles Remove="C:\Git\cadastro-despesa-back\CadastroDespesa.Teste\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dominio\Factories\Pagamentos\" />
+    <Folder Include="Dominio\Factories\TiposDespesas\" />
+  </ItemGroup>
+
 </Project>

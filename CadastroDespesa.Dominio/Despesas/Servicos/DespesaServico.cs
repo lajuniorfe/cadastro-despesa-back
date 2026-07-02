@@ -1,4 +1,3 @@
-using CadastroDespesa.Dominio.Cartoes.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Categorias.Entidades;
 using CadastroDespesa.Dominio.Categorias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
@@ -7,7 +6,6 @@ using CadastroDespesa.Dominio.Despesas.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Recorrencias.Entidades;
 using CadastroDespesa.Dominio.Recorrencias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.UnirOfWork;
-using CadastroDespesa.Dominio.Worker.Producer.Interface;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -20,15 +18,13 @@ public class DespesaServico : IDespesaServico
     private readonly IRecorrenciaServico recorrenciaServico;
     private readonly IUnitOfWork unitOfWork;
 
-    private readonly IRabbitProducer rabbitProducer;
-
-    public DespesaServico(IDespesaRepositorio despesasRepositorio, ICategoriaServico categoriaServico, IRecorrenciaServico recorrenciaServico, IUnitOfWork unitOfWork, IRabbitProducer rabbitProducer)
+    public DespesaServico(IDespesaRepositorio despesasRepositorio, ICategoriaServico categoriaServico, IRecorrenciaServico recorrenciaServico, IUnitOfWork unitOfWork)
     {
         this.despesasRepositorio = despesasRepositorio;
         this.categoriaServico = categoriaServico;
         this.recorrenciaServico = recorrenciaServico;
         this.unitOfWork = unitOfWork;
-        this.rabbitProducer = rabbitProducer;
+       
     }
 
     public async Task<Despesa> ValidarDespesaAsync(int idDespesa)

@@ -1,6 +1,6 @@
 ﻿using CadastroDespesa.Dominio.Categorias.Entidades;
 using CadastroDespesa.Dominio.Despesas.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Entidades;
+using CadastroDespesa.Dominio.Recorrencias.Entidades;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -20,17 +20,17 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Entidades
             var data = DateTime.Now.Date;
             var valor = 10;
             var categoria = new Mock<Categoria>();
-            var tipoDespesa = new Mock<Recorrencia>();
+            var recorrencia = new Mock<Recorrencia>();
 
             //act
-            Despesa despesa = new(descricao, valor,data, categoria.Object, tipoDespesa.Object);
+            Despesa despesa = new(descricao, valor,data, categoria.Object.Id, recorrencia.Object.Id, 1, 1);
 
             //assert
             Assert.Equal(descricao, despesa.Descricao);
             Assert.Equal(valor, despesa.Valor);
             Assert.Equal(data, despesa.Data);
             Assert.Equal(categoria.Object, despesa.Categoria);
-            Assert.Equal(tipoDespesa.Object, despesa.TipoDespesa);
+            Assert.Equal(recorrencia.Object, despesa.Recorrencia);
         }
     }
 }

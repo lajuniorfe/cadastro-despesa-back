@@ -51,7 +51,7 @@ namespace CadastroDespesa.Api.Controller.Despesas
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> BuscarDespesasMesCorrespondente(int id)
+        public async Task<IActionResult> ExcluirDespesa(int id)
         {
             await despesaApp.ExcluirDespesa(id);
 

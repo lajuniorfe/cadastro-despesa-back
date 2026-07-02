@@ -239,6 +239,8 @@ public class DespesaApp : IDespesaApp
     {
         try
         {
+            await unitOfWork.BeginTransaction();
+
             var despesaRelacionamento = await despesaRelacionamentoRepositorio.Listar(d => d.IdDespesa == idDespesa);
             if (despesaRelacionamento.Count() > 0)
             {
@@ -252,10 +254,13 @@ public class DespesaApp : IDespesaApp
 
             await despesasRepositorio.Deletar(despesa);
 
+            await unitOfWork.CommitAsync();
+
         }
 
         catch (Exception ex)
         {
+            await unitOfWork.RollbackAsync();
             throw new Exception("Não foi possível excluir despesa");
         }
     }

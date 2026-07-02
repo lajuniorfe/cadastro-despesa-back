@@ -3,8 +3,9 @@ using CadastroDespesa.Dominio.Categorias.Servicos.Interfaces;
 using CadastroDespesa.Dominio.Despesas.Entidades;
 using CadastroDespesa.Dominio.Despesas.Repositorios;
 using CadastroDespesa.Dominio.Despesas.Servicos;
-using CadastroDespesa.Dominio.TipoDespesas.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Servicos.Interfaces;
+using CadastroDespesa.Dominio.Recorrencias.Entidades;
+using CadastroDespesa.Dominio.Recorrencias.Servicos.Interfaces;
+using CadastroDespesa.Dominio.UnirOfWork;
 using Moq;
 
 namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
@@ -15,17 +16,21 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
         private readonly Mock<ICategoriaServico> _categoriaServicoMock;
         private readonly Mock<IRecorrenciaServico> _tipoDespesaServicoMock;
         private readonly DespesaServico _despesaServico;
+        private readonly Mock<IUnitOfWork> _unitOfWork;
 
         public DespesaServicoTeste()
         {
             _despesasRepositorioMock = new Mock<IDespesaRepositorio>();
             _categoriaServicoMock = new Mock<ICategoriaServico>();
             _tipoDespesaServicoMock = new Mock<IRecorrenciaServico>();
+            _unitOfWork = new Mock<IUnitOfWork>();
 
             _despesaServico = new DespesaServico(
                 _despesasRepositorioMock.Object,
                 _categoriaServicoMock.Object,
-                _tipoDespesaServicoMock.Object);
+                _tipoDespesaServicoMock.Object, 
+                _unitOfWork.Object
+                );
         }
 
         [Fact]
@@ -41,7 +46,7 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
             _categoriaServicoMock.Setup(s => s.ValidarCategoriaAsync(categoriaMock.Object.Id))
                                  .ReturnsAsync(categoriaMock.Object);
 
-            _tipoDespesaServicoMock.Setup(s => s.ValidarTipoDespesaAsync(tipoDespesaMock.Object.Id))
+            _tipoDespesaServicoMock.Setup(s => s.ValidarRecorrenciaAsync(tipoDespesaMock.Object.Id))
                                    .ReturnsAsync(tipoDespesaMock.Object);
 
             var despesaCriada = await _despesaServico
@@ -52,7 +57,7 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
             Assert.Equal(valor, despesaCriada.Valor);
             Assert.Equal(data.Date, despesaCriada.Data.Date);
             Assert.Equal(categoriaMock.Object, despesaCriada.Categoria);
-            Assert.Equal(tipoDespesaMock.Object, despesaCriada.TipoDespesa);
+            Assert.Equal(tipoDespesaMock.Object, despesaCriada.Recorrencia);
         }
 
         [Fact]

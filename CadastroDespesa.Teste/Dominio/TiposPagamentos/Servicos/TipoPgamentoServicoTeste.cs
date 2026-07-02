@@ -1,13 +1,7 @@
-﻿using CadastroDespesa.Dominio.Parcelas.Entidades;
-using CadastroDespesa.Dominio.TiposPagamento.Entidades;
+﻿using CadastroDespesa.Dominio.TiposPagamento.Entidades;
 using CadastroDespesa.Dominio.TiposPagamento.Repositorios;
 using CadastroDespesa.Dominio.TiposPagamento.Servicos;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroDespesa.Teste.Dominio.TiposPagamentos.Servicos
 {

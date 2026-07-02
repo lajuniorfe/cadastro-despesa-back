@@ -1,25 +1,19 @@
-﻿using CadastroDespesa.Dominio.Cartoes.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Entidades;
-using CadastroDespesa.Dominio.TipoDespesas.Repositorios;
-using CadastroDespesa.Dominio.TipoDespesas.Servicos;
+﻿using CadastroDespesa.Dominio.Recorrencias.Entidades;
+using CadastroDespesa.Dominio.Recorrencias.Repositorios;
+using CadastroDespesa.Dominio.Recorrencias.Servicos;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CadastroDespesa.Teste.Dominio.TiposDespesas.Servicos
 {
     public class TipoDespesaServicoTeste
     {
-        private readonly Mock<ITipoDespesaRepositorio> _tipoDespesaRepositorioMock;
-        private readonly TipoDespesaServico _tipoDespesaServico;
+        private readonly Mock<IRecorrenciaRepositorio> _tipoDespesaRepositorioMock;
+        private readonly RecorrenciaServico _tipoDespesaServico;
 
         public TipoDespesaServicoTeste()
         {
-            _tipoDespesaRepositorioMock = new Mock<ITipoDespesaRepositorio>();
-            _tipoDespesaServico = new TipoDespesaServico(_tipoDespesaRepositorioMock.Object);
+            _tipoDespesaRepositorioMock = new Mock<IRecorrenciaRepositorio>();
+            _tipoDespesaServico = new RecorrenciaServico(_tipoDespesaRepositorioMock.Object);
         }
 
         [Fact]
@@ -30,7 +24,7 @@ namespace CadastroDespesa.Teste.Dominio.TiposDespesas.Servicos
             _tipoDespesaRepositorioMock.Setup(r => r.ObterPorId(idTipoDespesa))
                                    .ReturnsAsync(tipoDespesaValido.Object);
 
-            var tipoDespesaRetornado = await _tipoDespesaServico.ValidarTipoDespesaAsync(idTipoDespesa);
+            var tipoDespesaRetornado = await _tipoDespesaServico.ValidarRecorrenciaAsync(idTipoDespesa);
 
             Assert.NotNull(tipoDespesaRetornado);
         }
