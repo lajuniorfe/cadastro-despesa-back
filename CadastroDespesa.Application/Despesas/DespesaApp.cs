@@ -265,5 +265,9 @@ public class DespesaApp : IDespesaApp
         }
     }
 
-
+    public async Task<List<DespesaResponse>> BuscarDespesasCategoria(int id)
+    {
+        IEnumerable<Despesa> despesas = await despesasRepositorio.Listar(d => d.IdCategoria == id);
+        return _mapper.Map<List<DespesaResponse>>(despesas);
+    }
 }
