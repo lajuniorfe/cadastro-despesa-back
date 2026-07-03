@@ -270,4 +270,6 @@ public class DespesaApp : IDespesaApp
         IEnumerable<Despesa> despesas = await despesasRepositorio.Listar(d => d.IdCategoria == id);
         return _mapper.Map<List<DespesaResponse>>(despesas);
     }
+
+    
 }

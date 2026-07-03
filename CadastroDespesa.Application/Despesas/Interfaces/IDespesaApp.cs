@@ -7,7 +7,7 @@ namespace CadastroDespesa.Application.Despesas.Interfaces;
 public interface IDespesaApp
 {
     Task<IList<DespesaResponse>> BuscarDespesas();
-    Task<DespesaResponse> BuscarDespesasCategoria(int id);
+    Task<List<DespesaResponse>> BuscarDespesasCategoria(int id);
 
     Task<DespesaRelacionamentoResponse> CadastrarDespesa(CadastrarDespesaRequest despesaRequest);
 
