@@ -35,6 +35,14 @@ namespace CadastroDespesa.Api.Controller.Despesas
 
         }
 
+
+        [HttpGet("categoria/{id}")]
+        public async Task<IActionResult> BuscarDespesasCategoria(int id)
+        {
+            return Ok(await despesaApp.BuscarDespesasCategoria(id));
+
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> BuscarDespesasId(int id)
         {

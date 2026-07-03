@@ -13,17 +13,12 @@ public class Despesa : BaseEntidade
     public virtual decimal Valor { get; protected set; }
     public virtual int? NumeroParcela { get; protected set; }
     public virtual int? TotalParcela { get; protected set; }
-    //public virtual decimal ValorParcela { get; protected set; }
-
- 
 
     #region relacionamento
     public virtual int IdCategoria { get; protected set; }
     public virtual Categoria? Categoria { get; protected set; }
     public virtual int IdRecorrencia { get; protected set; }
     public virtual Recorrencia? Recorrencia { get; protected set; }
-    //public virtual int? IdFatura { get; protected set; }
-    //public virtual Fatura? Fatura { get; protected set; }
     public virtual int IdUsuario { get; protected set; }
     public virtual Usuario Usuario { get; protected set; }
 
