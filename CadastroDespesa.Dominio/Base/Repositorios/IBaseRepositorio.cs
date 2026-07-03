@@ -16,4 +16,5 @@ public interface IBaseRepositorio<T> where T : BaseEntidade
     Task AlterarLista(IList<T> entity);
     Task Deletar(T entity);
     Task DeletarLista(IList<T> entity);
+    Task<IEnumerable<T>> ListarComIncludes(params Expression<Func<T, object>>[] includes);
 }

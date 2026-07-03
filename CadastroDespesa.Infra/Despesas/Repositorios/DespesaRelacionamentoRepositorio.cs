@@ -48,13 +48,11 @@ namespace CadastroDespesa.Infra.Despesas.Repositorios
                                  .ThenInclude(d => d.Usuario)
                              .FirstOrDefaultAsync(dr => dr.Id == despesaRelacionada.First().Id);
 
-              //.Include(dr => dr.Despesa)
-              //                   .ThenInclude(d => d.Fatura)
         }
 
         public async Task<IEnumerable<DespesaRelacionamento>> Listardireito(Expression<Func<DespesaRelacionamento, bool>> predicate)
         {
-            var qq = await contexto.GetDbSet<DespesaRelacionamento>()
+          return await contexto.GetDbSet<DespesaRelacionamento>()
                               .Include(dr => dr.Fatura)
                                .ThenInclude(d => d.Cartao)
                               .Include(dr => dr.Despesa)
@@ -64,7 +62,6 @@ namespace CadastroDespesa.Infra.Despesas.Repositorios
                               .Include(dr => dr.Despesa)
                                   .ThenInclude(d => d.Usuario)
                               .Where(predicate).ToListAsync();
-            return qq;
         }
     }
 }

@@ -9,9 +9,6 @@ namespace CadastroDespesa.Application.Faturas.Profiles
         public FaturaProfile()
         {
             CreateMap<Fatura, FaturaResponse>();
-            //CreateMap<DespesaRequest, Despesa>();
-            //CreateMap<CadastrarDespesaRequest, Despesa>();
-
         }
     }
 }

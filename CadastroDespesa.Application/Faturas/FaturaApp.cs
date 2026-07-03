@@ -21,9 +21,7 @@ namespace CadastroDespesa.Application.Faturas
         {
             var retorno = await faturaRepositorio.Listar(f => f.IdCartao == cartao && f.DataVencimento.Month == mes);
 
-            var tt = _mapper.Map<IList<FaturaResponse>>(retorno);
-
-            return tt;
+            return _mapper.Map<IList<FaturaResponse>>(retorno);
 
         }
 
@@ -31,9 +29,8 @@ namespace CadastroDespesa.Application.Faturas
         {
             var retorno = await faturaRepositorio.Listar(f => f.DataVencimento.Month == mes);
 
-            var tt = _mapper.Map<IList<FaturaResponse>>(retorno);
+            return _mapper.Map<IList<FaturaResponse>>(retorno);
 
-            return tt;
         }
     }
 }

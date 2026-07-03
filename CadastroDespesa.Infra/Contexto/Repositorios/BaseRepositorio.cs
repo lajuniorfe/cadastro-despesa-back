@@ -77,4 +77,16 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         contexto.RemoveRange(entity);
         await contexto.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<T>> ListarComIncludes(params Expression<Func<T, object>>[] includes)
+    {
+        IQueryable<T> query = contexto.Set<T>();
+
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+
+        return await query.ToListAsync();
+    }
 }

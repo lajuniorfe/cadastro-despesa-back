@@ -58,9 +58,6 @@ public static class InjecaoDependencia
         services.AddSingleton<IRabbitProducer, RabbitProducer>();
         services.AddSingleton<IRabbitConsumer, RabbitConsumer>();
 
-
-
-
     }
 
     private static void RegisterTypesFromAssembly(IServiceCollection services, string assemblyName, string suffix)
