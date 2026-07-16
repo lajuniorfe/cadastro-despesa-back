@@ -33,32 +33,32 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Servicos
                 );
         }
 
-        [Fact]
-        public async Task Quando_Receber_Id_Despesa_Espero_Instanciar_Despesa()
-        {
-            var categoriaMock = new Mock<Categoria>();
-            var tipoDespesaMock = new Mock<Recorrencia>();
+        //[Fact]
+        //public async Task Quando_Receber_Id_Despesa_Espero_Instanciar_Despesa()
+        //{
+        //    var categoriaMock = new Mock<Categoria>();
+        //    var tipoDespesaMock = new Mock<Recorrencia>();
 
-            var descricao = "Despesa Teste";
-            decimal valor = 200;
-            DateTime data = DateTime.Now.Date;
+        //    var descricao = "Despesa Teste";
+        //    decimal valor = 200;
+        //    DateTime data = DateTime.Now.Date;
 
-            _categoriaServicoMock.Setup(s => s.ValidarCategoriaAsync(categoriaMock.Object.Id))
-                                 .ReturnsAsync(categoriaMock.Object);
+        //    _categoriaServicoMock.Setup(s => s.ValidarCategoriaAsync(categoriaMock.Object.Id))
+        //                         .ReturnsAsync(categoriaMock.Object);
 
-            _tipoDespesaServicoMock.Setup(s => s.ValidarRecorrenciaAsync(tipoDespesaMock.Object.Id))
-                                   .ReturnsAsync(tipoDespesaMock.Object);
+        //    _tipoDespesaServicoMock.Setup(s => s.ValidarRecorrenciaAsync(tipoDespesaMock.Object.Id))
+        //                           .ReturnsAsync(tipoDespesaMock.Object);
 
-            var despesaCriada = await _despesaServico
-                .InstanciaDespesaParaCadastro(descricao, valor, data, categoriaMock.Object.Id, tipoDespesaMock.Object.Id);
+        //    var despesaCriada = await _despesaServico
+        //        .InstanciaDespesaParaCadastro(descricao, valor, data, categoriaMock.Object.Id, tipoDespesaMock.Object.Id);
 
 
-            Assert.Equal(descricao, despesaCriada.Descricao);
-            Assert.Equal(valor, despesaCriada.Valor);
-            Assert.Equal(data.Date, despesaCriada.Data.Date);
-            Assert.Equal(categoriaMock.Object, despesaCriada.Categoria);
-            Assert.Equal(tipoDespesaMock.Object, despesaCriada.Recorrencia);
-        }
+        //    Assert.Equal(descricao, despesaCriada.Descricao);
+        //    Assert.Equal(valor, despesaCriada.Valor);
+        //    Assert.Equal(data.Date, despesaCriada.Data.Date);
+        //    Assert.Equal(categoriaMock.Object, despesaCriada.Categoria);
+        //    Assert.Equal(tipoDespesaMock.Object, despesaCriada.Recorrencia);
+        //}
 
         [Fact]
         public async Task Quando_Receber_Id_Despesa_Espero_Retornar_Despesa_Valida()

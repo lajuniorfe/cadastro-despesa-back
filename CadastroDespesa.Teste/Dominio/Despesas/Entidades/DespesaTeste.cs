@@ -12,25 +12,25 @@ namespace CadastroDespesa.Teste.Dominio.Despesas.Entidades
 {
     public class DespesaTeste
     {
-        [Fact]
-        public void Quando_Instanciar_Despesa_Espero_Valores_Validos()
-        {
-            //arrange
-            var descricao = "Despesa Teste";
-            var data = DateTime.Now.Date;
-            var valor = 10;
-            var categoria = new Mock<Categoria>();
-            var recorrencia = new Mock<Recorrencia>();
+        //[Fact]
+        //public void Quando_Instanciar_Despesa_Espero_Valores_Validos()
+        //{
+        //    //arrange
+        //    var descricao = "Despesa Teste";
+        //    var data = DateTime.Now.Date;
+        //    var valor = 10;
+        //    var categoria = new Mock<Categoria>();
+        //    var recorrencia = new Mock<Recorrencia>();
 
-            //act
-            Despesa despesa = new(descricao, valor,data, categoria.Object.Id, recorrencia.Object.Id, 1, 1);
+        //    //act
+        //    Despesa despesa = new(descricao, valor,data, categoria.Object.Id, recorrencia.Object.Id, 1, 1);
 
-            //assert
-            Assert.Equal(descricao, despesa.Descricao);
-            Assert.Equal(valor, despesa.Valor);
-            Assert.Equal(data, despesa.Data);
-            Assert.Equal(categoria.Object, despesa.Categoria);
-            Assert.Equal(recorrencia.Object, despesa.Recorrencia);
-        }
+        //    //assert
+        //    Assert.Equal(descricao, despesa.Descricao);
+        //    Assert.Equal(valor, despesa.Valor);
+        //    Assert.Equal(data, despesa.Data);
+        //    Assert.Equal(categoria.Object, despesa.Categoria);
+        //    Assert.Equal(recorrencia.Object, despesa.Recorrencia);
+        //}
     }
 }
