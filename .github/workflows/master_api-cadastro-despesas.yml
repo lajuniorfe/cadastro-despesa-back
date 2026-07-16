@@ -27,13 +27,13 @@ jobs:
         run: dotnet build CadastroDespesa.Api/CadastroDespesa.Api.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish CadastroDespesa.Api/CadastroDespesa.Api.csproj -c Release -o ${{ github.workspace }}/publish
+        run: dotnet publish CadastroDespesa.Api/CadastroDespesa.Api.csproj -c Release -o ./publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{ github.workspace }}/publish
+          path: ./publish
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,7 +47,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-          path: ${{ github.workspace }}/publish
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -62,4 +61,4 @@ jobs:
         with:
           app-name: 'api-cadastro-despesas'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/publish
+          package: ${{ github.workspace }}
