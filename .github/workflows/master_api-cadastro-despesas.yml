@@ -62,3 +62,4 @@ jobs:
           app-name: 'api-cadastro-despesas'
           slot-name: 'Production'
           package: ${{ github.workspace }}
+          startup-command: 'dotnet CadastroDespesa.Api.dll'
