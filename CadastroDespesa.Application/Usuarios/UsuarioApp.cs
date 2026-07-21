@@ -44,5 +44,14 @@ namespace CadastroDespesa.Application.Usuarios
 
             return response;
         }
+
+        public async Task<UsuarioResponse> RetornarUsuarioIdAzureAsync(string id)
+        {
+            Usuario usuario = await usuarioRepositorio.Buscar(u => u.IdAzure == id);
+
+            UsuarioResponse response = _mapper.Map<UsuarioResponse>(usuario);
+
+            return response;
+        }
     }
 }

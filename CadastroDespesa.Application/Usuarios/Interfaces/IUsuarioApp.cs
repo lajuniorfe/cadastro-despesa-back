@@ -8,6 +8,6 @@ namespace CadastroDespesa.Application.Usuarios.Interfaces
         Task CadastrarUsuarioAsync(UsuarioRequest request);
         Task<UsuarioResponse> RetornarUsuarioIdAsync(int id);
         Task<IList<UsuarioResponse>> ListUsuariosAsync();
-
+        Task<UsuarioResponse> RetornarUsuarioIdAzureAsync(string id);
     }
 }

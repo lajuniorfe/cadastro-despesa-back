@@ -27,7 +27,9 @@ namespace CadastroDespesa.Infra.Usuarios.Mapeamentos
 
             builder.Property(d => d.Senha)
                .HasColumnName("senha");
-               
+
+            builder.Property(d => d.IdAzure)
+             .HasColumnName("id_azure");
 
         }
     }

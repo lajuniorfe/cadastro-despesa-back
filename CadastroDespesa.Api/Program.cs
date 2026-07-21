@@ -52,30 +52,18 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services
+    .AddAuthentication("Bearer")
+    .AddJwtBearer(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = false,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
+        options.Authority =
+            "https://login.microsoftonline.com/ec94cfcc-a960-4df2-b2b9-6598ba7a718f/v2.0";
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-//    options.AddPolicy("User", policy => policy.RequireRole("User"));
-//});
+        options.Audience =
+            "9b94654b-c97e-40b7-b3e6-df94eec57a26";
+    });
+
+builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
