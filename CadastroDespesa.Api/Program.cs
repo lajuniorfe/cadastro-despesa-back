@@ -1,8 +1,5 @@
 using CadastroDespesa.IOC;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -57,10 +54,10 @@ builder.Services
     .AddJwtBearer(options =>
     {
         options.Authority =
-            "https://login.microsoftonline.com/ec94cfcc-a960-4df2-b2b9-6598ba7a718f/v2.0";
+             "https://login.microsoftonline.com/d9b4057a-557b-41c0-9344-f3860b5e27e9";
 
         options.Audience =
-            "9b94654b-c97e-40b7-b3e6-df94eec57a26";
+            "api://ae869cf1-70ef-43c3-a417-7d991935b650";
     });
 
 builder.Services.AddAuthorization();
