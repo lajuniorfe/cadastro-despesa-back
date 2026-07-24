@@ -1,7 +1,7 @@
 using CadastroDespesa.Dominio.Base.Entidades;
 using CadastroDespesa.Dominio.Categorias.Entidades;
-using CadastroDespesa.Dominio.Faturas.Entidades;
 using CadastroDespesa.Dominio.Recorrencias.Entidades;
+using CadastroDespesa.Dominio.TiposPagamento.Entidades;
 using CadastroDespesa.Dominio.Usuarios.Entidades;
 
 namespace CadastroDespesa.Dominio.Despesas.Entidades;
@@ -11,7 +11,6 @@ public class Despesa : BaseEntidade
     public virtual string? Descricao { get; protected set; }
     public virtual DateTime Data { get; protected set; }
     public virtual decimal Valor { get; protected set; }
-    public virtual int? NumeroParcela { get; protected set; }
     public virtual int? TotalParcela { get; protected set; }
 
     #region relacionamento
@@ -21,6 +20,9 @@ public class Despesa : BaseEntidade
     public virtual Recorrencia? Recorrencia { get; protected set; }
     public virtual int IdUsuario { get; protected set; }
     public virtual Usuario Usuario { get; protected set; }
+
+    public virtual int IdTipoPagamento { get; protected set; }
+    public virtual TipoPagamento TipoPagamento { get;  set; }
 
     #endregion
 
@@ -67,29 +69,13 @@ public class Despesa : BaseEntidade
         TotalParcela = totalParcela;
     }
 
-    public void SetNumeroParcela(int numeroParcela)
-    {
-        NumeroParcela = numeroParcela;
-    }
-
-    //public void SetValorParcela(decimal valorParcela)
-    //{
-    //    ValorParcela = valorParcela;
-    //}
-
-    //public void SetFatura(int idFatura)
-    //{
-    //    IdFatura = idFatura;
-    //}
-
     public void SetUsuario(int idUsuario)
     {
         IdUsuario = idUsuario;
     }
 
-  
-    
-
-
-   
+    public void SetTipoPagamento(int tipoPagamento)
+    {
+        IdTipoPagamento = tipoPagamento;
+    }
 }

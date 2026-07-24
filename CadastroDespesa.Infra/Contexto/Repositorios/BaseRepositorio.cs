@@ -78,13 +78,18 @@ public class BaseRepositorio<T> : IBaseRepositorio<T> where T : BaseEntidade
         await contexto.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<T>> ListarComIncludes(params Expression<Func<T, object>>[] includes)
+    public async Task<IEnumerable<T>> ListarComIncludes(Expression<Func<T, bool>>? predicate = null, Func<IQueryable<T>, IQueryable<T>>? include = null)
     {
         IQueryable<T> query = contexto.Set<T>();
 
-        foreach (var include in includes)
+        if (include != null)
         {
-            query = query.Include(include);
+            query = include(query);
+        }
+
+        if (predicate != null)
+        {
+            query = query.Where(predicate);
         }
 
         return await query.ToListAsync();

@@ -30,10 +30,6 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
              .HasColumnType("timestamp without time zone")
              .IsRequired();
 
-        builder.Property(d => d.NumeroParcela).HasColumnName("numero_parcela")
-            .HasColumnType("integer");
-   
-
         builder.Property(d => d.TotalParcela).HasColumnName("total_parcela")
             .HasColumnType("integer")
             .IsRequired();
@@ -52,6 +48,10 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
             .HasColumnName("id_usuario")
             .HasColumnType("integer");
 
+        builder.Property(d => d.IdTipoPagamento)
+          .HasColumnName("id_tipo_pagamento")
+          .HasColumnType("integer");
+
         builder.HasOne(d => d.Categoria)
             .WithMany()
             .HasForeignKey(d => d.IdCategoria);
@@ -63,6 +63,10 @@ public class DespesaMap : IEntityTypeConfiguration<Despesa>
         builder.HasOne(d => d.Usuario)
            .WithMany()
            .HasForeignKey(d => d.IdUsuario);
+
+        builder.HasOne(d => d.TipoPagamento)
+         .WithMany()
+         .HasForeignKey(d => d.IdTipoPagamento);
 
     }
 }

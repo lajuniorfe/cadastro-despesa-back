@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CadastroDespesa.DTO.Despesas.Requests
+﻿namespace CadastroDespesa.DTO.Despesas.Requests
 {
     public class AlterarDespesaRequest
     {
@@ -14,5 +8,8 @@ namespace CadastroDespesa.DTO.Despesas.Requests
         public string Descricao { get; set; }
         public int Parcela {  get; set; }
         public int IdCartao { get; set; }
+        public int IdCategoria { get; set; }
+        public int IdUsuario { get; set; }
+        public int IdTipoPagamento { get; set; }
     }
 }

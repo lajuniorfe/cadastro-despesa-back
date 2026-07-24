@@ -3,6 +3,7 @@ using CadastroDespesa.Application.Investimentos.Intefaces;
 using CadastroDespesa.Dominio.Investimentos.Entidades;
 using CadastroDespesa.Dominio.Investimentos.Repositorios;
 using CadastroDespesa.DTO.Investimentos.Responses;
+using Microsoft.EntityFrameworkCore;
 
 namespace CadastroDespesa.Application.Investimentos
 {
@@ -20,7 +21,7 @@ namespace CadastroDespesa.Application.Investimentos
 
         public async Task<IList<InvestimentoResponse>> RetornarListaInvestimentos()
         {
-            IEnumerable<Investimento> response = await investimentoRepositorio.ListarComIncludes(i => i.Usuario);
+            IEnumerable<Investimento> response = await investimentoRepositorio.ListarComIncludes( null, d=> d.Include(d => d.Usuario));
             return _mapper.Map<IList<InvestimentoResponse>>(response);
         }
     }

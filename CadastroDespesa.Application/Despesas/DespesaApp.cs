@@ -14,6 +14,7 @@ using CadastroDespesa.Dominio.TiposPagamento.Servicos.Factorys;
 using CadastroDespesa.Dominio.UnirOfWork;
 using CadastroDespesa.DTO.Despesas.Requests;
 using CadastroDespesa.DTO.Despesas.Responses;
+using Microsoft.EntityFrameworkCore;
 
 namespace CadastroDespesa.Application.Despesas;
 
@@ -49,19 +50,59 @@ public class DespesaApp : IDespesaApp
         DespesaRelacionamento despesaRelacionada = listaDespesasRelacionadas.ToList().FirstOrDefault();
         IList<DespesaRelacionamento> listaOriginal = listaDespesasRelacionadas.ToList();
 
-
-        despesaRelacionada.Despesa.SetValor(request.ValorDespesa);
+        #region Despesa
         despesaRelacionada.Despesa.SetDescricao(request.Descricao);
+        despesaRelacionada.Despesa.SetValor(request.ValorDespesa);
+        despesaRelacionada.Despesa.SetData(request.DataDespesa);
+        despesaRelacionada.Despesa.SetCategoria(request.IdCategoria);
+        despesaRelacionada.Despesa.SetTotalParcela(request.Parcela);
+        despesaRelacionada.Despesa.SetUsuario(request.IdUsuario);
 
-        if (despesaRelacionada.Fatura.IdCartao != request.IdCartao || request.DataDespesa != despesaRelacionada.Despesa.Data)
+        #endregion
+
+
+        #region DespesaRelacionada
+
+        if (request.IdTipoPagamento != despesaRelacionada.Despesa.IdTipoPagamento)
         {
-            Cartao cartao = await cartaoServico.ValidarCartaoAsync(request.IdCartao);
+            //era cartao e foi pra pix
+            if (despesaRelacionada.Despesa.IdTipoPagamento == 1 && request.IdTipoPagamento == 2)
+            {
+                despesaRelacionada.Despesa.SetTipoPagamento(request.IdTipoPagamento);
 
-            var retornado = await AlteraDataDespesasRelacionadas(request, listaOriginal, cartao);
-            despesaRelacionada.Despesa.SetData(request.DataDespesa);
-            listaOriginal = retornado;
+                // retirar da fatura
+                foreach (var i in listaOriginal)
+                {
+                    await faturaRepositorio.Deletar(i.Fatura);
+
+                    i.SetIdFatura(0);
+
+                    await despesaRelacionamentoRepositorio.Alterar(i);
+                }
+            }
+            //era pix e foi pra cartao
+            else if (despesaRelacionada.Despesa.IdTipoPagamento == 2 && request.IdTipoPagamento == 1)
+            {
+                despesaRelacionada.Despesa.SetTipoPagamento(request.IdTipoPagamento);
+
+                Cartao cartao = await cartaoServico.ValidarCartaoAsync(request.IdCartao);
+
+                var retornado = await AlteraDataDespesasRelacionadas(request, listaOriginal, cartao);
+                despesaRelacionada.Despesa.SetData(request.DataDespesa);
+                listaOriginal = retornado;
+            }
         }
+        else
+        {
+            if (despesaRelacionada.Fatura.IdCartao != request.IdCartao || request.DataDespesa != despesaRelacionada.Despesa.Data)
+            {
+                Cartao cartao = await cartaoServico.ValidarCartaoAsync(request.IdCartao);
 
+                var retornado = await AlteraDataDespesasRelacionadas(request, listaOriginal, cartao);
+                despesaRelacionada.Despesa.SetData(request.DataDespesa);
+                listaOriginal = retornado;
+            }
+        }
 
         if ((despesaRelacionada.Despesa.Recorrencia.Id == 2) && request.Parcela != listaOriginal[0].TotalParcela)
         {
@@ -71,7 +112,9 @@ public class DespesaApp : IDespesaApp
             listaOriginal = retorno;
         }
 
-        var tt = listaOriginal;
+
+        #endregion
+
 
         await despesaRelacionamentoRepositorio.AlterarLista(listaOriginal);
 
@@ -135,7 +178,7 @@ public class DespesaApp : IDespesaApp
                 i.SetValor(request.ValorDespesa);
                 i.SetData(dataCorreta);
                 i.SetIdFatura(fatura.Id);
-                
+
             }
             else
             {
@@ -162,8 +205,19 @@ public class DespesaApp : IDespesaApp
     public async Task<IList<DespesaRelacionamentoResponse>> BuscarDespesasMesCorrespondente(int mes, int ano)
     {
 
-        var retorno = await despesaRelacionamentoRepositorio.Listardireito(d => d.Data.Month == mes && d.Data.Year == ano);
+        //var retorno = await despesaRelacionamentoRepositorio.Listardireito(d => d.Data.Month == mes && d.Data.Year == ano);
+        //return _mapper.Map<IList<DespesaRelacionamentoResponse>>(retorno.OrderByDescending(a => a.Despesa.Data));
+
+        var retorno = await despesaRelacionamentoRepositorio.ListarComIncludes(d => d.Data.Month == mes && d.Data.Year == ano,
+            q => q.Include(dr => dr.Fatura)
+                  .ThenInclude(f => f.Cartao)
+                .Include(dr => dr.Despesa).ThenInclude(d => d.Categoria)
+                .Include(dr => dr.Despesa).ThenInclude(d => d.Recorrencia)
+                 .Include(dr => dr.Despesa).ThenInclude(d => d.Usuario)
+                  .Include(dr => dr.Despesa).ThenInclude(d => d.TipoPagamento));
+
         return _mapper.Map<IList<DespesaRelacionamentoResponse>>(retorno.OrderByDescending(a => a.Despesa.Data));
+
     }
 
 
@@ -212,13 +266,13 @@ public class DespesaApp : IDespesaApp
                 var despesaRelacionamentoCriada = await despesaRelacionamentoRepositorio.CriarDespesasRetornandoPrimeira(listaDespesaRelacionamento);
                 response = _mapper.Map<DespesaRelacionamentoResponse>(despesaRelacionamentoCriada);
 
-                response.Despesa.IdTipoPagamento = request.IdTipoPagamento;
+                response.Despesa.TipoPagamento.Id = request.IdTipoPagamento;
             }
             else
             {
                 var despesaRelacionamentoCriada = await despesaRelacionamentoRepositorio.CriarDespesaRetornando(listaDespesaRelacionamento.First());
                 response = _mapper.Map<DespesaRelacionamentoResponse>(despesaRelacionamentoCriada);
-                response.Despesa.IdTipoPagamento = request.IdTipoPagamento;
+                response.Despesa.TipoPagamento.Id = request.IdTipoPagamento;
             }
 
             #endregion
@@ -271,5 +325,5 @@ public class DespesaApp : IDespesaApp
         return _mapper.Map<List<DespesaResponse>>(despesas);
     }
 
-    
+
 }
