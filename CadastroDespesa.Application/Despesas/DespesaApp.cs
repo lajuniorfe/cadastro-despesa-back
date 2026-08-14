@@ -204,11 +204,7 @@ public class DespesaApp : IDespesaApp
 
     public async Task<IList<DespesaRelacionamentoResponse>> BuscarDespesasMesCorrespondente(int mes, int ano)
     {
-
-        //var retorno = await despesaRelacionamentoRepositorio.Listardireito(d => d.Data.Month == mes && d.Data.Year == ano);
-        //return _mapper.Map<IList<DespesaRelacionamentoResponse>>(retorno.OrderByDescending(a => a.Despesa.Data));
-
-        var retorno = await despesaRelacionamentoRepositorio.ListarComIncludes(d => d.Data.Month == mes && d.Data.Year == ano,
+        IEnumerable<DespesaRelacionamento> retorno = await despesaRelacionamentoRepositorio.ListarComIncludes(d => d.Data.Month == mes && d.Data.Year == ano,
             q => q.Include(dr => dr.Fatura)
                   .ThenInclude(f => f.Cartao)
                 .Include(dr => dr.Despesa).ThenInclude(d => d.Categoria)
@@ -220,7 +216,6 @@ public class DespesaApp : IDespesaApp
 
     }
 
-
     public async Task<DespesaRelacionamentoResponse> CadastrarDespesa(CadastrarDespesaRequest request)
     {
         try
@@ -228,7 +223,7 @@ public class DespesaApp : IDespesaApp
             await unitOfWork.BeginTransaction();
 
             #region criando a Despesa
-            Despesa despesa = new(request.Descricao, request.Valor, request.Data, request.IdCategoria, request.idRecorrencia, request.Parcela.Value, request.idUsuario);
+            Despesa despesa = new(request.Descricao, request.Valor, request.Data, request.IdCategoria, request.idRecorrencia, request.Parcela.Value, request.idUsuario, request.IdTipoPagamento);
 
             Despesa retorno = await despesasRepositorio.Criar(despesa);
 
@@ -263,7 +258,7 @@ public class DespesaApp : IDespesaApp
             if (listaDespesaRelacionamento.Count() > 1)
             {
 
-                var despesaRelacionamentoCriada = await despesaRelacionamentoRepositorio.CriarDespesasRetornandoPrimeira(listaDespesaRelacionamento);
+                DespesaRelacionamento despesaRelacionamentoCriada = await despesaRelacionamentoRepositorio.CriarDespesasRetornandoPrimeira(listaDespesaRelacionamento);
                 response = _mapper.Map<DespesaRelacionamentoResponse>(despesaRelacionamentoCriada);
 
                 response.Despesa.TipoPagamento.Id = request.IdTipoPagamento;
@@ -324,6 +319,5 @@ public class DespesaApp : IDespesaApp
         IEnumerable<Despesa> despesas = await despesasRepositorio.Listar(d => d.IdCategoria == id);
         return _mapper.Map<List<DespesaResponse>>(despesas);
     }
-
 
 }

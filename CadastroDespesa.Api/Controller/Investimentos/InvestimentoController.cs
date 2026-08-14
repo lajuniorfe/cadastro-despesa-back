@@ -1,4 +1,5 @@
 ﻿using CadastroDespesa.Application.Investimentos.Intefaces;
+using CadastroDespesa.DTO.Investimentos.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroDespesa.Api.Controller.Investimentos
@@ -17,6 +18,13 @@ namespace CadastroDespesa.Api.Controller.Investimentos
         public async Task<IActionResult> BuscarInvestimentos()
         {
             return Ok(await investimentoApp.RetornarListaInvestimentos());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CadastrarInvestimento([FromBody] InvestimentoRequest request)
+        {
+            await investimentoApp.CadastrarInvestimento(request);
+            return Created();
         }
     }
 }

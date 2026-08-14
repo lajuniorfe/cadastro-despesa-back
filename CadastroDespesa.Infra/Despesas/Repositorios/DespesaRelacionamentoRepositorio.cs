@@ -21,11 +21,13 @@ namespace CadastroDespesa.Infra.Despesas.Repositorios
             return await contexto.GetDbSet<DespesaRelacionamento>()
                             .Include(dr => dr.Despesa)
                                 .ThenInclude(d => d.Categoria)
-                            
+
                             .Include(dr => dr.Despesa)
                                 .ThenInclude(d => d.Recorrencia)
                             .Include(dr => dr.Despesa)
                                 .ThenInclude(d => d.Usuario)
+                            .Include(dr => dr.Despesa)
+                                .ThenInclude(d => d.TipoPagamento)
                             .FirstOrDefaultAsync(dr => dr.Id == despesa.Id);
 
             //.Include(dr => dr.Despesa)
@@ -41,27 +43,28 @@ namespace CadastroDespesa.Infra.Despesas.Repositorios
             return await contexto.GetDbSet<DespesaRelacionamento>()
                              .Include(dr => dr.Despesa)
                                  .ThenInclude(d => d.Categoria)
-                           
                              .Include(dr => dr.Despesa)
                                  .ThenInclude(d => d.Recorrencia)
                              .Include(dr => dr.Despesa)
                                  .ThenInclude(d => d.Usuario)
+                             .Include(dr => dr.Despesa)
+                                 .ThenInclude(d => d.TipoPagamento)
                              .FirstOrDefaultAsync(dr => dr.Id == despesaRelacionada.First().Id);
 
         }
 
         public async Task<IEnumerable<DespesaRelacionamento>> Listardireito(Expression<Func<DespesaRelacionamento, bool>> predicate)
         {
-          return await contexto.GetDbSet<DespesaRelacionamento>()
-                              .Include(dr => dr.Fatura)
-                               .ThenInclude(d => d.Cartao)
-                              .Include(dr => dr.Despesa)
-                                  .ThenInclude(d => d.Categoria)
-                              .Include(dr => dr.Despesa)
-                                  .ThenInclude(d => d.Recorrencia)
-                              .Include(dr => dr.Despesa)
-                                  .ThenInclude(d => d.Usuario)
-                              .Where(predicate).ToListAsync();
+            return await contexto.GetDbSet<DespesaRelacionamento>()
+                                .Include(dr => dr.Fatura)
+                                 .ThenInclude(d => d.Cartao)
+                                .Include(dr => dr.Despesa)
+                                    .ThenInclude(d => d.Categoria)
+                                .Include(dr => dr.Despesa)
+                                    .ThenInclude(d => d.Recorrencia)
+                                .Include(dr => dr.Despesa)
+                                    .ThenInclude(d => d.Usuario)
+                                .Where(predicate).ToListAsync();
         }
     }
 }

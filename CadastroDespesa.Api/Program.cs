@@ -1,3 +1,5 @@
+using CadastroDespesa.Application.Notifications;
+using CadastroDespesa.Application.Notifications.Interfaces;
 using CadastroDespesa.IOC;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
@@ -61,7 +63,7 @@ builder.Services
     });
 
 builder.Services.AddAuthorization();
-
+builder.Services.AddSingleton<INotificationServices, NotificationServices>();
 
 var app = builder.Build();
 

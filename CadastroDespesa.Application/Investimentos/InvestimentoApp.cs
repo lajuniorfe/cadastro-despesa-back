@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using CadastroDespesa.Application.Investimentos.Intefaces;
 using CadastroDespesa.Dominio.Investimentos.Entidades;
+using CadastroDespesa.Dominio.Investimentos.Enums;
 using CadastroDespesa.Dominio.Investimentos.Repositorios;
+using CadastroDespesa.DTO.Investimentos.Requests;
 using CadastroDespesa.DTO.Investimentos.Responses;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,21 @@ namespace CadastroDespesa.Application.Investimentos
         {
             this.investimentoRepositorio = investimentoRepositorio;
             _mapper = mapper;
+        }
+
+        public async Task CadastrarInvestimento(InvestimentoRequest request)
+        {
+            Investimento investimento = new(request.Valor, request.Descricao, (TipoInvestimentoEnum)request.Tipo, request.Data, request.IdUsuario);
+            
+            if(investimento.Tipo == TipoInvestimentoEnum.Retirada || investimento.Tipo == TipoInvestimentoEnum.PagamentoDivida)
+            {
+                await investimentoRepositorio.Criar(investimento);
+            }
+            else
+            {
+                //alterar apenas o valor
+            }
+            
         }
 
         public async Task<IList<InvestimentoResponse>> RetornarListaInvestimentos()

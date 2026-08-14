@@ -24,7 +24,7 @@ public class DespesaServico : IDespesaServico
         this.categoriaServico = categoriaServico;
         this.recorrenciaServico = recorrenciaServico;
         this.unitOfWork = unitOfWork;
-       
+
     }
 
     public async Task<Despesa> ValidarDespesaAsync(int idDespesa)
@@ -42,20 +42,5 @@ public class DespesaServico : IDespesaServico
 
         return null;
     }
-
-
-
-    public static string RemoverAcentos(string texto)
-    {
-        if (string.IsNullOrWhiteSpace(texto))
-            return texto;
-
-        var textoNormalizado = texto.Normalize(NormalizationForm.FormD);
-        var regex = new Regex(@"[\p{Mn}]"); // Mn = Mark, Nonspacing (acentos e diacríticos)
-        return regex.Replace(textoNormalizado, "")
-                    .Normalize(NormalizationForm.FormC);
-    }
-
-
 
 }

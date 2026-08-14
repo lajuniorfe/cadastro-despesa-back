@@ -1,4 +1,5 @@
-﻿using CadastroDespesa.DTO.Investimentos.Responses;
+﻿using CadastroDespesa.DTO.Investimentos.Requests;
+using CadastroDespesa.DTO.Investimentos.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace CadastroDespesa.Application.Investimentos.Intefaces
     public interface IInvestimentoApp
     {
         Task<IList<InvestimentoResponse>> RetornarListaInvestimentos();
+        Task CadastrarInvestimento(InvestimentoRequest request);
     }
 }

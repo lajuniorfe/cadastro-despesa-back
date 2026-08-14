@@ -13,5 +13,8 @@ namespace CadastroDespesa.Dominio.Investimentos.Enums
 
         [Description("Retirada")]
         Retirada = 2,
+
+        [Description("Pagamento-Divida")]
+        PagamentoDivida = 3,
     }
 }

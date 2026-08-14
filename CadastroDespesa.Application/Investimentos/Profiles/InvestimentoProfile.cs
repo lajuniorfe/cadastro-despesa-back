@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CadastroDespesa.Dominio.Investimentos.Entidades;
+using CadastroDespesa.DTO.Investimentos.Requests;
 using CadastroDespesa.DTO.Investimentos.Responses;
 
 namespace CadastroDespesa.Application.Investimentos.Profiles
@@ -9,7 +10,7 @@ namespace CadastroDespesa.Application.Investimentos.Profiles
         public InvestimentoProfile()
         {
             CreateMap<Investimento, InvestimentoResponse>();
-              
+            CreateMap<InvestimentoRequest, Investimento>();
         }
     }
 }

@@ -28,7 +28,7 @@ public class Despesa : BaseEntidade
 
 
     protected Despesa() { }
-    public Despesa(string? descricao, decimal valor, DateTime data, int categoria, int recorrencia, int totalParcela, int idUsuario)
+    public Despesa(string? descricao, decimal valor, DateTime data, int categoria, int recorrencia, int totalParcela, int idUsuario, int idTipoPagamento)
     {
         SetDescricao(descricao);
         SetData(data);
@@ -37,6 +37,7 @@ public class Despesa : BaseEntidade
         SetRecorrencia(recorrencia);
         SetTotalParcela(totalParcela);
         SetUsuario(idUsuario);
+        SetTipoPagamento(idTipoPagamento);
     }
 
     public void SetCategoria(int categoria)
