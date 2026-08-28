@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ConfiguracoesFinanceiras\NovaPasta\**" />
+    <EmbeddedResource Remove="ConfiguracoesFinanceiras\NovaPasta\**" />
+    <None Remove="ConfiguracoesFinanceiras\NovaPasta\**" />
+  </ItemGroup>
+
  <ItemGroup>
     <ProjectReference Include="..\CadastroDespesa.Infra\CadastroDespesa.Infra.csproj" />
   </ItemGroup>
